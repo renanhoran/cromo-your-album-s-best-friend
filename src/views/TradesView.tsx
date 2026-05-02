@@ -33,7 +33,7 @@ export function TradesView({ counts }: { counts: StickerCounts }) {
 
   return (
     <div className="pb-24">
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
           <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Match inteligente</p>
           <h1 className="text-2xl font-black tracking-tight">Trocas possíveis</h1>

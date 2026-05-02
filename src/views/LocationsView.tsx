@@ -83,7 +83,7 @@ export function LocationsView({ userId, userCity }: { userId: string; userCity: 
 
   return (
     <div className="pb-24 relative min-h-screen">
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
           <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Copa 2026</p>
           <h1 className="text-2xl font-black tracking-tight">Pontos de troca</h1>

@@ -46,7 +46,7 @@ export function ProfileView({
 
   return (
     <div className="pb-24">
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3 flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Perfil</p>

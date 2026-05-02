@@ -71,7 +71,7 @@ export function AlbumView({
   return (
     <div className="pb-24">
       {/* Header / progress */}
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
           <div className="flex items-center justify-between mb-3">
             <div>
