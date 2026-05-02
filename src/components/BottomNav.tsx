@@ -1,18 +1,19 @@
 import { cn } from "@/lib/utils";
-import { Home, Users, User } from "lucide-react";
+import { Home, Users, User, MapPin } from "lucide-react";
 
-export type Tab = "album" | "trocas" | "perfil";
+export type Tab = "album" | "trocas" | "locais" | "perfil";
 
 const items: { id: Tab; label: string; icon: typeof Home }[] = [
   { id: "album", label: "Álbum", icon: Home },
   { id: "trocas", label: "Trocas", icon: Users },
+  { id: "locais", label: "Locais", icon: MapPin },
   { id: "perfil", label: "Perfil", icon: User },
 ];
 
 export function BottomNav({ tab, onChange }: { tab: Tab; onChange: (t: Tab) => void }) {
   return (
     <nav className="fixed bottom-0 inset-x-0 z-30 bg-background/95 backdrop-blur border-t border-border">
-      <div className="max-w-md mx-auto grid grid-cols-3">
+      <div className="max-w-md mx-auto grid grid-cols-4">
         {items.map((it) => {
           const Icon = it.icon;
           const active = tab === it.id;
