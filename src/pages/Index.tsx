@@ -12,7 +12,6 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Session, User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 
-const PAID_KEY = "cromo:paid:v1";
 const ONBOARD_KEY = "cromo:onboarded:v1";
 
 export interface Profile {
@@ -25,7 +24,8 @@ const Index = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [paid, setPaid] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
+  const [premiumChecked, setPremiumChecked] = useState(false);
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
@@ -42,7 +42,6 @@ const Index = () => {
       setUser(data.session?.user ?? null);
       setLoading(false);
     });
-    setPaid(localStorage.getItem(PAID_KEY) === "1");
     setShowOnboard(localStorage.getItem(ONBOARD_KEY) !== "1");
     return () => sub.subscription.unsubscribe();
   }, []);
@@ -51,6 +50,8 @@ const Index = () => {
   useEffect(() => {
     if (!user) {
       setCounts({});
+      setIsPremium(false);
+      setPremiumChecked(false);
       return;
     }
     (async () => {
@@ -61,6 +62,9 @@ const Index = () => {
         .maybeSingle();
       if (prof) {
         setProfile({ nome: prof.nome ?? "", cidade: prof.cidade ?? "", avatar: prof.avatar ?? "⚽" });
+        const ativo =
+          !!prof.is_premium && !!prof.premium_ate && new Date(prof.premium_ate) > new Date();
+        setIsPremium(ativo);
       } else {
         const initial = {
           id: user.id,
@@ -70,7 +74,9 @@ const Index = () => {
         };
         await supabase.from("profiles").insert(initial);
         setProfile({ nome: initial.nome, cidade: initial.cidade, avatar: initial.avatar });
+        setIsPremium(false);
       }
+      setPremiumChecked(true);
 
       const { data: stickers } = await supabase
         .from("user_stickers")
@@ -109,7 +115,7 @@ const Index = () => {
     await supabase.from("profiles").upsert({ id: user.id, ...p });
   };
 
-  if (loading) {
+  if (loading || (user && !premiumChecked)) {
     return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
   }
 
@@ -128,14 +134,12 @@ const Index = () => {
     );
   }
 
-  if (!paid) {
+  if (!isPremium) {
     return (
       <Paywall
-        onUnlock={() => {
-          localStorage.setItem(PAID_KEY, "1");
-          setPaid(true);
-          toast.success("Acesso liberado! Bom álbum 🎉");
-        }}
+        userId={user.id}
+        email={user.email ?? ""}
+        nome={profile.nome}
       />
     );
   }
@@ -167,8 +171,7 @@ const Index = () => {
           email={user.email ?? ""}
           onLogout={async () => {
             await supabase.auth.signOut();
-            localStorage.removeItem(PAID_KEY);
-            setPaid(false);
+            setIsPremium(false);
           }}
         />
       )}
