@@ -1,5 +1,6 @@
 import { Sticker as StickerT } from "@/data/stickers";
 import { cn } from "@/lib/utils";
+import { FLAGS } from "@/data/flags";
 
 interface Props {
   sticker: StickerT;
@@ -12,6 +13,7 @@ export function StickerCard({ sticker, count, onClick }: Props) {
   const initials = sticker.sigla_selecao;
   const isEspecial = sticker.tipo === "especial";
   const isEscudo = sticker.tipo === "escudo";
+  const flag = FLAGS[sticker.sigla_selecao];
 
   return (
     <button
@@ -40,7 +42,13 @@ export function StickerCard({ sticker, count, onClick }: Props) {
             state === "missing" && "text-foreground/30"
           )}
         >
-          {isEspecial ? "★" : initials}
+          {flag ? (
+            <span className="text-4xl leading-none">{flag}</span>
+          ) : isEspecial ? (
+            "★"
+          ) : (
+            initials
+          )}
         </div>
         <div
           className={cn(

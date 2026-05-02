@@ -71,7 +71,7 @@ export function AlbumView({
   return (
     <div className="pb-24">
       {/* Header / progress */}
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
           <div className="flex items-center justify-between mb-3">
             <div>
@@ -155,6 +155,17 @@ export function AlbumView({
               <span className="text-[11px] text-muted-foreground font-medium">
                 {items.filter((s) => (counts[s.id] ?? 0) >= 1).length}/{items.length}
               </span>
+            </div>
+            <div className="h-1 rounded-full bg-secondary overflow-hidden mb-2">
+              <div
+                className="h-full rounded-full transition-all"
+                style={{
+                  width: `${Math.round(
+                    (items.filter((s) => (counts[s.id] ?? 0) >= 1).length / items.length) * 100
+                  )}%`,
+                  background: "var(--gradient-primary)",
+                }}
+              />
             </div>
             <div className="grid grid-cols-3 gap-2">
               {items.map((s) => (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Login } from "@/components/Login";
 import { Paywall } from "@/components/Paywall";
+import { Onboarding } from "@/components/Onboarding";
 import { BottomNav, Tab } from "@/components/BottomNav";
 import { AlbumView } from "@/views/AlbumView";
 import { TradesView } from "@/views/TradesView";
@@ -12,6 +13,7 @@ import type { Session, User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 
 const PAID_KEY = "cromo:paid:v1";
+const ONBOARD_KEY = "cromo:onboarded:v1";
 
 export interface Profile {
   nome: string;
@@ -24,6 +26,7 @@ const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [paid, setPaid] = useState(false);
+  const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
   const [profile, setProfile] = useState<Profile>({ nome: "", cidade: "", avatar: "⚽" });
@@ -40,6 +43,7 @@ const Index = () => {
       setLoading(false);
     });
     setPaid(localStorage.getItem(PAID_KEY) === "1");
+    setShowOnboard(localStorage.getItem(ONBOARD_KEY) !== "1");
     return () => sub.subscription.unsubscribe();
   }, []);
 
@@ -113,6 +117,17 @@ const Index = () => {
     return <Login />;
   }
 
+  if (showOnboard) {
+    return (
+      <Onboarding
+        onDone={() => {
+          localStorage.setItem(ONBOARD_KEY, "1");
+          setShowOnboard(false);
+        }}
+      />
+    );
+  }
+
   if (!paid) {
     return (
       <Paywall
@@ -127,6 +142,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto">
+      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur border-b border-border">
+        <div className="flex items-center justify-between px-4 h-12">
+          <button onClick={() => setTab("album")} className="font-black tracking-tight text-sm">
+            CROMO <span className="text-primary">⚽</span>
+          </button>
+          <button
+            onClick={() => setTab("perfil")}
+            aria-label="Abrir perfil"
+            className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center text-base font-bold"
+          >
+            {profile.avatar || (profile.nome?.[0] ?? user.email?.[0] ?? "?").toUpperCase()}
+          </button>
+        </div>
+      </header>
       {tab === "album" && <AlbumView counts={counts} onTap={handleTap} />}
       {tab === "trocas" && <TradesView counts={counts} />}
       {tab === "locais" && <LocationsView userId={user.id} userCity={profile.cidade} />}

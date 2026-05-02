@@ -33,7 +33,7 @@ export function TradesView({ counts }: { counts: StickerCounts }) {
 
   return (
     <div className="pb-24">
-      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
+      <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
           <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Match inteligente</p>
           <h1 className="text-2xl font-black tracking-tight">Trocas possíveis</h1>
@@ -48,6 +48,14 @@ export function TradesView({ counts }: { counts: StickerCounts }) {
 
       <div className="px-4 pt-4 space-y-3">
         <AdBanner label="Patrocinado" />
+
+        <div className="rounded-2xl border border-dashed border-border p-4 text-center">
+          <div className="text-2xl mb-1">📍</div>
+          <p className="font-bold text-sm">Usuários reais próximos</p>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Em breve — convide amigos para o CROMO!
+          </p>
+        </div>
 
         {matches.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
