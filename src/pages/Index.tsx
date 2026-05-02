@@ -142,6 +142,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto">
+      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur border-b border-border">
+        <div className="flex items-center justify-between px-4 h-12">
+          <button onClick={() => setTab("album")} className="font-black tracking-tight text-sm">
+            CROMO <span className="text-primary">⚽</span>
+          </button>
+          <button
+            onClick={() => setTab("perfil")}
+            aria-label="Abrir perfil"
+            className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center text-base font-bold"
+          >
+            {profile.avatar || (profile.nome?.[0] ?? user.email?.[0] ?? "?").toUpperCase()}
+          </button>
+        </div>
+      </header>
       {tab === "album" && <AlbumView counts={counts} onTap={handleTap} />}
       {tab === "trocas" && <TradesView counts={counts} />}
       {tab === "locais" && <LocationsView userId={user.id} userCity={profile.cidade} />}
