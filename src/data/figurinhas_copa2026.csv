@@ -1,0 +1,1002 @@
+id,grupo,sigla_selecao,selecao,posicao_relativa,tipo,nome
+FWC-001,FWC,FWC,Abertura,0,especial,Página Inicial / Logo FIFA World Cup 2026
+FWC-002,FWC,FWC,Abertura,0,especial,Mascote Oficial
+FWC-003,FWC,FWC,Abertura,0,especial,Troféu FIFA World Cup
+FWC-004,FWC,FWC,Abertura,0,especial,"MetLife Stadium (Nova York, EUA)"
+FWC-005,FWC,FWC,Abertura,0,especial,"AT&T Stadium (Dallas, EUA)"
+FWC-006,FWC,FWC,Abertura,0,especial,"SoFi Stadium (Los Angeles, EUA)"
+FWC-007,FWC,FWC,Abertura,0,especial,"Levi's Stadium (San Francisco, EUA)"
+FWC-008,FWC,FWC,Abertura,0,especial,"Rose Bowl (Los Angeles, EUA)"
+FWC-009,FWC,FWC,Abertura,0,especial,"Gillette Stadium (Boston, EUA)"
+FWC-010,FWC,FWC,Abertura,0,especial,"Arrowhead Stadium (Kansas City, EUA)"
+FWC-011,FWC,FWC,Abertura,0,especial,"Lincoln Financial Field (Filadélfia, EUA)"
+FWC-012,FWC,FWC,Abertura,0,especial,"Estadio Azteca (Cidade do México, MEX)"
+FWC-013,FWC,FWC,Abertura,0,especial,"Estadio Akron (Guadalajara, MEX)"
+FWC-014,FWC,FWC,Abertura,0,especial,"Estadio BBVA (Monterrey, MEX)"
+FWC-015,FWC,FWC,Abertura,0,especial,"BC Place (Vancouver, CAN)"
+FWC-016,FWC,FWC,Abertura,0,especial,"BMO Field (Toronto, CAN)"
+MEX-000,A,MEX,México,0,escudo,Escudo — México
+MEX-001,A,MEX,México,1,jogador,Luis Malagón
+MEX-002,A,MEX,México,2,jogador,Johan Vásquez
+MEX-003,A,MEX,México,3,jogador,Jorge Sánchez
+MEX-004,A,MEX,México,4,jogador,César Montes
+MEX-005,A,MEX,México,5,jogador,Jesús Gallardo
+MEX-006,A,MEX,México,6,jogador,Israel Reyes
+MEX-007,A,MEX,México,7,jogador,Diego Lainez
+MEX-008,A,MEX,México,8,jogador,Carlos Rodríguez
+MEX-009,A,MEX,México,9,jogador,Edson Álvarez
+MEX-010,A,MEX,México,10,jogador,Orbelín Pineda
+MEX-011,A,MEX,México,11,jogador,Marcel Ruiz
+MEX-012,A,MEX,México,12,jogador,Érick Sánchez
+MEX-013,A,MEX,México,13,jogador,Hirving Lozano
+MEX-014,A,MEX,México,14,jogador,Santiago Giménez
+MEX-015,A,MEX,México,15,jogador,Raúl Jiménez
+MEX-016,A,MEX,México,16,jogador,Alexis Vega
+MEX-017,A,MEX,México,17,jogador,Roberto Alvarado
+MEX-018,A,MEX,México,18,jogador,César Huerta
+MEX-019,A,MEX,México,19,foto_time,Foto Oficial — México
+RSA-000,A,RSA,África do Sul,0,escudo,Escudo — África do Sul
+RSA-001,A,RSA,África do Sul,1,jogador,Ronwen Williams
+RSA-002,A,RSA,África do Sul,2,jogador,Sipho Chaine
+RSA-003,A,RSA,África do Sul,3,jogador,Aubrey Modiba
+RSA-004,A,RSA,África do Sul,4,jogador,Samukele Kabini
+RSA-005,A,RSA,África do Sul,5,jogador,Mbekezeli Mbokazi
+RSA-006,A,RSA,África do Sul,6,jogador,Khulumani Ndamane
+RSA-007,A,RSA,África do Sul,7,jogador,Siyabonga Ngezana
+RSA-008,A,RSA,África do Sul,8,jogador,Khuliso Mudau
+RSA-009,A,RSA,África do Sul,9,jogador,Nkosinathi Sibisi
+RSA-010,A,RSA,África do Sul,10,jogador,Teboho Mokoena
+RSA-011,A,RSA,África do Sul,11,jogador,Thalente Mbatha
+RSA-012,A,RSA,África do Sul,12,jogador,Bathuisi Aubaas
+RSA-013,A,RSA,África do Sul,13,jogador,Yaya Sithole
+RSA-014,A,RSA,África do Sul,14,jogador,Sipho Mbule
+RSA-015,A,RSA,África do Sul,15,jogador,Lyle Foster
+RSA-016,A,RSA,África do Sul,16,jogador,Ioraam Rayners
+RSA-017,A,RSA,África do Sul,17,jogador,Mohau Nkota
+RSA-018,A,RSA,África do Sul,18,jogador,Oswin Appolis
+RSA-019,A,RSA,África do Sul,19,foto_time,Foto Oficial — África do Sul
+KOR-000,A,KOR,Coreia do Sul,0,escudo,Escudo — Coreia do Sul
+KOR-001,A,KOR,Coreia do Sul,1,jogador,Hyeon-woo Jo
+KOR-002,A,KOR,Coreia do Sul,2,jogador,Seung-Gyu Kim
+KOR-003,A,KOR,Coreia do Sul,3,jogador,Min-jae Kim
+KOR-004,A,KOR,Coreia do Sul,4,jogador,Yu-min Cho
+KOR-005,A,KOR,Coreia do Sul,5,jogador,Young-woo Seol
+KOR-006,A,KOR,Coreia do Sul,6,jogador,Han-beom Lee
+KOR-007,A,KOR,Coreia do Sul,7,jogador,Tae-seok Lee
+KOR-008,A,KOR,Coreia do Sul,8,jogador,Myung-jae Lee
+KOR-009,A,KOR,Coreia do Sul,9,jogador,Jae-sung Lee
+KOR-010,A,KOR,Coreia do Sul,10,jogador,In-beom Hwang
+KOR-011,A,KOR,Coreia do Sul,11,jogador,Kang-in Lee
+KOR-012,A,KOR,Coreia do Sul,12,jogador,Seung-ho Paik
+KOR-013,A,KOR,Coreia do Sul,13,jogador,Jens Castrop
+KOR-014,A,KOR,Coreia do Sul,14,jogador,Dong-gyeong Lee
+KOR-015,A,KOR,Coreia do Sul,15,jogador,Gue-sung Cho
+KOR-016,A,KOR,Coreia do Sul,16,jogador,Heung-min Son
+KOR-017,A,KOR,Coreia do Sul,17,jogador,Hee-chan Hwang
+KOR-018,A,KOR,Coreia do Sul,18,jogador,Hyeon-Gyu Oh
+KOR-019,A,KOR,Coreia do Sul,19,foto_time,Foto Oficial — Coreia do Sul
+CZE-000,A,CZE,Rep. Tcheca,0,escudo,Escudo — Rep. Tcheca
+CZE-001,A,CZE,Rep. Tcheca,1,jogador,Matěj Kovář
+CZE-002,A,CZE,Rep. Tcheca,2,jogador,Jindřich Staněk
+CZE-003,A,CZE,Rep. Tcheca,3,jogador,Ladislav Krejčí
+CZE-004,A,CZE,Rep. Tcheca,4,jogador,Vladimír Coufal
+CZE-005,A,CZE,Rep. Tcheca,5,jogador,Jaroslav Zelený
+CZE-006,A,CZE,Rep. Tcheca,6,jogador,Tomáš Holeš
+CZE-007,A,CZE,Rep. Tcheca,7,jogador,David Zima
+CZE-008,A,CZE,Rep. Tcheca,8,jogador,Michal Sadílek
+CZE-009,A,CZE,Rep. Tcheca,9,jogador,Lukáš Provod
+CZE-010,A,CZE,Rep. Tcheca,10,jogador,Lukáš Červ
+CZE-011,A,CZE,Rep. Tcheca,11,jogador,Tomáš Souček
+CZE-012,A,CZE,Rep. Tcheca,12,jogador,Pavel Šulc
+CZE-013,A,CZE,Rep. Tcheca,13,jogador,Matěj Vydra
+CZE-014,A,CZE,Rep. Tcheca,14,jogador,Vasil Kušej
+CZE-015,A,CZE,Rep. Tcheca,15,jogador,Tomáš Chorý
+CZE-016,A,CZE,Rep. Tcheca,16,jogador,Václav Černý
+CZE-017,A,CZE,Rep. Tcheca,17,jogador,Adam Hložek
+CZE-018,A,CZE,Rep. Tcheca,18,jogador,Patrik Schick
+CZE-019,A,CZE,Rep. Tcheca,19,foto_time,Foto Oficial — Rep. Tcheca
+CAN-000,B,CAN,Canadá,0,escudo,Escudo — Canadá
+CAN-001,B,CAN,Canadá,1,jogador,Dayne St. Clair
+CAN-002,B,CAN,Canadá,2,jogador,Alphonso Davies
+CAN-003,B,CAN,Canadá,3,jogador,Alistair Johnston
+CAN-004,B,CAN,Canadá,4,jogador,Samuel Adekugbe
+CAN-005,B,CAN,Canadá,5,jogador,Richie Laryea
+CAN-006,B,CAN,Canadá,6,jogador,Derek Cornelius
+CAN-007,B,CAN,Canadá,7,jogador,Moïse Bombito
+CAN-008,B,CAN,Canadá,8,jogador,Kamal Miller
+CAN-009,B,CAN,Canadá,9,jogador,Stephen Eustáquio
+CAN-010,B,CAN,Canadá,10,jogador,Ismaël Koné
+CAN-011,B,CAN,Canadá,11,jogador,Jonathan Osorio
+CAN-012,B,CAN,Canadá,12,jogador,Jacob Shaffelburg
+CAN-013,B,CAN,Canadá,13,jogador,Mathieu Choinière
+CAN-014,B,CAN,Canadá,14,jogador,Niko Sigur
+CAN-015,B,CAN,Canadá,15,jogador,Tajon Buchanan
+CAN-016,B,CAN,Canadá,16,jogador,Liam Millar
+CAN-017,B,CAN,Canadá,17,jogador,Cyle Larin
+CAN-018,B,CAN,Canadá,18,jogador,Jonathan David
+CAN-019,B,CAN,Canadá,19,foto_time,Foto Oficial — Canadá
+BIH-000,B,BIH,Bósnia e Herzegovina,0,escudo,Escudo — Bósnia e Herzegovina
+BIH-001,B,BIH,Bósnia e Herzegovina,1,jogador,Nikola Vasilj
+BIH-002,B,BIH,Bósnia e Herzegovina,2,jogador,Amar Dedić
+BIH-003,B,BIH,Bósnia e Herzegovina,3,jogador,Sead Kolašinac
+BIH-004,B,BIH,Bósnia e Herzegovina,4,jogador,Tarik Muharemović
+BIH-005,B,BIH,Bósnia e Herzegovina,5,jogador,Nihad Mujakić
+BIH-006,B,BIH,Bósnia e Herzegovina,6,jogador,Nikola Katić
+BIH-007,B,BIH,Bósnia e Herzegovina,7,jogador,Amir Hadžiahmetović
+BIH-008,B,BIH,Bósnia e Herzegovina,8,jogador,Benjamin Tahirović
+BIH-009,B,BIH,Bósnia e Herzegovina,9,jogador,Armin Gigović
+BIH-010,B,BIH,Bósnia e Herzegovina,10,jogador,Ivan Šunjić
+BIH-011,B,BIH,Bósnia e Herzegovina,11,jogador,Ivan Bašić
+BIH-012,B,BIH,Bósnia e Herzegovina,12,jogador,Dženis Burnić
+BIH-013,B,BIH,Bósnia e Herzegovina,13,jogador,Esmir Bajraktarević
+BIH-014,B,BIH,Bósnia e Herzegovina,14,jogador,Amar Memić
+BIH-015,B,BIH,Bósnia e Herzegovina,15,jogador,Ermedin Demirović
+BIH-016,B,BIH,Bósnia e Herzegovina,16,jogador,Edin Džeko
+BIH-017,B,BIH,Bósnia e Herzegovina,17,jogador,Samed Baždar
+BIH-018,B,BIH,Bósnia e Herzegovina,18,jogador,Haris Tabaković
+BIH-019,B,BIH,Bósnia e Herzegovina,19,foto_time,Foto Oficial — Bósnia e Herzegovina
+QAT-000,B,QAT,Catar,0,escudo,Escudo — Catar
+QAT-001,B,QAT,Catar,1,jogador,Meshaal Barsham
+QAT-002,B,QAT,Catar,2,jogador,Sultan Albrake
+QAT-003,B,QAT,Catar,3,jogador,Lucas Mendes
+QAT-004,B,QAT,Catar,4,jogador,Homam Ahmed
+QAT-005,B,QAT,Catar,5,jogador,Boualem Khoukhi
+QAT-006,B,QAT,Catar,6,jogador,Pedro Miguel
+QAT-007,B,QAT,Catar,7,jogador,Tarek Salman
+QAT-008,B,QAT,Catar,8,jogador,Mohamed Al-Mannai
+QAT-009,B,QAT,Catar,9,jogador,Karim Boudiaf
+QAT-010,B,QAT,Catar,10,jogador,Assim Madibo
+QAT-011,B,QAT,Catar,11,jogador,Ahmed Fatehi
+QAT-012,B,QAT,Catar,12,jogador,Mohammed Waad
+QAT-013,B,QAT,Catar,13,jogador,Abdulaziz Hatem
+QAT-014,B,QAT,Catar,14,jogador,Hassan Al-Haydos
+QAT-015,B,QAT,Catar,15,jogador,Edmilson Junior
+QAT-016,B,QAT,Catar,16,jogador,Akram Hassan Afif
+QAT-017,B,QAT,Catar,17,jogador,Ahmed Al Ganehi
+QAT-018,B,QAT,Catar,18,jogador,Almoez Ali
+QAT-019,B,QAT,Catar,19,foto_time,Foto Oficial — Catar
+SUI-000,B,SUI,Suíça,0,escudo,Escudo — Suíça
+SUI-001,B,SUI,Suíça,1,jogador,Gregor Kobel
+SUI-002,B,SUI,Suíça,2,jogador,Yvon Mvogo
+SUI-003,B,SUI,Suíça,3,jogador,Manuel Akanji
+SUI-004,B,SUI,Suíça,4,jogador,Ricardo Rodriguez
+SUI-005,B,SUI,Suíça,5,jogador,Nico Elvedi
+SUI-006,B,SUI,Suíça,6,jogador,Aurèle Amenda
+SUI-007,B,SUI,Suíça,7,jogador,Silvan Widmer
+SUI-008,B,SUI,Suíça,8,jogador,Granit Xhaka
+SUI-009,B,SUI,Suíça,9,jogador,Denis Zakaria
+SUI-010,B,SUI,Suíça,10,jogador,Remo Freuler
+SUI-011,B,SUI,Suíça,11,jogador,Fabian Rieder
+SUI-012,B,SUI,Suíça,12,jogador,Ardon Jashari
+SUI-013,B,SUI,Suíça,13,jogador,Johan Manzambi
+SUI-014,B,SUI,Suíça,14,jogador,Michel Aebischer
+SUI-015,B,SUI,Suíça,15,jogador,Breel Embolo
+SUI-016,B,SUI,Suíça,16,jogador,Ruben Vargas
+SUI-017,B,SUI,Suíça,17,jogador,Dan Ndoye
+SUI-018,B,SUI,Suíça,18,jogador,Zeki Amdouni
+SUI-019,B,SUI,Suíça,19,foto_time,Foto Oficial — Suíça
+BRA-000,C,BRA,Brasil,0,escudo,Escudo — Brasil
+BRA-001,C,BRA,Brasil,1,jogador,Alisson
+BRA-002,C,BRA,Brasil,2,jogador,Bento
+BRA-003,C,BRA,Brasil,3,jogador,Marquinhos
+BRA-004,C,BRA,Brasil,4,jogador,Éder Militão
+BRA-005,C,BRA,Brasil,5,jogador,Gabriel Magalhães
+BRA-006,C,BRA,Brasil,6,jogador,Danilo
+BRA-007,C,BRA,Brasil,7,jogador,Wesley
+BRA-008,C,BRA,Brasil,8,jogador,Lucas Paquetá
+BRA-009,C,BRA,Brasil,9,jogador,Casemiro
+BRA-010,C,BRA,Brasil,10,jogador,Bruno Guimarães
+BRA-011,C,BRA,Brasil,11,jogador,Luiz Henrique
+BRA-012,C,BRA,Brasil,12,jogador,Vinícius Júnior
+BRA-013,C,BRA,Brasil,13,jogador,Rodrygo
+BRA-014,C,BRA,Brasil,14,jogador,João Pedro
+BRA-015,C,BRA,Brasil,15,jogador,Matheus Cunha
+BRA-016,C,BRA,Brasil,16,jogador,Gabriel Martinelli
+BRA-017,C,BRA,Brasil,17,jogador,Raphinha
+BRA-018,C,BRA,Brasil,18,jogador,Estêvão
+BRA-019,C,BRA,Brasil,19,foto_time,Foto Oficial — Brasil
+MAR-000,C,MAR,Marrocos,0,escudo,Escudo — Marrocos
+MAR-001,C,MAR,Marrocos,1,jogador,Yassine Bounou
+MAR-002,C,MAR,Marrocos,2,jogador,Munir El Kajoui
+MAR-003,C,MAR,Marrocos,3,jogador,Achraf Hakimi
+MAR-004,C,MAR,Marrocos,4,jogador,Noussair Mazraoui
+MAR-005,C,MAR,Marrocos,5,jogador,Nayef Aguerd
+MAR-006,C,MAR,Marrocos,6,jogador,Romain Saïss
+MAR-007,C,MAR,Marrocos,7,jogador,Jawad El Yamiq
+MAR-008,C,MAR,Marrocos,8,jogador,Adam Masina
+MAR-009,C,MAR,Marrocos,9,jogador,Sofyan Amrabat
+MAR-010,C,MAR,Marrocos,10,jogador,Azzedine Ounahi
+MAR-011,C,MAR,Marrocos,11,jogador,Eliesse Ben Seghir
+MAR-012,C,MAR,Marrocos,12,jogador,Bilal El Khannouss
+MAR-013,C,MAR,Marrocos,13,jogador,Ismael Saibari
+MAR-014,C,MAR,Marrocos,14,jogador,Youssef En-Nesyri
+MAR-015,C,MAR,Marrocos,15,jogador,Abde Ezzalzouli
+MAR-016,C,MAR,Marrocos,16,jogador,Soufiane Rahimi
+MAR-017,C,MAR,Marrocos,17,jogador,Brahim Díaz
+MAR-018,C,MAR,Marrocos,18,jogador,Ayoub El Kaabi
+MAR-019,C,MAR,Marrocos,19,foto_time,Foto Oficial — Marrocos
+HAI-000,C,HAI,Haiti,0,escudo,Escudo — Haiti
+HAI-001,C,HAI,Haiti,1,jogador,Johny Placide
+HAI-002,C,HAI,Haiti,2,jogador,Carlens Arcus
+HAI-003,C,HAI,Haiti,3,jogador,Martin Expérience
+HAI-004,C,HAI,Haiti,4,jogador,Jean-Kevin Duverne
+HAI-005,C,HAI,Haiti,5,jogador,Ricardo Adé
+HAI-006,C,HAI,Haiti,6,jogador,Duke Lacroix
+HAI-007,C,HAI,Haiti,7,jogador,Garven Metusala
+HAI-008,C,HAI,Haiti,8,jogador,Hannes Delcroix
+HAI-009,C,HAI,Haiti,9,jogador,Leverton Pierre
+HAI-010,C,HAI,Haiti,10,jogador,Danley Jean Jacques
+HAI-011,C,HAI,Haiti,11,jogador,Jean-Ricner Bellegarde
+HAI-012,C,HAI,Haiti,12,jogador,Christopher Attys
+HAI-013,C,HAI,Haiti,13,jogador,Derrick Etienne Jr.
+HAI-014,C,HAI,Haiti,14,jogador,Josué Casimir
+HAI-015,C,HAI,Haiti,15,jogador,Ruben Providence
+HAI-016,C,HAI,Haiti,16,jogador,Duckens Nazon
+HAI-017,C,HAI,Haiti,17,jogador,Louicius Deedson
+HAI-018,C,HAI,Haiti,18,jogador,Frantzdy Pierrot
+HAI-019,C,HAI,Haiti,19,foto_time,Foto Oficial — Haiti
+SCO-000,C,SCO,Escócia,0,escudo,Escudo — Escócia
+SCO-001,C,SCO,Escócia,1,jogador,Angus Gunn
+SCO-002,C,SCO,Escócia,2,jogador,Jack Hendry
+SCO-003,C,SCO,Escócia,3,jogador,Kieran Tierney
+SCO-004,C,SCO,Escócia,4,jogador,Aaron Hickey
+SCO-005,C,SCO,Escócia,5,jogador,Andrew Robertson
+SCO-006,C,SCO,Escócia,6,jogador,Scott McKenna
+SCO-007,C,SCO,Escócia,7,jogador,John Souttar
+SCO-008,C,SCO,Escócia,8,jogador,Anthony Ralston
+SCO-009,C,SCO,Escócia,9,jogador,Grant Hanley
+SCO-010,C,SCO,Escócia,10,jogador,Scott McTominay
+SCO-011,C,SCO,Escócia,11,jogador,Billy Gilmour
+SCO-012,C,SCO,Escócia,12,jogador,Lewis Ferguson
+SCO-013,C,SCO,Escócia,13,jogador,Ryan Christie
+SCO-014,C,SCO,Escócia,14,jogador,Kenny McLean
+SCO-015,C,SCO,Escócia,15,jogador,John McGinn
+SCO-016,C,SCO,Escócia,16,jogador,Lyndon Dykes
+SCO-017,C,SCO,Escócia,17,jogador,Che Adams
+SCO-018,C,SCO,Escócia,18,jogador,Ben Gannon-Doak
+SCO-019,C,SCO,Escócia,19,foto_time,Foto Oficial — Escócia
+USA-000,D,USA,Estados Unidos,0,escudo,Escudo — Estados Unidos
+USA-001,D,USA,Estados Unidos,1,jogador,Matt Freese
+USA-002,D,USA,Estados Unidos,2,jogador,Chris Richards
+USA-003,D,USA,Estados Unidos,3,jogador,Tim Ream
+USA-004,D,USA,Estados Unidos,4,jogador,Mark McKenzie
+USA-005,D,USA,Estados Unidos,5,jogador,Alex Freeman
+USA-006,D,USA,Estados Unidos,6,jogador,Antonee Robinson
+USA-007,D,USA,Estados Unidos,7,jogador,Tyler Adams
+USA-008,D,USA,Estados Unidos,8,jogador,Tanner Tessmann
+USA-009,D,USA,Estados Unidos,9,jogador,Weston McKennie
+USA-010,D,USA,Estados Unidos,10,jogador,Christian Roldan
+USA-011,D,USA,Estados Unidos,11,jogador,Timothy Weah
+USA-012,D,USA,Estados Unidos,12,jogador,Diego Luna
+USA-013,D,USA,Estados Unidos,13,jogador,Malik Tillman
+USA-014,D,USA,Estados Unidos,14,jogador,Christian Pulisic
+USA-015,D,USA,Estados Unidos,15,jogador,Brenden Aaronson
+USA-016,D,USA,Estados Unidos,16,jogador,Ricardo Pepi
+USA-017,D,USA,Estados Unidos,17,jogador,Haji Wright
+USA-018,D,USA,Estados Unidos,18,jogador,Folarin Balogun
+USA-019,D,USA,Estados Unidos,19,foto_time,Foto Oficial — Estados Unidos
+PAR-000,D,PAR,Paraguai,0,escudo,Escudo — Paraguai
+PAR-001,D,PAR,Paraguai,1,jogador,Roberto Fernández
+PAR-002,D,PAR,Paraguai,2,jogador,Orlando Gill
+PAR-003,D,PAR,Paraguai,3,jogador,Gustavo Gómez
+PAR-004,D,PAR,Paraguai,4,jogador,Fabián Balbuena
+PAR-005,D,PAR,Paraguai,5,jogador,Juan José Cáceres
+PAR-006,D,PAR,Paraguai,6,jogador,Omar Alderete
+PAR-007,D,PAR,Paraguai,7,jogador,Junior Alonso
+PAR-008,D,PAR,Paraguai,8,jogador,Mathías Villasanti
+PAR-009,D,PAR,Paraguai,9,jogador,Diego Gómez
+PAR-010,D,PAR,Paraguai,10,jogador,Damián Bobadilla
+PAR-011,D,PAR,Paraguai,11,jogador,Andrés Cubas
+PAR-012,D,PAR,Paraguai,12,jogador,Matías Galarza
+PAR-013,D,PAR,Paraguai,13,jogador,Julio Enciso
+PAR-014,D,PAR,Paraguai,14,jogador,Richard Sánchez
+PAR-015,D,PAR,Paraguai,15,jogador,Ángel Romero
+PAR-016,D,PAR,Paraguai,16,jogador,Iván Torres
+PAR-017,D,PAR,Paraguai,17,jogador,Miguel Almirón
+PAR-018,D,PAR,Paraguai,18,jogador,Antonio Sanabria
+PAR-019,D,PAR,Paraguai,19,foto_time,Foto Oficial — Paraguai
+AUS-000,D,AUS,Austrália,0,escudo,Escudo — Austrália
+AUS-001,D,AUS,Austrália,1,jogador,Mathew Ryan
+AUS-002,D,AUS,Austrália,2,jogador,Joe Gauci
+AUS-003,D,AUS,Austrália,3,jogador,Harry Souttar
+AUS-004,D,AUS,Austrália,4,jogador,Alessandro Circati
+AUS-005,D,AUS,Austrália,5,jogador,Jordan Bos
+AUS-006,D,AUS,Austrália,6,jogador,Aziz Behich
+AUS-007,D,AUS,Austrália,7,jogador,Cameron Burgess
+AUS-008,D,AUS,Austrália,8,jogador,Lewis Miller
+AUS-009,D,AUS,Austrália,9,jogador,Milos Degenek
+AUS-010,D,AUS,Austrália,10,jogador,Jackson Irvine
+AUS-011,D,AUS,Austrália,11,jogador,Riley McGree
+AUS-012,D,AUS,Austrália,12,jogador,Aiden O'Neill
+AUS-013,D,AUS,Austrália,13,jogador,Connor Metcalfe
+AUS-014,D,AUS,Austrália,14,jogador,Patrick Yazbek
+AUS-015,D,AUS,Austrália,15,jogador,Craig Goodwin
+AUS-016,D,AUS,Austrália,16,jogador,Kusini Yengi
+AUS-017,D,AUS,Austrália,17,jogador,Nestory Irankunda
+AUS-018,D,AUS,Austrália,18,jogador,Mohamed Touré
+AUS-019,D,AUS,Austrália,19,foto_time,Foto Oficial — Austrália
+TUR-000,D,TUR,Turquia,0,escudo,Escudo — Turquia
+TUR-001,D,TUR,Turquia,1,jogador,Ugurcan Cakir
+TUR-002,D,TUR,Turquia,2,jogador,Mert Muldur
+TUR-003,D,TUR,Turquia,3,jogador,Zeki Celik
+TUR-004,D,TUR,Turquia,4,jogador,Abdulkerim Bardakci
+TUR-005,D,TUR,Turquia,5,jogador,Caglar Soyuncu
+TUR-006,D,TUR,Turquia,6,jogador,Merih Demiral
+TUR-007,D,TUR,Turquia,7,jogador,Ferdi Kadioglu
+TUR-008,D,TUR,Turquia,8,jogador,Kaan Ayhan
+TUR-009,D,TUR,Turquia,9,jogador,Ismail Yuksek
+TUR-010,D,TUR,Turquia,10,jogador,Hakan Calhanoglu
+TUR-011,D,TUR,Turquia,11,jogador,Orkun Kokcu
+TUR-012,D,TUR,Turquia,12,jogador,Arda Güler
+TUR-013,D,TUR,Turquia,13,jogador,Irfan Can Kahveci
+TUR-014,D,TUR,Turquia,14,jogador,Yunus Akgun
+TUR-015,D,TUR,Turquia,15,jogador,Can Uzun
+TUR-016,D,TUR,Turquia,16,jogador,Baris Alper Yilmaz
+TUR-017,D,TUR,Turquia,17,jogador,Kerem Akturkoglu
+TUR-018,D,TUR,Turquia,18,jogador,Kenan Yildiz
+TUR-019,D,TUR,Turquia,19,foto_time,Foto Oficial — Turquia
+GER-000,E,GER,Alemanha,0,escudo,Escudo — Alemanha
+GER-001,E,GER,Alemanha,1,jogador,Marc-André ter Stegen
+GER-002,E,GER,Alemanha,2,jogador,Jonathan Tah
+GER-003,E,GER,Alemanha,3,jogador,David Raum
+GER-004,E,GER,Alemanha,4,jogador,Nico Schlotterbeck
+GER-005,E,GER,Alemanha,5,jogador,Antonio Rüdiger
+GER-006,E,GER,Alemanha,6,jogador,Waldemar Anton
+GER-007,E,GER,Alemanha,7,jogador,Ridle Baku
+GER-008,E,GER,Alemanha,8,jogador,Maximilian Mittelstädt
+GER-009,E,GER,Alemanha,9,jogador,Joshua Kimmich
+GER-010,E,GER,Alemanha,10,jogador,Florian Wirtz
+GER-011,E,GER,Alemanha,11,jogador,Felix Nmecha
+GER-012,E,GER,Alemanha,12,jogador,Leon Goretzka
+GER-013,E,GER,Alemanha,13,jogador,Jamal Musiala
+GER-014,E,GER,Alemanha,14,jogador,Serge Gnabry
+GER-015,E,GER,Alemanha,15,jogador,Kai Havertz
+GER-016,E,GER,Alemanha,16,jogador,Leroy Sané
+GER-017,E,GER,Alemanha,17,jogador,Karim Adeyemi
+GER-018,E,GER,Alemanha,18,jogador,Nick Woltemade
+GER-019,E,GER,Alemanha,19,foto_time,Foto Oficial — Alemanha
+CUW-000,E,CUW,Curaçao,0,escudo,Escudo — Curaçao
+CUW-001,E,CUW,Curaçao,1,jogador,Eloy Room
+CUW-002,E,CUW,Curaçao,2,jogador,Armando Obispo
+CUW-003,E,CUW,Curaçao,3,jogador,Sherel Floranus
+CUW-004,E,CUW,Curaçao,4,jogador,Jurien Gaari
+CUW-005,E,CUW,Curaçao,5,jogador,Joshua Brenet
+CUW-006,E,CUW,Curaçao,6,jogador,Roshon Van Eijma
+CUW-007,E,CUW,Curaçao,7,jogador,Shurandy Sambo
+CUW-008,E,CUW,Curaçao,8,jogador,Livano Comenencia
+CUW-009,E,CUW,Curaçao,9,jogador,Godfried Roemeratoe
+CUW-010,E,CUW,Curaçao,10,jogador,Juninho Bacuna
+CUW-011,E,CUW,Curaçao,11,jogador,Leandro Bacuna
+CUW-012,E,CUW,Curaçao,12,jogador,Tahith Chong
+CUW-013,E,CUW,Curaçao,13,jogador,Kenji Gorré
+CUW-014,E,CUW,Curaçao,14,jogador,Jearl Margaritha
+CUW-015,E,CUW,Curaçao,15,jogador,Jurgen Locadia
+CUW-016,E,CUW,Curaçao,16,jogador,Jeremy Antonisse
+CUW-017,E,CUW,Curaçao,17,jogador,Gervane Kastaneer
+CUW-018,E,CUW,Curaçao,18,jogador,Sontje Hansen
+CUW-019,E,CUW,Curaçao,19,foto_time,Foto Oficial — Curaçao
+CIV-000,E,CIV,Costa do Marfim,0,escudo,Escudo — Costa do Marfim
+CIV-001,E,CIV,Costa do Marfim,1,jogador,Yahia Fofana
+CIV-002,E,CIV,Costa do Marfim,2,jogador,Ghislain Konan
+CIV-003,E,CIV,Costa do Marfim,3,jogador,Wilfried Singo
+CIV-004,E,CIV,Costa do Marfim,4,jogador,Odilon Kossounou
+CIV-005,E,CIV,Costa do Marfim,5,jogador,Evan Ndicka
+CIV-006,E,CIV,Costa do Marfim,6,jogador,Willy Boly
+CIV-007,E,CIV,Costa do Marfim,7,jogador,Emmanuel Agbadou
+CIV-008,E,CIV,Costa do Marfim,8,jogador,Ousmane Diomande
+CIV-009,E,CIV,Costa do Marfim,9,jogador,Franck Kessié
+CIV-010,E,CIV,Costa do Marfim,10,jogador,Seko Fofana
+CIV-011,E,CIV,Costa do Marfim,11,jogador,Ibrahim Sangaré
+CIV-012,E,CIV,Costa do Marfim,12,jogador,Jean-Philippe Gbamin
+CIV-013,E,CIV,Costa do Marfim,13,jogador,Amad Diallo
+CIV-014,E,CIV,Costa do Marfim,14,jogador,Sébastien Haller
+CIV-015,E,CIV,Costa do Marfim,15,jogador,Simon Adingra
+CIV-016,E,CIV,Costa do Marfim,16,jogador,Yan Diomande
+CIV-017,E,CIV,Costa do Marfim,17,jogador,Evann Guessand
+CIV-018,E,CIV,Costa do Marfim,18,jogador,Oumar Diakité
+CIV-019,E,CIV,Costa do Marfim,19,foto_time,Foto Oficial — Costa do Marfim
+ECU-000,E,ECU,Equador,0,escudo,Escudo — Equador
+ECU-001,E,ECU,Equador,1,jogador,Hernán Galíndez
+ECU-002,E,ECU,Equador,2,jogador,Gonzalo Valle
+ECU-003,E,ECU,Equador,3,jogador,Piero Hincapié
+ECU-004,E,ECU,Equador,4,jogador,Pervis Estupiñán
+ECU-005,E,ECU,Equador,5,jogador,Willian Pacho
+ECU-006,E,ECU,Equador,6,jogador,Ángelo Preciado
+ECU-007,E,ECU,Equador,7,jogador,Joel Ordóñez
+ECU-008,E,ECU,Equador,8,jogador,Moisés Caicedo
+ECU-009,E,ECU,Equador,9,jogador,Alan Franco
+ECU-010,E,ECU,Equador,10,jogador,Kendry Páez
+ECU-011,E,ECU,Equador,11,jogador,Pedro Vite
+ECU-012,E,ECU,Equador,12,jogador,John Yeboah
+ECU-013,E,ECU,Equador,13,jogador,Leonardo Campana
+ECU-014,E,ECU,Equador,14,jogador,Gonzalo Plata
+ECU-015,E,ECU,Equador,15,jogador,Nilson Angulo
+ECU-016,E,ECU,Equador,16,jogador,Alan Minda
+ECU-017,E,ECU,Equador,17,jogador,Kevin Rodríguez
+ECU-018,E,ECU,Equador,18,jogador,Enner Valencia
+ECU-019,E,ECU,Equador,19,foto_time,Foto Oficial — Equador
+NED-000,F,NED,Holanda,0,escudo,Escudo — Holanda
+NED-001,F,NED,Holanda,1,jogador,Bart Verbruggen
+NED-002,F,NED,Holanda,2,jogador,Virgil van Dijk
+NED-003,F,NED,Holanda,3,jogador,Micky van de Ven
+NED-004,F,NED,Holanda,4,jogador,Jurriën Timber
+NED-005,F,NED,Holanda,5,jogador,Denzel Dumfries
+NED-006,F,NED,Holanda,6,jogador,Nathan Aké
+NED-007,F,NED,Holanda,7,jogador,Jeremie Frimpong
+NED-008,F,NED,Holanda,8,jogador,Jan Paul van Hecke
+NED-009,F,NED,Holanda,9,jogador,Tijjani Reijnders
+NED-010,F,NED,Holanda,10,jogador,Ryan Gravenberch
+NED-011,F,NED,Holanda,11,jogador,Teun Koopmeiners
+NED-012,F,NED,Holanda,12,jogador,Frenkie de Jong
+NED-013,F,NED,Holanda,13,jogador,Xavi Simons
+NED-014,F,NED,Holanda,14,jogador,Justin Kluivert
+NED-015,F,NED,Holanda,15,jogador,Memphis Depay
+NED-016,F,NED,Holanda,16,jogador,Donyell Malen
+NED-017,F,NED,Holanda,17,jogador,Wout Weghorst
+NED-018,F,NED,Holanda,18,jogador,Cody Gakpo
+NED-019,F,NED,Holanda,19,foto_time,Foto Oficial — Holanda
+JPN-000,F,JPN,Japão,0,escudo,Escudo — Japão
+JPN-001,F,JPN,Japão,1,jogador,Zion Suzuki
+JPN-002,F,JPN,Japão,2,jogador,Henry Heroki Mochizuki
+JPN-003,F,JPN,Japão,3,jogador,Ayumu Seko
+JPN-004,F,JPN,Japão,4,jogador,Junnosuke Suzuki
+JPN-005,F,JPN,Japão,5,jogador,Shogo Taniguchi
+JPN-006,F,JPN,Japão,6,jogador,Tsuyoshi Watanabe
+JPN-007,F,JPN,Japão,7,jogador,Kaishu Sano
+JPN-008,F,JPN,Japão,8,jogador,Yuki Soma
+JPN-009,F,JPN,Japão,9,jogador,Ao Tanaka
+JPN-010,F,JPN,Japão,10,jogador,Daichi Kamada
+JPN-011,F,JPN,Japão,11,jogador,Takefusa Kubo
+JPN-012,F,JPN,Japão,12,jogador,Ritsu Doan
+JPN-013,F,JPN,Japão,13,jogador,Keito Nakamura
+JPN-014,F,JPN,Japão,14,jogador,Takumi Minamino
+JPN-015,F,JPN,Japão,15,jogador,Shuto Machino
+JPN-016,F,JPN,Japão,16,jogador,Junya Ito
+JPN-017,F,JPN,Japão,17,jogador,Koki Ogawa
+JPN-018,F,JPN,Japão,18,jogador,Ayase Ueda
+JPN-019,F,JPN,Japão,19,foto_time,Foto Oficial — Japão
+SWE-000,F,SWE,Suécia,0,escudo,Escudo — Suécia
+SWE-001,F,SWE,Suécia,1,jogador,Victor Johansson
+SWE-002,F,SWE,Suécia,2,jogador,Isak Hien
+SWE-003,F,SWE,Suécia,3,jogador,Gabriel Gudmundsson
+SWE-004,F,SWE,Suécia,4,jogador,Emil Holm
+SWE-005,F,SWE,Suécia,5,jogador,Victor Nilsson Lindelöf
+SWE-006,F,SWE,Suécia,6,jogador,Gustaf Lagerbielke
+SWE-007,F,SWE,Suécia,7,jogador,Lucas Bergvall
+SWE-008,F,SWE,Suécia,8,jogador,Hugo Larsson
+SWE-009,F,SWE,Suécia,9,jogador,Jesper Karlström
+SWE-010,F,SWE,Suécia,10,jogador,Yasin Ayari
+SWE-011,F,SWE,Suécia,11,jogador,Mattias Svanberg
+SWE-012,F,SWE,Suécia,12,jogador,Daniel Svensson
+SWE-013,F,SWE,Suécia,13,jogador,Ken Sema
+SWE-014,F,SWE,Suécia,14,jogador,Roony Bardghji
+SWE-015,F,SWE,Suécia,15,jogador,Dejan Kulusevski
+SWE-016,F,SWE,Suécia,16,jogador,Anthony Elanga
+SWE-017,F,SWE,Suécia,17,jogador,Alexander Isak
+SWE-018,F,SWE,Suécia,18,jogador,Viktor Gyökeres
+SWE-019,F,SWE,Suécia,19,foto_time,Foto Oficial — Suécia
+TUN-000,F,TUN,Tunísia,0,escudo,Escudo — Tunísia
+TUN-001,F,TUN,Tunísia,1,jogador,Bechir Ben Said
+TUN-002,F,TUN,Tunísia,2,jogador,Aymen Dahmen
+TUN-003,F,TUN,Tunísia,3,jogador,Van Valery
+TUN-004,F,TUN,Tunísia,4,jogador,Montassar Talbi
+TUN-005,F,TUN,Tunísia,5,jogador,Yassine Meriah
+TUN-006,F,TUN,Tunísia,6,jogador,Ali Abdi
+TUN-007,F,TUN,Tunísia,7,jogador,Dylan Bronn
+TUN-008,F,TUN,Tunísia,8,jogador,Ellyes Skhiri
+TUN-009,F,TUN,Tunísia,9,jogador,Aissa Laidouni
+TUN-010,F,TUN,Tunísia,10,jogador,Ferjani Sassi
+TUN-011,F,TUN,Tunísia,11,jogador,Mohamed Ali Ben Romdhane
+TUN-012,F,TUN,Tunísia,12,jogador,Hannibal Mejbri
+TUN-013,F,TUN,Tunísia,13,jogador,Elias Achouri
+TUN-014,F,TUN,Tunísia,14,jogador,Elias Saad
+TUN-015,F,TUN,Tunísia,15,jogador,Hazem Mastouri
+TUN-016,F,TUN,Tunísia,16,jogador,Ismael Gharbi
+TUN-017,F,TUN,Tunísia,17,jogador,Sayfallah Ltaief
+TUN-018,F,TUN,Tunísia,18,jogador,Naim Sliti
+TUN-019,F,TUN,Tunísia,19,foto_time,Foto Oficial — Tunísia
+BEL-000,G,BEL,Bélgica,0,escudo,Escudo — Bélgica
+BEL-001,G,BEL,Bélgica,1,jogador,Thibaut Courtois
+BEL-002,G,BEL,Bélgica,2,jogador,Arthur Theate
+BEL-003,G,BEL,Bélgica,3,jogador,Timothy Castagne
+BEL-004,G,BEL,Bélgica,4,jogador,Zeno Debast
+BEL-005,G,BEL,Bélgica,5,jogador,Brandon Mechele
+BEL-006,G,BEL,Bélgica,6,jogador,Maxim De Cuyper
+BEL-007,G,BEL,Bélgica,7,jogador,Thomas Meunier
+BEL-008,G,BEL,Bélgica,8,jogador,Youri Tielemans
+BEL-009,G,BEL,Bélgica,9,jogador,Amadou Onana
+BEL-010,G,BEL,Bélgica,10,jogador,Nicolas Raskin
+BEL-011,G,BEL,Bélgica,11,jogador,Alexis Saelemaekers
+BEL-012,G,BEL,Bélgica,12,jogador,Hans Vanaken
+BEL-013,G,BEL,Bélgica,13,jogador,Kevin De Bruyne
+BEL-014,G,BEL,Bélgica,14,jogador,Jérémy Doku
+BEL-015,G,BEL,Bélgica,15,jogador,Charles De Ketelaere
+BEL-016,G,BEL,Bélgica,16,jogador,Leandro Trossard
+BEL-017,G,BEL,Bélgica,17,jogador,Loïs Openda
+BEL-018,G,BEL,Bélgica,18,jogador,Romelu Lukaku
+BEL-019,G,BEL,Bélgica,19,foto_time,Foto Oficial — Bélgica
+EGY-000,G,EGY,Egito,0,escudo,Escudo — Egito
+EGY-001,G,EGY,Egito,1,jogador,Mohamed El Shenawy
+EGY-002,G,EGY,Egito,2,jogador,Mohamed Hany
+EGY-003,G,EGY,Egito,3,jogador,Mohamed Hamdy
+EGY-004,G,EGY,Egito,4,jogador,Yasser Ibrahim
+EGY-005,G,EGY,Egito,5,jogador,Khaled Sobhi
+EGY-006,G,EGY,Egito,6,jogador,Ramy Rabia
+EGY-007,G,EGY,Egito,7,jogador,Hossam Abdelmaguid
+EGY-008,G,EGY,Egito,8,jogador,Ahmed Fatouh
+EGY-009,G,EGY,Egito,9,jogador,Marwan Attia
+EGY-010,G,EGY,Egito,10,jogador,Zizo
+EGY-011,G,EGY,Egito,11,jogador,Hamdy Fathy
+EGY-012,G,EGY,Egito,12,jogador,Mohamed Lasheen
+EGY-013,G,EGY,Egito,13,jogador,Emam Ashour
+EGY-014,G,EGY,Egito,14,jogador,Osama Faisal
+EGY-015,G,EGY,Egito,15,jogador,Mohamed Salah
+EGY-016,G,EGY,Egito,16,jogador,Mostafa Mohamed
+EGY-017,G,EGY,Egito,17,jogador,Trezeguet
+EGY-018,G,EGY,Egito,18,jogador,Omar Marmoush
+EGY-019,G,EGY,Egito,19,foto_time,Foto Oficial — Egito
+IRN-000,G,IRN,Irã,0,escudo,Escudo — Irã
+IRN-001,G,IRN,Irã,1,jogador,Alireza Beiranvand
+IRN-002,G,IRN,Irã,2,jogador,Morteza Pouraliganji
+IRN-003,G,IRN,Irã,3,jogador,Ehsan Hajsafi
+IRN-004,G,IRN,Irã,4,jogador,Milad Mohammadi
+IRN-005,G,IRN,Irã,5,jogador,Shoja Khalilzadeh
+IRN-006,G,IRN,Irã,6,jogador,Ramin Rezaeian
+IRN-007,G,IRN,Irã,7,jogador,Hossein Kanaani
+IRN-008,G,IRN,Irã,8,jogador,Sadegh Moharrami
+IRN-009,G,IRN,Irã,9,jogador,Saleh Hardani
+IRN-010,G,IRN,Irã,10,jogador,Saeed Ezatolahi
+IRN-011,G,IRN,Irã,11,jogador,Saman Ghoddos
+IRN-012,G,IRN,Irã,12,jogador,Omid Noorafkan
+IRN-013,G,IRN,Irã,13,jogador,Roozbeh Cheshmi
+IRN-014,G,IRN,Irã,14,jogador,Mohammad Mohebi
+IRN-015,G,IRN,Irã,15,jogador,Sardar Azmoun
+IRN-016,G,IRN,Irã,16,jogador,Mehdi Taremi
+IRN-017,G,IRN,Irã,17,jogador,Alireza Jahanbakhsh
+IRN-018,G,IRN,Irã,18,jogador,Ali Gholizadeh
+IRN-019,G,IRN,Irã,19,foto_time,Foto Oficial — Irã
+NZL-000,G,NZL,Nova Zelândia,0,escudo,Escudo — Nova Zelândia
+NZL-001,G,NZL,Nova Zelândia,1,jogador,Max Crocombe-Payne
+NZL-002,G,NZL,Nova Zelândia,2,jogador,Alex Paulsen
+NZL-003,G,NZL,Nova Zelândia,3,jogador,Michael Boxall
+NZL-004,G,NZL,Nova Zelândia,4,jogador,Liberato Cacace
+NZL-005,G,NZL,Nova Zelândia,5,jogador,Tim Payne
+NZL-006,G,NZL,Nova Zelândia,6,jogador,Tyler Bindon
+NZL-007,G,NZL,Nova Zelândia,7,jogador,Francis de Vries
+NZL-008,G,NZL,Nova Zelândia,8,jogador,Finn Surman
+NZL-009,G,NZL,Nova Zelândia,9,jogador,Joe Bell
+NZL-010,G,NZL,Nova Zelândia,10,jogador,Sarpreet Singh
+NZL-011,G,NZL,Nova Zelândia,11,jogador,Ryan Thomas
+NZL-012,G,NZL,Nova Zelândia,12,jogador,Matthew Garbett
+NZL-013,G,NZL,Nova Zelândia,13,jogador,Marko Stamenić
+NZL-014,G,NZL,Nova Zelândia,14,jogador,Ben Old
+NZL-015,G,NZL,Nova Zelândia,15,jogador,Chris Wood
+NZL-016,G,NZL,Nova Zelândia,16,jogador,Elijah Just
+NZL-017,G,NZL,Nova Zelândia,17,jogador,Callum McCowatt
+NZL-018,G,NZL,Nova Zelândia,18,jogador,Kosta Barbarouses
+NZL-019,G,NZL,Nova Zelândia,19,foto_time,Foto Oficial — Nova Zelândia
+ESP-000,H,ESP,Espanha,0,escudo,Escudo — Espanha
+ESP-001,H,ESP,Espanha,1,jogador,Unai Simón
+ESP-002,H,ESP,Espanha,2,jogador,Robin Le Normand
+ESP-003,H,ESP,Espanha,3,jogador,Aymeric Laporte
+ESP-004,H,ESP,Espanha,4,jogador,Dean Huijsen
+ESP-005,H,ESP,Espanha,5,jogador,Pedro Porro
+ESP-006,H,ESP,Espanha,6,jogador,Dani Carvajal
+ESP-007,H,ESP,Espanha,7,jogador,Marc Cucurella
+ESP-008,H,ESP,Espanha,8,jogador,Martín Zubimendi
+ESP-009,H,ESP,Espanha,9,jogador,Rodri
+ESP-010,H,ESP,Espanha,10,jogador,Pedri
+ESP-011,H,ESP,Espanha,11,jogador,Fabián Ruiz
+ESP-012,H,ESP,Espanha,12,jogador,Mikel Merino
+ESP-013,H,ESP,Espanha,13,jogador,Lamine Yamal
+ESP-014,H,ESP,Espanha,14,jogador,Dani Olmo
+ESP-015,H,ESP,Espanha,15,jogador,Nico Williams
+ESP-016,H,ESP,Espanha,16,jogador,Ferran Torres
+ESP-017,H,ESP,Espanha,17,jogador,Álvaro Morata
+ESP-018,H,ESP,Espanha,18,jogador,Mikel Oyarzabal
+ESP-019,H,ESP,Espanha,19,foto_time,Foto Oficial — Espanha
+CPV-000,H,CPV,Cabo Verde,0,escudo,Escudo — Cabo Verde
+CPV-001,H,CPV,Cabo Verde,1,jogador,Vozinha
+CPV-002,H,CPV,Cabo Verde,2,jogador,Logan Costa
+CPV-003,H,CPV,Cabo Verde,3,jogador,Pico
+CPV-004,H,CPV,Cabo Verde,4,jogador,Diney
+CPV-005,H,CPV,Cabo Verde,5,jogador,Steven Moreira
+CPV-006,H,CPV,Cabo Verde,6,jogador,Wagner Pina
+CPV-007,H,CPV,Cabo Verde,7,jogador,João Paulo
+CPV-008,H,CPV,Cabo Verde,8,jogador,Yannick Semedo
+CPV-009,H,CPV,Cabo Verde,9,jogador,Kevin Pina
+CPV-010,H,CPV,Cabo Verde,10,jogador,Patrick Andrade
+CPV-011,H,CPV,Cabo Verde,11,jogador,Jamiro Monteiro
+CPV-012,H,CPV,Cabo Verde,12,jogador,Deroy Duarte
+CPV-013,H,CPV,Cabo Verde,13,jogador,Garry Rodrigues
+CPV-014,H,CPV,Cabo Verde,14,jogador,Jovane Cabral
+CPV-015,H,CPV,Cabo Verde,15,jogador,Ryan Mendes
+CPV-016,H,CPV,Cabo Verde,16,jogador,Dailon Livramento
+CPV-017,H,CPV,Cabo Verde,17,jogador,Willy Semedo
+CPV-018,H,CPV,Cabo Verde,18,jogador,Bebé
+CPV-019,H,CPV,Cabo Verde,19,foto_time,Foto Oficial — Cabo Verde
+KSA-000,H,KSA,Arábia Saudita,0,escudo,Escudo — Arábia Saudita
+KSA-001,H,KSA,Arábia Saudita,1,jogador,Nawaf Alaqidi
+KSA-002,H,KSA,Arábia Saudita,2,jogador,Abdulrahman Al-Sanbi
+KSA-003,H,KSA,Arábia Saudita,3,jogador,Saud Abdulhamid
+KSA-004,H,KSA,Arábia Saudita,4,jogador,Nawaf Boushal
+KSA-005,H,KSA,Arábia Saudita,5,jogador,Jihad Thakri
+KSA-006,H,KSA,Arábia Saudita,6,jogador,Moteb Al-Harbi
+KSA-007,H,KSA,Arábia Saudita,7,jogador,Hassan Altambakti
+KSA-008,H,KSA,Arábia Saudita,8,jogador,Musab Aljuwayr
+KSA-009,H,KSA,Arábia Saudita,9,jogador,Ziyad Aljohani
+KSA-010,H,KSA,Arábia Saudita,10,jogador,Abdullah Alkhaibari
+KSA-011,H,KSA,Arábia Saudita,11,jogador,Nasser Aldawsari
+KSA-012,H,KSA,Arábia Saudita,12,jogador,Saleh Abu Alshamat
+KSA-013,H,KSA,Arábia Saudita,13,jogador,Marwan Alsahafi
+KSA-014,H,KSA,Arábia Saudita,14,jogador,Salem Aldawsari
+KSA-015,H,KSA,Arábia Saudita,15,jogador,Abdulrahman Al-Aboud
+KSA-016,H,KSA,Arábia Saudita,16,jogador,Feras Albrikan
+KSA-017,H,KSA,Arábia Saudita,17,jogador,Saleh Alshehri
+KSA-018,H,KSA,Arábia Saudita,18,jogador,Abdullah Al-Hamdan
+KSA-019,H,KSA,Arábia Saudita,19,foto_time,Foto Oficial — Arábia Saudita
+URU-000,H,URU,Uruguai,0,escudo,Escudo — Uruguai
+URU-001,H,URU,Uruguai,1,jogador,Sergio Rochet
+URU-002,H,URU,Uruguai,2,jogador,Santiago Mele
+URU-003,H,URU,Uruguai,3,jogador,Ronald Araujo
+URU-004,H,URU,Uruguai,4,jogador,José María Giménez
+URU-005,H,URU,Uruguai,5,jogador,Sebastian Caceres
+URU-006,H,URU,Uruguai,6,jogador,Mathias Olivera
+URU-007,H,URU,Uruguai,7,jogador,Guillermo Varela
+URU-008,H,URU,Uruguai,8,jogador,Nahitan Nandez
+URU-009,H,URU,Uruguai,9,jogador,Federico Valverde
+URU-010,H,URU,Uruguai,10,jogador,Giorgian De Arrascaeta
+URU-011,H,URU,Uruguai,11,jogador,Rodrigo Bentancur
+URU-012,H,URU,Uruguai,12,jogador,Manuel Ugarte
+URU-013,H,URU,Uruguai,13,jogador,Nicolás de la Cruz
+URU-014,H,URU,Uruguai,14,jogador,Maxi Araujo
+URU-015,H,URU,Uruguai,15,jogador,Darwin Núñez
+URU-016,H,URU,Uruguai,16,jogador,Federico Viñas
+URU-017,H,URU,Uruguai,17,jogador,Rodrigo Aguirre
+URU-018,H,URU,Uruguai,18,jogador,Facundo Pellistri
+URU-019,H,URU,Uruguai,19,foto_time,Foto Oficial — Uruguai
+FRA-000,I,FRA,França,0,escudo,Escudo — França
+FRA-001,I,FRA,França,1,jogador,Mike Maignan
+FRA-002,I,FRA,França,2,jogador,Theo Hernández
+FRA-003,I,FRA,França,3,jogador,William Saliba
+FRA-004,I,FRA,França,4,jogador,Jules Koundé
+FRA-005,I,FRA,França,5,jogador,Ibrahima Konaté
+FRA-006,I,FRA,França,6,jogador,Dayot Upamecano
+FRA-007,I,FRA,França,7,jogador,Lucas Digne
+FRA-008,I,FRA,França,8,jogador,Aurélien Tchouaméni
+FRA-009,I,FRA,França,9,jogador,Eduardo Camavinga
+FRA-010,I,FRA,França,10,jogador,Manu Koné
+FRA-011,I,FRA,França,11,jogador,Adrien Rabiot
+FRA-012,I,FRA,França,12,jogador,Michael Olise
+FRA-013,I,FRA,França,13,jogador,Ousmane Dembélé
+FRA-014,I,FRA,França,14,jogador,Bradley Barcola
+FRA-015,I,FRA,França,15,jogador,Désiré Doué
+FRA-016,I,FRA,França,16,jogador,Kingsley Coman
+FRA-017,I,FRA,França,17,jogador,Hugo Ekitike
+FRA-018,I,FRA,França,18,jogador,Kylian Mbappé
+FRA-019,I,FRA,França,19,foto_time,Foto Oficial — França
+SEN-000,I,SEN,Senegal,0,escudo,Escudo — Senegal
+SEN-001,I,SEN,Senegal,1,jogador,Eduardo Mendy
+SEN-002,I,SEN,Senegal,2,jogador,Yehvann Diouf
+SEN-003,I,SEN,Senegal,3,jogador,Moussa Niakhaté
+SEN-004,I,SEN,Senegal,4,jogador,Abdoulaye Seck
+SEN-005,I,SEN,Senegal,5,jogador,Ismail Jakobs
+SEN-006,I,SEN,Senegal,6,jogador,El Hadji Malick Diouf
+SEN-007,I,SEN,Senegal,7,jogador,Kalidou Koulibaly
+SEN-008,I,SEN,Senegal,8,jogador,Idrissa Gana Gueye
+SEN-009,I,SEN,Senegal,9,jogador,Pape Matar Sarr
+SEN-010,I,SEN,Senegal,10,jogador,Pape Gueye
+SEN-011,I,SEN,Senegal,11,jogador,Habib Diarra
+SEN-012,I,SEN,Senegal,12,jogador,Lamine Camara
+SEN-013,I,SEN,Senegal,13,jogador,Sadio Mané
+SEN-014,I,SEN,Senegal,14,jogador,Ismaïla Sarr
+SEN-015,I,SEN,Senegal,15,jogador,Boulaye Dia
+SEN-016,I,SEN,Senegal,16,jogador,Iliman Ndiaye
+SEN-017,I,SEN,Senegal,17,jogador,Nicolas Jackson
+SEN-018,I,SEN,Senegal,18,jogador,Krepin Diatta
+SEN-019,I,SEN,Senegal,19,foto_time,Foto Oficial — Senegal
+IRQ-000,I,IRQ,Iraque,0,escudo,Escudo — Iraque
+IRQ-001,I,IRQ,Iraque,1,jogador,Jalal Hassan
+IRQ-002,I,IRQ,Iraque,2,jogador,Rebin Sulaka
+IRQ-003,I,IRQ,Iraque,3,jogador,Hussein Ali
+IRQ-004,I,IRQ,Iraque,4,jogador,Akam Hashem
+IRQ-005,I,IRQ,Iraque,5,jogador,Merchas Doski
+IRQ-006,I,IRQ,Iraque,6,jogador,Zaid Tahseen
+IRQ-007,I,IRQ,Iraque,7,jogador,Manaf Younis
+IRQ-008,I,IRQ,Iraque,8,jogador,Zidane Iqbal
+IRQ-009,I,IRQ,Iraque,9,jogador,Amir Al-Ammari
+IRQ-010,I,IRQ,Iraque,10,jogador,Ibrahim Bayesh
+IRQ-011,I,IRQ,Iraque,11,jogador,Ali Jasim
+IRQ-012,I,IRQ,Iraque,12,jogador,Youssef Amyn
+IRQ-013,I,IRQ,Iraque,13,jogador,Aimar Sher
+IRQ-014,I,IRQ,Iraque,14,jogador,Marko Farji
+IRQ-015,I,IRQ,Iraque,15,jogador,Osama Rashid
+IRQ-016,I,IRQ,Iraque,16,jogador,Ali Al-Hamadi
+IRQ-017,I,IRQ,Iraque,17,jogador,Aymen Hussein
+IRQ-018,I,IRQ,Iraque,18,jogador,Mohanad Ali
+IRQ-019,I,IRQ,Iraque,19,foto_time,Foto Oficial — Iraque
+NOR-000,I,NOR,Noruega,0,escudo,Escudo — Noruega
+NOR-001,I,NOR,Noruega,1,jogador,Ørjan Nyland
+NOR-002,I,NOR,Noruega,2,jogador,Julian Ryerson
+NOR-003,I,NOR,Noruega,3,jogador,Leo Østigård
+NOR-004,I,NOR,Noruega,4,jogador,Kristoffer Ajer
+NOR-005,I,NOR,Noruega,5,jogador,Marcus Holmgren Pedersen
+NOR-006,I,NOR,Noruega,6,jogador,David Møller Wolfe
+NOR-007,I,NOR,Noruega,7,jogador,Torbjørn Heggem
+NOR-008,I,NOR,Noruega,8,jogador,Morten Thorsby
+NOR-009,I,NOR,Noruega,9,jogador,Martin Ødegaard
+NOR-010,I,NOR,Noruega,10,jogador,Sander Berge
+NOR-011,I,NOR,Noruega,11,jogador,Andreas Schjelderup
+NOR-012,I,NOR,Noruega,12,jogador,Patrick Berg
+NOR-013,I,NOR,Noruega,13,jogador,Erling Haaland
+NOR-014,I,NOR,Noruega,14,jogador,Alexander Sørloth
+NOR-015,I,NOR,Noruega,15,jogador,Aron Dønnum
+NOR-016,I,NOR,Noruega,16,jogador,Jørgen Strand Larsen
+NOR-017,I,NOR,Noruega,17,jogador,Antonio Nusa
+NOR-018,I,NOR,Noruega,18,jogador,Oscar Bobb
+NOR-019,I,NOR,Noruega,19,foto_time,Foto Oficial — Noruega
+ARG-000,J,ARG,Argentina,0,escudo,Escudo — Argentina
+ARG-001,J,ARG,Argentina,1,jogador,Emiliano Martínez
+ARG-002,J,ARG,Argentina,2,jogador,Nahuel Molina
+ARG-003,J,ARG,Argentina,3,jogador,Cristian Romero
+ARG-004,J,ARG,Argentina,4,jogador,Nicolás Otamendi
+ARG-005,J,ARG,Argentina,5,jogador,Nicolás Tagliafico
+ARG-006,J,ARG,Argentina,6,jogador,Leonardo Balerdi
+ARG-007,J,ARG,Argentina,7,jogador,Enzo Fernández
+ARG-008,J,ARG,Argentina,8,jogador,Alexis Mac Allister
+ARG-009,J,ARG,Argentina,9,jogador,Rodrigo De Paul
+ARG-010,J,ARG,Argentina,10,jogador,Exequiel Palacios
+ARG-011,J,ARG,Argentina,11,jogador,Leandro Paredes
+ARG-012,J,ARG,Argentina,12,jogador,Nico Paz
+ARG-013,J,ARG,Argentina,13,jogador,Franco Mastantuono
+ARG-014,J,ARG,Argentina,14,jogador,Nico González
+ARG-015,J,ARG,Argentina,15,jogador,Lionel Messi
+ARG-016,J,ARG,Argentina,16,jogador,Lautaro Martínez
+ARG-017,J,ARG,Argentina,17,jogador,Julián Álvarez
+ARG-018,J,ARG,Argentina,18,jogador,Giuliano Simeone
+ARG-019,J,ARG,Argentina,19,foto_time,Foto Oficial — Argentina
+ALG-000,J,ALG,Argélia,0,escudo,Escudo — Argélia
+ALG-001,J,ALG,Argélia,1,jogador,Alexis Guendouz
+ALG-002,J,ALG,Argélia,2,jogador,Ramy Bensebaini
+ALG-003,J,ALG,Argélia,3,jogador,Youcef Atal
+ALG-004,J,ALG,Argélia,4,jogador,Rayan Aït-Nouri
+ALG-005,J,ALG,Argélia,5,jogador,Mohamed Amine Tougai
+ALG-006,J,ALG,Argélia,6,jogador,Aïssa Mandi
+ALG-007,J,ALG,Argélia,7,jogador,Ismael Bennacer
+ALG-008,J,ALG,Argélia,8,jogador,Houssem Aouar
+ALG-009,J,ALG,Argélia,9,jogador,Hicham Boudaoui
+ALG-010,J,ALG,Argélia,10,jogador,Ramiz Zerrouki
+ALG-011,J,ALG,Argélia,11,jogador,Nabil Bentaleb
+ALG-012,J,ALG,Argélia,12,jogador,Farés Chaibi
+ALG-013,J,ALG,Argélia,13,jogador,Riyad Mahrez
+ALG-014,J,ALG,Argélia,14,jogador,Said Benrahma
+ALG-015,J,ALG,Argélia,15,jogador,Anis Hadj Moussa
+ALG-016,J,ALG,Argélia,16,jogador,Amine Gouiri
+ALG-017,J,ALG,Argélia,17,jogador,Baghdad Bounedjah
+ALG-018,J,ALG,Argélia,18,jogador,Mohammed Amoura
+ALG-019,J,ALG,Argélia,19,foto_time,Foto Oficial — Argélia
+AUT-000,J,AUT,Áustria,0,escudo,Escudo — Áustria
+AUT-001,J,AUT,Áustria,1,jogador,Alexander Schlager
+AUT-002,J,AUT,Áustria,2,jogador,Patrick Pentz
+AUT-003,J,AUT,Áustria,3,jogador,David Alaba
+AUT-004,J,AUT,Áustria,4,jogador,Kevin Danso
+AUT-005,J,AUT,Áustria,5,jogador,Philipp Lienhart
+AUT-006,J,AUT,Áustria,6,jogador,Stefan Posch
+AUT-007,J,AUT,Áustria,7,jogador,Phillipp Mwene
+AUT-008,J,AUT,Áustria,8,jogador,Alexander Prass
+AUT-009,J,AUT,Áustria,9,jogador,Xaver Schlager
+AUT-010,J,AUT,Áustria,10,jogador,Marcel Sabitzer
+AUT-011,J,AUT,Áustria,11,jogador,Konrad Laimer
+AUT-012,J,AUT,Áustria,12,jogador,Florian Grillitsch
+AUT-013,J,AUT,Áustria,13,jogador,Nicolas Seiwald
+AUT-014,J,AUT,Áustria,14,jogador,Romano Schmid
+AUT-015,J,AUT,Áustria,15,jogador,Patrick Wimmer
+AUT-016,J,AUT,Áustria,16,jogador,Christoph Baumgartner
+AUT-017,J,AUT,Áustria,17,jogador,Michael Gregoritsch
+AUT-018,J,AUT,Áustria,18,jogador,Marko Arnautović
+AUT-019,J,AUT,Áustria,19,foto_time,Foto Oficial — Áustria
+JOR-000,J,JOR,Jordânia,0,escudo,Escudo — Jordânia
+JOR-001,J,JOR,Jordânia,1,jogador,Yazeed Abulaila
+JOR-002,J,JOR,Jordânia,2,jogador,Ihsan Haddad
+JOR-003,J,JOR,Jordânia,3,jogador,Mohammad Abu Hashish
+JOR-004,J,JOR,Jordânia,4,jogador,Yazan Al-Arab
+JOR-005,J,JOR,Jordânia,5,jogador,Abdallah Nasib
+JOR-006,J,JOR,Jordânia,6,jogador,Saleem Obaid
+JOR-007,J,JOR,Jordânia,7,jogador,Mohammad Abualnadi
+JOR-008,J,JOR,Jordânia,8,jogador,Ibrahim Saadeh
+JOR-009,J,JOR,Jordânia,9,jogador,Nizar Al-Rashdan
+JOR-010,J,JOR,Jordânia,10,jogador,Noor Al-Rawabdeh
+JOR-011,J,JOR,Jordânia,11,jogador,Mohannad Abu Taha
+JOR-012,J,JOR,Jordânia,12,jogador,Amer Jamous
+JOR-013,J,JOR,Jordânia,13,jogador,Musa Al-Taamari
+JOR-014,J,JOR,Jordânia,14,jogador,Yazan Al-Naimat
+JOR-015,J,JOR,Jordânia,15,jogador,Mahmoud Al-Mardi
+JOR-016,J,JOR,Jordânia,16,jogador,Ali Olwan
+JOR-017,J,JOR,Jordânia,17,jogador,Mohammad Abu Zrayq
+JOR-018,J,JOR,Jordânia,18,jogador,Ibrahim Sabra
+JOR-019,J,JOR,Jordânia,19,foto_time,Foto Oficial — Jordânia
+POR-000,K,POR,Portugal,0,escudo,Escudo — Portugal
+POR-001,K,POR,Portugal,1,jogador,Diogo Costa
+POR-002,K,POR,Portugal,2,jogador,José Sá
+POR-003,K,POR,Portugal,3,jogador,Rúben Dias
+POR-004,K,POR,Portugal,4,jogador,João Cancelo
+POR-005,K,POR,Portugal,5,jogador,Diogo Dalot
+POR-006,K,POR,Portugal,6,jogador,Nuno Mendes
+POR-007,K,POR,Portugal,7,jogador,Gonçalo Inácio
+POR-008,K,POR,Portugal,8,jogador,Bernardo Silva
+POR-009,K,POR,Portugal,9,jogador,Bruno Fernandes
+POR-010,K,POR,Portugal,10,jogador,Rúben Neves
+POR-011,K,POR,Portugal,11,jogador,Vitinha
+POR-012,K,POR,Portugal,12,jogador,João Neves
+POR-013,K,POR,Portugal,13,jogador,Cristiano Ronaldo
+POR-014,K,POR,Portugal,14,jogador,Francisco Trincão
+POR-015,K,POR,Portugal,15,jogador,João Félix
+POR-016,K,POR,Portugal,16,jogador,Gonçalo Ramos
+POR-017,K,POR,Portugal,17,jogador,Pedro Neto
+POR-018,K,POR,Portugal,18,jogador,Rafael Leão
+POR-019,K,POR,Portugal,19,foto_time,Foto Oficial — Portugal
+COD-000,K,COD,RD Congo,0,escudo,Escudo — RD Congo
+COD-001,K,COD,RD Congo,1,jogador,Lionel Mpasi
+COD-002,K,COD,RD Congo,2,jogador,Aaron Wan-Bissaka
+COD-003,K,COD,RD Congo,3,jogador,Axel Tuanzebe
+COD-004,K,COD,RD Congo,4,jogador,Arthur Masuaku
+COD-005,K,COD,RD Congo,5,jogador,Chancel Mbemba
+COD-006,K,COD,RD Congo,6,jogador,Joris Kayembe
+COD-007,K,COD,RD Congo,7,jogador,Charles Pickel
+COD-008,K,COD,RD Congo,8,jogador,Ngal'ayel Mukau
+COD-009,K,COD,RD Congo,9,jogador,Edo Kayembe
+COD-010,K,COD,RD Congo,10,jogador,Samuel Moutoussamy
+COD-011,K,COD,RD Congo,11,jogador,Noah Sadiki
+COD-012,K,COD,RD Congo,12,jogador,Théo Bongonda
+COD-013,K,COD,RD Congo,13,jogador,Meschack Elia
+COD-014,K,COD,RD Congo,14,jogador,Yoane Wissa
+COD-015,K,COD,RD Congo,15,jogador,Brian Cipenga
+COD-016,K,COD,RD Congo,16,jogador,Fiston Mayele
+COD-017,K,COD,RD Congo,17,jogador,Cédric Bakambu
+COD-018,K,COD,RD Congo,18,jogador,Nathanaël Mbuku
+COD-019,K,COD,RD Congo,19,foto_time,Foto Oficial — RD Congo
+UZB-000,K,UZB,Uzbequistão,0,escudo,Escudo — Uzbequistão
+UZB-001,K,UZB,Uzbequistão,1,jogador,Utkir Yusupov
+UZB-002,K,UZB,Uzbequistão,2,jogador,Farrukh Savfiev
+UZB-003,K,UZB,Uzbequistão,3,jogador,Sherzod Nasrullaev
+UZB-004,K,UZB,Uzbequistão,4,jogador,Umar Eshmurodov
+UZB-005,K,UZB,Uzbequistão,5,jogador,Husniddin Aliqulov
+UZB-006,K,UZB,Uzbequistão,6,jogador,Rustamjon Ashurmatov
+UZB-007,K,UZB,Uzbequistão,7,jogador,Abbosbek Fayzullaev
+UZB-008,K,UZB,Uzbequistão,8,jogador,Jamshid Iskanderov
+UZB-009,K,UZB,Uzbequistão,9,jogador,Jaloliddin Masharipov
+UZB-010,K,UZB,Uzbequistão,10,jogador,Otabek Shukurov
+UZB-011,K,UZB,Uzbequistão,11,jogador,Bobur Abdukholiqov
+UZB-012,K,UZB,Uzbequistão,12,jogador,Islomjon Kobilov
+UZB-013,K,UZB,Uzbequistão,13,jogador,Asilbek Turgunboev
+UZB-014,K,UZB,Uzbequistão,14,jogador,Hojimat Erkinov
+UZB-015,K,UZB,Uzbequistão,15,jogador,Eldor Shomurodov
+UZB-016,K,UZB,Uzbequistão,16,jogador,Jasur Yakhshiboev
+UZB-017,K,UZB,Uzbequistão,17,jogador,Akbar Djalalov
+UZB-018,K,UZB,Uzbequistão,18,jogador,Shokhrukh Jalolov
+UZB-019,K,UZB,Uzbequistão,19,foto_time,Foto Oficial — Uzbequistão
+COL-000,K,COL,Colômbia,0,escudo,Escudo — Colômbia
+COL-001,K,COL,Colômbia,1,jogador,Camilo Vargas
+COL-002,K,COL,Colômbia,2,jogador,David Ospina
+COL-003,K,COL,Colômbia,3,jogador,Dávinson Sánchez
+COL-004,K,COL,Colômbia,4,jogador,Yerry Mina
+COL-005,K,COL,Colômbia,5,jogador,Daniel Muñoz
+COL-006,K,COL,Colômbia,6,jogador,Johan Mojica
+COL-007,K,COL,Colômbia,7,jogador,Wilmar Barrios
+COL-008,K,COL,Colômbia,8,jogador,Matheus Uribe
+COL-009,K,COL,Colômbia,9,jogador,James Rodríguez
+COL-010,K,COL,Colômbia,10,jogador,Luis Díaz
+COL-011,K,COL,Colômbia,11,jogador,Jhon Arias
+COL-012,K,COL,Colômbia,12,jogador,Richard Ríos
+COL-013,K,COL,Colômbia,13,jogador,Rafael Santos Borré
+COL-014,K,COL,Colômbia,14,jogador,Falcao García
+COL-015,K,COL,Colômbia,15,jogador,Duván Zapata
+COL-016,K,COL,Colômbia,16,jogador,Cucho Hernández
+COL-017,K,COL,Colômbia,17,jogador,Lerma
+COL-018,K,COL,Colômbia,18,jogador,Carrascal
+COL-019,K,COL,Colômbia,19,foto_time,Foto Oficial — Colômbia
+ENG-000,L,ENG,Inglaterra,0,escudo,Escudo — Inglaterra
+ENG-001,L,ENG,Inglaterra,1,jogador,Jordan Pickford
+ENG-002,L,ENG,Inglaterra,2,jogador,Nick Pope
+ENG-003,L,ENG,Inglaterra,3,jogador,Trent Alexander-Arnold
+ENG-004,L,ENG,Inglaterra,4,jogador,John Stones
+ENG-005,L,ENG,Inglaterra,5,jogador,Marc Guéhi
+ENG-006,L,ENG,Inglaterra,6,jogador,Levi Colwill
+ENG-007,L,ENG,Inglaterra,7,jogador,Kieran Trippier
+ENG-008,L,ENG,Inglaterra,8,jogador,Luke Shaw
+ENG-009,L,ENG,Inglaterra,9,jogador,Declan Rice
+ENG-010,L,ENG,Inglaterra,10,jogador,Jude Bellingham
+ENG-011,L,ENG,Inglaterra,11,jogador,Kobbie Mainoo
+ENG-012,L,ENG,Inglaterra,12,jogador,Phil Foden
+ENG-013,L,ENG,Inglaterra,13,jogador,Bukayo Saka
+ENG-014,L,ENG,Inglaterra,14,jogador,Cole Palmer
+ENG-015,L,ENG,Inglaterra,15,jogador,Jarrod Bowen
+ENG-016,L,ENG,Inglaterra,16,jogador,Harry Kane
+ENG-017,L,ENG,Inglaterra,17,jogador,Ollie Watkins
+ENG-018,L,ENG,Inglaterra,18,jogador,Eberechi Eze
+ENG-019,L,ENG,Inglaterra,19,foto_time,Foto Oficial — Inglaterra
+CRO-000,L,CRO,Croácia,0,escudo,Escudo — Croácia
+CRO-001,L,CRO,Croácia,1,jogador,Dominik Livaković
+CRO-002,L,CRO,Croácia,2,jogador,Ivo Grbić
+CRO-003,L,CRO,Croácia,3,jogador,Josip Juranović
+CRO-004,L,CRO,Croácia,4,jogador,Dejan Lovren
+CRO-005,L,CRO,Croácia,5,jogador,Joško Gvardiol
+CRO-006,L,CRO,Croácia,6,jogador,Borna Sosa
+CRO-007,L,CRO,Croácia,7,jogador,Martin Erlić
+CRO-008,L,CRO,Croácia,8,jogador,Šime Vrsaljko
+CRO-009,L,CRO,Croácia,9,jogador,Mateo Kovačić
+CRO-010,L,CRO,Croácia,10,jogador,Marcelo Brozović
+CRO-011,L,CRO,Croácia,11,jogador,Luka Modrić
+CRO-012,L,CRO,Croácia,12,jogador,Luka Sučić
+CRO-013,L,CRO,Croácia,13,jogador,Ante Rebić
+CRO-014,L,CRO,Croácia,14,jogador,Andrej Kramarić
+CRO-015,L,CRO,Croácia,15,jogador,Ivan Perišić
+CRO-016,L,CRO,Croácia,16,jogador,Bruno Petković
+CRO-017,L,CRO,Croácia,17,jogador,Dario Špikić
+CRO-018,L,CRO,Croácia,18,jogador,Petar Sucić
+CRO-019,L,CRO,Croácia,19,foto_time,Foto Oficial — Croácia
+GHA-000,L,GHA,Gana,0,escudo,Escudo — Gana
+GHA-001,L,GHA,Gana,1,jogador,Lawrence Ati-Zigi
+GHA-002,L,GHA,Gana,2,jogador,Joseph Wollacott
+GHA-003,L,GHA,Gana,3,jogador,Daniel Amartey
+GHA-004,L,GHA,Gana,4,jogador,Alexander Djiku
+GHA-005,L,GHA,Gana,5,jogador,Salisu Mohammed
+GHA-006,L,GHA,Gana,6,jogador,Baba Rahman
+GHA-007,L,GHA,Gana,7,jogador,Tariq Lamptey
+GHA-008,L,GHA,Gana,8,jogador,Joseph Aidoo
+GHA-009,L,GHA,Gana,9,jogador,Thomas Partey
+GHA-010,L,GHA,Gana,10,jogador,Iddrisu Baba
+GHA-011,L,GHA,Gana,11,jogador,Mohammed Kudus
+GHA-012,L,GHA,Gana,12,jogador,André Ayew
+GHA-013,L,GHA,Gana,13,jogador,Jordan Ayew
+GHA-014,L,GHA,Gana,14,jogador,Osman Bukari
+GHA-015,L,GHA,Gana,15,jogador,Antoine Semenyo
+GHA-016,L,GHA,Gana,16,jogador,Kamaldeen Sulemana
+GHA-017,L,GHA,Gana,17,jogador,Ernest Nuamah
+GHA-018,L,GHA,Gana,18,jogador,Felix Afena-Gyan
+GHA-019,L,GHA,Gana,19,foto_time,Foto Oficial — Gana
+PAN-000,L,PAN,Panamá,0,escudo,Escudo — Panamá
+PAN-001,L,PAN,Panamá,1,jogador,Luis Mejía
+PAN-002,L,PAN,Panamá,2,jogador,Orlando Mosquera
+PAN-003,L,PAN,Panamá,3,jogador,Harold Cummings
+PAN-004,L,PAN,Panamá,4,jogador,Fidel Escobar
+PAN-005,L,PAN,Panamá,5,jogador,Roderick Miller
+PAN-006,L,PAN,Panamá,6,jogador,Eric Davis
+PAN-007,L,PAN,Panamá,7,jogador,Andrés Andrade
+PAN-008,L,PAN,Panamá,8,jogador,Aníbal Godoy
+PAN-009,L,PAN,Panamá,9,jogador,Adalberto Carrasquilla
+PAN-010,L,PAN,Panamá,10,jogador,José Fajardo
+PAN-011,L,PAN,Panamá,11,jogador,Édgar Bárcenas
+PAN-012,L,PAN,Panamá,12,jogador,Cecilio Waterman
+PAN-013,L,PAN,Panamá,13,jogador,Rolando Blackburn
+PAN-014,L,PAN,Panamá,14,jogador,Freddy Góndola
+PAN-015,L,PAN,Panamá,15,jogador,Ismael Díaz
+PAN-016,L,PAN,Panamá,16,jogador,Jovani Welch
+PAN-017,L,PAN,Panamá,17,jogador,Tomás Alvarado
+PAN-018,L,PAN,Panamá,18,jogador,Valentín Pimentel
+PAN-019,L,PAN,Panamá,19,foto_time,Foto Oficial — Panamá
+HIS-001,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 1
+HIS-002,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 2
+HIS-003,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 3
+HIS-004,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 4
+HIS-005,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 5
+HIS-006,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 6
+HIS-007,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 7
+HIS-008,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 8
+HIS-009,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 9
+HIS-010,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 10
+HIS-011,HISTORY,HISTORY,História da Copa,0,especial,FIFA World Cup History 11
+CC-001,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC1
+CC-002,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC2
+CC-003,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC3
+CC-004,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC4
+CC-005,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC5
+CC-006,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC6
+CC-007,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC7
+CC-008,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC8
+CC-009,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC9
+CC-010,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC10
+CC-011,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC11
+CC-012,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC12
+CC-013,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC13
+CC-014,COCACOLA,COCACOLA,Coca-Cola,0,especial_parceiro,Figurinha Coca-Cola CC14
