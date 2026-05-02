@@ -1,6 +1,6 @@
 import data from "./stickers-data.json";
 
-export type StickerType = "escudo" | "jogador" | "especial" | "foto_time";
+export type StickerType = "escudo" | "jogador" | "especial" | "foto_time" | "especial_parceiro";
 
 export interface Sticker {
   id: string;

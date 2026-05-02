@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar: string | null
+          cidade: string | null
+          created_at: string | null
+          id: string
+          nome: string | null
+        }
+        Insert: {
+          avatar?: string | null
+          cidade?: string | null
+          created_at?: string | null
+          id: string
+          nome?: string | null
+        }
+        Update: {
+          avatar?: string | null
+          cidade?: string | null
+          created_at?: string | null
+          id?: string
+          nome?: string | null
+        }
+        Relationships: []
+      }
+      trade_locations: {
+        Row: {
+          ativo: boolean | null
+          cidade: string
+          created_at: string | null
+          created_by: string | null
+          data_evento: string | null
+          descricao: string | null
+          endereco: string | null
+          estado: string | null
+          horario: string | null
+          id: string
+          lat: number | null
+          lng: number | null
+          nome: string
+          tipo: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          cidade: string
+          created_at?: string | null
+          created_by?: string | null
+          data_evento?: string | null
+          descricao?: string | null
+          endereco?: string | null
+          estado?: string | null
+          horario?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          nome: string
+          tipo?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          cidade?: string
+          created_at?: string | null
+          created_by?: string | null
+          data_evento?: string | null
+          descricao?: string | null
+          endereco?: string | null
+          estado?: string | null
+          horario?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          nome?: string
+          tipo?: string | null
+        }
+        Relationships: []
+      }
+      user_stickers: {
+        Row: {
+          count: number | null
+          id: string
+          sticker_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          count?: number | null
+          id?: string
+          sticker_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          count?: number | null
+          id?: string
+          sticker_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
