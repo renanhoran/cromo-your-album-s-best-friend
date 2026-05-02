@@ -5,6 +5,8 @@ import type { Profile } from "@/pages/Index";
 import { AdBanner } from "@/components/AdBanner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function ProfileView({
   counts,
@@ -35,13 +37,29 @@ export function ProfileView({
     setProfile(next);
   };
 
+  const [isDark, setIsDark] = useState(
+    typeof document !== "undefined" && document.documentElement.classList.contains("dark")
+  );
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+  }, [isDark]);
+
   return (
     <div className="pb-24">
       <header className="sticky top-0 z-20 bg-background/95 backdrop-blur border-b border-border">
-        <div className="px-4 pt-4 pb-3">
-          <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Perfil</p>
-          <h1 className="text-2xl font-black tracking-tight">{profile.nome || "Você"}</h1>
-          {email && <p className="text-xs text-muted-foreground mt-0.5">{email}</p>}
+        <div className="px-4 pt-4 pb-3 flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Perfil</p>
+            <h1 className="text-2xl font-black tracking-tight truncate">{profile.nome || "Você"}</h1>
+            {email && <p className="text-xs text-muted-foreground mt-0.5 truncate">{email}</p>}
+          </div>
+          <button
+            onClick={() => setIsDark((v) => !v)}
+            aria-label="Alternar tema"
+            className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center shrink-0"
+          >
+            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
         </div>
       </header>
 
