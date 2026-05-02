@@ -1,39 +1,132 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Loader2, Check } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
-export function Paywall({ onUnlock }: { onUnlock: () => void }) {
+interface PaywallProps {
+  userId: string;
+  email: string;
+  nome?: string;
+}
+
+const BENEFITS = [
+  "Figurinhas ilimitadas",
+  "Match de trocas sem limite",
+  "Mapa de pontos de troca",
+  "Até 4 perfis — família toda usa",
+  "Sem propagandas",
+  "Backup automático",
+];
+
+export function Paywall({ userId, email, nome }: PaywallProps) {
+  const [periodo, setPeriodo] = useState<"mensal" | "anual">("anual");
+  const [loading, setLoading] = useState(false);
+
+  const preco =
+    periodo === "anual"
+      ? { principal: "R$ 6,65", sufixo: "/mês", detalhe: "cobrado R$ 79,90/ano" }
+      : { principal: "R$ 9,90", sufixo: "/mês", detalhe: "cobrado mensalmente" };
+
+  const legal =
+    periodo === "anual"
+      ? "Nenhuma cobrança nos primeiros 3 dias. Depois, R$ 79,90/ano. Cancele quando quiser."
+      : "Nenhuma cobrança nos primeiros 3 dias. Depois, R$ 9,90 por mês. Cancele quando quiser.";
+
+  const handleStart = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: { user_id: userId, email, nome, periodo },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("URL de checkout não recebida");
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Não foi possível iniciar o checkout. Tente novamente.");
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 bg-background">
-      <div className="max-w-md w-full text-center">
-        <div className="mx-auto mb-6 h-20 w-20 rounded-3xl flex items-center justify-center text-4xl text-primary-foreground shadow-[var(--shadow-pop)]" style={{ background: "var(--gradient-primary)" }}>
-          ⚽️
+    <div className="min-h-screen bg-background px-5 py-8 flex justify-center">
+      <div className="w-full max-w-[420px] flex flex-col">
+        <div className="flex justify-center mb-5">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-bold">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            3 dias de teste grátis
+          </span>
         </div>
-        <h1 className="text-3xl font-black tracking-tight mb-2">CROMO</h1>
-        <p className="text-muted-foreground mb-8">
-          O jeito mais rápido de completar seu álbum da Copa 2026.
+
+        <h1 className="text-3xl font-black tracking-tight text-center leading-tight mb-2">
+          Complete seu álbum mais rápido.
+        </h1>
+        <p className="text-center text-muted-foreground text-sm mb-6">
+          Acesso completo. Cancele quando quiser.
         </p>
 
-        <div className="rounded-2xl border border-border bg-card p-6 text-left shadow-[var(--shadow-card)] mb-6">
-          <div className="flex items-baseline gap-2 mb-4">
-            <span className="text-4xl font-black">R$ 9,90</span>
-            <span className="text-sm text-muted-foreground">acesso completo</span>
-          </div>
-          <ul className="space-y-2 text-sm">
-            <li className="flex gap-2"><span className="text-primary font-bold">✓</span> Controle de figurinhas em 1 toque</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">✓</span> Match inteligente com outros usuários</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">✓</span> Veja quem tem o que você precisa</li>
-            <li className="flex gap-2"><span className="text-primary font-bold">✓</span> Atualizações durante toda a Copa</li>
-          </ul>
+        <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-secondary mb-5">
+          <button
+            onClick={() => setPeriodo("mensal")}
+            className={`h-10 rounded-lg text-sm font-semibold transition-colors ${
+              periodo === "mensal" ? "bg-background shadow-sm" : "text-muted-foreground"
+            }`}
+          >
+            Mensal
+          </button>
+          <button
+            onClick={() => setPeriodo("anual")}
+            className={`h-10 rounded-lg text-sm font-semibold transition-colors ${
+              periodo === "anual" ? "bg-background shadow-sm" : "text-muted-foreground"
+            }`}
+          >
+            Anual
+          </button>
         </div>
 
+        <div className="rounded-2xl border border-border bg-card p-5 mb-6">
+          <div className="flex items-baseline gap-1">
+            <span className="text-4xl font-black">{preco.principal}</span>
+            <span className="text-base text-muted-foreground font-medium">{preco.sufixo}</span>
+          </div>
+          <p className="text-sm text-muted-foreground mt-1">{preco.detalhe}</p>
+          {periodo === "anual" && (
+            <span className="inline-block mt-3 px-2.5 py-1 rounded-full bg-primary/15 text-primary text-xs font-bold">
+              Economize 33%
+            </span>
+          )}
+        </div>
+
+        <ul className="space-y-3 mb-8">
+          {BENEFITS.map((b) => (
+            <li key={b} className="flex items-center gap-3 text-sm">
+              <span className="h-5 w-5 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">
+                <Check className="h-3 w-3" strokeWidth={3} />
+              </span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
         <Button
-          onClick={onUnlock}
-          className="w-full h-14 text-base font-bold shadow-[var(--shadow-pop)]"
-          style={{ background: "var(--gradient-primary)" }}
+          onClick={handleStart}
+          disabled={loading}
+          className="w-full h-14 text-base font-bold rounded-xl"
+          style={{ backgroundColor: "#1DB954", color: "#000" }}
         >
-          Liberar acesso · R$ 9,90
+          {loading ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : (
+            "Começar teste grátis de 3 dias"
+          )}
         </Button>
-        <p className="mt-3 text-xs text-muted-foreground">
-          Pagamento único · cancele quando quiser
+
+        <p className="mt-4 text-xs text-muted-foreground text-center leading-relaxed">
+          {legal}
         </p>
       </div>
     </div>
