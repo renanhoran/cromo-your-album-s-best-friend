@@ -42,6 +42,7 @@ export function ProfileView({
   );
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
+    localStorage.setItem("cromo:theme", isDark ? "dark" : "light");
   }, [isDark]);
 
   return (
