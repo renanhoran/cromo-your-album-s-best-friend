@@ -10,7 +10,6 @@ import { ProfileView } from "@/views/ProfileView";
 import { StickerCounts } from "@/lib/storage";
 import { supabase } from "@/integrations/supabase/client";
 import type { Session, User } from "@supabase/supabase-js";
-import { toast } from "sonner";
 
 const ONBOARD_KEY = "cromo:onboarded:v1";
 
