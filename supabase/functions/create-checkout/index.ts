@@ -78,7 +78,6 @@ Deno.serve(async (req) => {
           cancelUrl: `${APP_URL}/`,
           expiredUrl: `${APP_URL}/`,
         },
-        customer: customerId,
         items: [
           {
             name: "Mania de Álbum",
@@ -90,6 +89,10 @@ Deno.serve(async (req) => {
         subscription: {
           cycle: ciclo,
           nextDueDate: nextDueDateStr,
+        },
+        customerData: {
+          name: nome || email,
+          email,
         },
       }),
     });
