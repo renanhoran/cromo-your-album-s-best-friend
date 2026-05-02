@@ -91,7 +91,6 @@ Deno.serve(async (req) => {
           cycle: ciclo,
           nextDueDate: nextDueDateStr,
         },
-        customerData: { email },
       }),
     });
 
