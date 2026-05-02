@@ -4,6 +4,7 @@ import { StickerCounts } from "@/lib/storage";
 import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
+import { Search, X } from "lucide-react";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 
@@ -22,6 +23,7 @@ export function AlbumView({
   onTap: (id: string) => void;
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
+  const [query, setQuery] = useState("");
 
   const stats = useMemo(() => {
     const total = STICKERS.length;
@@ -38,14 +40,22 @@ export function AlbumView({
   }, [counts]);
 
   const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
     return STICKERS.filter((s) => {
       const c = counts[s.id] ?? 0;
       if (filter === "tenho") return c >= 1;
       if (filter === "preciso") return c === 0;
       if (filter === "repetidas") return c >= 2;
       return true;
+    }).filter((s) => {
+      if (!q) return true;
+      return (
+        s.selecao.toLowerCase().includes(q) ||
+        s.sigla_selecao.toLowerCase().includes(q) ||
+        s.nome.toLowerCase().includes(q)
+      );
     });
-  }, [counts, filter]);
+  }, [counts, filter, query]);
 
   // Group by selecao for visual organization
   const grouped = useMemo(() => {
@@ -102,6 +112,27 @@ export function AlbumView({
                 {f.label}
               </button>
             ))}
+          </div>
+
+          <div className="relative mt-3">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <input
+              type="text"
+              inputMode="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Buscar seleção ou jogador"
+              className="w-full h-10 pl-9 pr-9 rounded-full bg-secondary text-sm font-medium placeholder:text-muted-foreground border border-transparent focus:bg-card focus:border-border focus:outline-none transition-colors"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                aria-label="Limpar busca"
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
           </div>
         </div>
       </header>
