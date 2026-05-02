@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { STICKERS } from "@/data/stickers";
-import { Profile, StickerCounts, saveProfile } from "@/lib/storage";
+import { StickerCounts } from "@/lib/storage";
+import type { Profile } from "@/pages/Index";
 import { AdBanner } from "@/components/AdBanner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,11 +10,13 @@ export function ProfileView({
   counts,
   profile,
   setProfile,
+  email,
   onLogout,
 }: {
   counts: StickerCounts;
   profile: Profile;
   setProfile: (p: Profile) => void;
+  email: string;
   onLogout: () => void;
 }) {
   const stats = useMemo(() => {
@@ -30,7 +33,6 @@ export function ProfileView({
   const update = (patch: Partial<Profile>) => {
     const next = { ...profile, ...patch };
     setProfile(next);
-    saveProfile(next);
   };
 
   return (
@@ -39,6 +41,7 @@ export function ProfileView({
         <div className="px-4 pt-4 pb-3">
           <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Perfil</p>
           <h1 className="text-2xl font-black tracking-tight">{profile.nome || "Você"}</h1>
+          {email && <p className="text-xs text-muted-foreground mt-0.5">{email}</p>}
         </div>
       </header>
 
