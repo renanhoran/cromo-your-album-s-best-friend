@@ -49,6 +49,14 @@ export function TradesView({ counts }: { counts: StickerCounts }) {
       <div className="px-4 pt-4 space-y-3">
         <AdBanner label="Patrocinado" />
 
+        <div className="rounded-2xl border border-dashed border-border p-4 text-center">
+          <div className="text-2xl mb-1">📍</div>
+          <p className="font-bold text-sm">Usuários reais próximos</p>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Em breve — convide amigos para o CROMO!
+          </p>
+        </div>
+
         {matches.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-2">🤝</div>

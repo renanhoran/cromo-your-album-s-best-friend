@@ -156,6 +156,17 @@ export function AlbumView({
                 {items.filter((s) => (counts[s.id] ?? 0) >= 1).length}/{items.length}
               </span>
             </div>
+            <div className="h-1 rounded-full bg-secondary overflow-hidden mb-2">
+              <div
+                className="h-full rounded-full transition-all"
+                style={{
+                  width: `${Math.round(
+                    (items.filter((s) => (counts[s.id] ?? 0) >= 1).length / items.length) * 100
+                  )}%`,
+                  background: "var(--gradient-primary)",
+                }}
+              />
+            </div>
             <div className="grid grid-cols-3 gap-2">
               {items.map((s) => (
                 <StickerCard
