@@ -10,15 +10,6 @@ interface PaywallProps {
   nome?: string;
 }
 
-const BENEFITS = [
-  "Figurinhas ilimitadas",
-  "Match de trocas sem limite",
-  "Mapa de pontos de troca",
-  "Até 4 perfis — família toda usa",
-  "Sem propagandas",
-  "Backup automático",
-];
-
 export function Paywall({ userId, email, nome }: PaywallProps) {
   const [periodo, setPeriodo] = useState<"mensal" | "anual">("anual");
   const [loading, setLoading] = useState(false);
@@ -100,17 +91,6 @@ export function Paywall({ userId, email, nome }: PaywallProps) {
             </span>
           )}
         </div>
-
-        <ul className="space-y-3 mb-8">
-          {BENEFITS.map((b) => (
-            <li key={b} className="flex items-center gap-3 text-sm">
-              <span className="h-5 w-5 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">
-                <Check className="h-3 w-3" strokeWidth={3} />
-              </span>
-              <span>{b}</span>
-            </li>
-          ))}
-        </ul>
 
         <Button
           onClick={handleStart}
