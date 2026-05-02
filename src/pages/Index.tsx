@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Login } from "@/components/Login";
 import { Paywall } from "@/components/Paywall";
+import { Onboarding } from "@/components/Onboarding";
 import { BottomNav, Tab } from "@/components/BottomNav";
 import { AlbumView } from "@/views/AlbumView";
 import { TradesView } from "@/views/TradesView";
@@ -12,6 +13,7 @@ import type { Session, User } from "@supabase/supabase-js";
 import { toast } from "sonner";
 
 const PAID_KEY = "cromo:paid:v1";
+const ONBOARD_KEY = "cromo:onboarded:v1";
 
 export interface Profile {
   nome: string;
@@ -24,6 +26,7 @@ const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [paid, setPaid] = useState(false);
+  const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
   const [profile, setProfile] = useState<Profile>({ nome: "", cidade: "", avatar: "⚽" });
@@ -40,6 +43,7 @@ const Index = () => {
       setLoading(false);
     });
     setPaid(localStorage.getItem(PAID_KEY) === "1");
+    setShowOnboard(localStorage.getItem(ONBOARD_KEY) !== "1");
     return () => sub.subscription.unsubscribe();
   }, []);
 
@@ -111,6 +115,17 @@ const Index = () => {
 
   if (!session || !user) {
     return <Login />;
+  }
+
+  if (showOnboard) {
+    return (
+      <Onboarding
+        onDone={() => {
+          localStorage.setItem(ONBOARD_KEY, "1");
+          setShowOnboard(false);
+        }}
+      />
+    );
   }
 
   if (!paid) {
