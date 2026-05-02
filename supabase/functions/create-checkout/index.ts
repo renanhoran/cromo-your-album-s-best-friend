@@ -5,7 +5,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const ASAAS_URL = "https://api.asaas.com/v3";
+const ASAAS_URL = "https://sandbox.asaas.com/api/v3";
 const ASAAS_KEY = Deno.env.get("ASAAS_API_KEY")!;
 const APP_URL = Deno.env.get("APP_URL") ?? "https://maniadealbum.com.br";
 
