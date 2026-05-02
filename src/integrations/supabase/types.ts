@@ -16,25 +16,40 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          asaas_customer_id: string | null
+          asaas_subscription_id: string | null
           avatar: string | null
           cidade: string | null
           created_at: string | null
           id: string
+          is_premium: boolean | null
           nome: string | null
+          periodo_assinatura: string | null
+          premium_ate: string | null
         }
         Insert: {
+          asaas_customer_id?: string | null
+          asaas_subscription_id?: string | null
           avatar?: string | null
           cidade?: string | null
           created_at?: string | null
           id: string
+          is_premium?: boolean | null
           nome?: string | null
+          periodo_assinatura?: string | null
+          premium_ate?: string | null
         }
         Update: {
+          asaas_customer_id?: string | null
+          asaas_subscription_id?: string | null
           avatar?: string | null
           cidade?: string | null
           created_at?: string | null
           id?: string
+          is_premium?: boolean | null
           nome?: string | null
+          periodo_assinatura?: string | null
+          premium_ate?: string | null
         }
         Relationships: []
       }
