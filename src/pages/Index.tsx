@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Login } from "@/components/Login";
 import { Paywall } from "@/components/Paywall";
 import { Onboarding } from "@/components/Onboarding";
@@ -53,12 +53,16 @@ const Index = () => {
   }, []);
 
   // Load profile & stickers when user changes
+  const loadedUserId = useRef<string | null>(null);
   useEffect(() => {
     if (!user) {
       setCounts({});
       setAcesso("carregando");
+      loadedUserId.current = null;
       return;
     }
+    if (loadedUserId.current === user.id) return;
+    loadedUserId.current = user.id;
     (async () => {
       const { data: prof } = await supabase
         .from("profiles")
