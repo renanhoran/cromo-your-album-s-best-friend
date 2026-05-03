@@ -13,6 +13,7 @@ import type { Session, User } from "@supabase/supabase-js";
 import logoIcon from "@/assets/logo-icon.png";
 import { User as UserIcon } from "lucide-react";
 import { TesteBanner } from "@/components/TesteBanner";
+import { toast } from "sonner";
 
 export interface Profile {
   nome: string;
@@ -37,6 +38,29 @@ const Index = () => {
     cidade: "",
     avatar: "⚽",
   });
+
+  // Detectar retorno do Stripe após pagamento
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paymentStatus = params.get("payment");
+    const planoRetorno = params.get("plano");
+
+    if (paymentStatus === "success" && user) {
+      window.history.replaceState({}, "", "/");
+      setIsPremium(true);
+      setAcesso("livre");
+      setPlano((planoRetorno as "basico" | "completo") ?? "completo");
+      supabase
+        .from("profiles")
+        .update({ is_premium: true, plano: planoRetorno ?? "completo" })
+        .eq("id", user.id);
+      toast.success(
+        planoRetorno === "basico"
+          ? "Plano Básico ativado! Bem-vindo ao Mania de Álbum 🎉"
+          : "Plano Completo ativado! Aproveite a câmera IA 🎉"
+      );
+    }
+  }, [user]);
 
   // Auth listener (set up before getSession)
   useEffect(() => {
