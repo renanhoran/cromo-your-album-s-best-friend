@@ -1,11 +1,15 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { STICKERS } from "@/data/stickers";
+import type { Sticker } from "@/data/stickers";
 import { StickerCounts } from "@/lib/storage";
 import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
-import { Search, X } from "lucide-react";
+import { Search, X, Camera } from "lucide-react";
 import { getFlagUrl } from "@/data/flags";
+import { IdentifySheet, IdentifyResult } from "@/components/IdentifySheet";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 
@@ -19,14 +23,132 @@ const FILTERS: { id: Filter; label: string }[] = [
 export function AlbumView({
   counts,
   onTap,
+  onSetCount,
   isPremium = false,
 }: {
   counts: StickerCounts;
   onTap: (id: string) => void;
+  onSetCount?: (id: string, next: number) => void;
   isPremium?: boolean;
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
   const [query, setQuery] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [identifying, setIdentifying] = useState(false);
+  const [showSheet, setShowSheet] = useState(false);
+  const [identifyResult, setIdentifyResult] = useState<IdentifyResult | null>(null);
+  const [encontrada, setEncontrada] = useState<Sticker | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const check = () =>
+      setIsMobile(window.innerWidth < 768 || (navigator.maxTouchPoints ?? 0) > 0);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const compressImage = (file: File): Promise<{ base64: string; mediaType: string }> =>
+    new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+      reader.onload = () => {
+        img.onload = () => {
+          const maxW = 800;
+          const scale = Math.min(1, maxW / img.width);
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return reject(new Error("no ctx"));
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+          resolve({ base64: dataUrl.split(",")[1], mediaType: "image/jpeg" });
+        };
+        img.onerror = reject;
+        img.src = reader.result as string;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+  const findSticker = (r: IdentifyResult): Sticker | null => {
+    const nome = r.nome?.toLowerCase().trim() ?? "";
+    const sigla = r.selecao?.toUpperCase().trim() ?? "";
+    const num = r.numero?.toString().replace(/\D/g, "") ?? "";
+
+    if (sigla && num) {
+      const exact = STICKERS.find(
+        (s) => s.sigla_selecao === sigla && s.id.endsWith(num.padStart(3, "0"))
+      );
+      if (exact) return exact;
+    }
+    if (nome) {
+      const byName = STICKERS.find((s) => s.nome.toLowerCase() === nome);
+      if (byName) return byName;
+      const partial = STICKERS.find(
+        (s) => s.nome.toLowerCase().includes(nome) || nome.includes(s.nome.toLowerCase())
+      );
+      if (partial) return partial;
+    }
+    if (sigla && !num) {
+      const escudo = STICKERS.find(
+        (s) => s.sigla_selecao === sigla && s.tipo === "escudo"
+      );
+      if (escudo) return escudo;
+    }
+    return null;
+  };
+
+  const handleCameraCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setShowSheet(true);
+    setIdentifying(true);
+    setIdentifyResult(null);
+    setEncontrada(null);
+
+    try {
+      const { base64, mediaType } = await compressImage(file);
+      const { data: { session } } = await supabase.auth.getSession();
+
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/identify-sticker`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session?.access_token ?? ""}`,
+          },
+          body: JSON.stringify({ imageBase64: base64, mediaType }),
+        }
+      );
+
+      if (!res.ok) {
+        toast.error("Erro ao identificar. Tente novamente.");
+        setShowSheet(false);
+        return;
+      }
+
+      const result: IdentifyResult = await res.json();
+
+      if (result.confianca === "baixa" || (!result.nome && !result.numero)) {
+        toast.error("Não consegui identificar a figurinha. Tenta uma foto mais nítida.");
+        setShowSheet(false);
+        return;
+      }
+
+      setIdentifyResult(result);
+      setEncontrada(findSticker(result));
+    } catch {
+      toast.error("Erro ao identificar. Tente novamente.");
+      setShowSheet(false);
+    } finally {
+      setIdentifying(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  };
 
   const stats = useMemo(() => {
     const total = STICKERS.length;
@@ -202,6 +324,43 @@ export function AlbumView({
         ))}
 
       </div>
+
+      {isMobile && (
+        <>
+          <label
+            htmlFor="camera-input"
+            aria-label="Identificar figurinha pela câmera"
+            className="fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg cursor-pointer active:scale-95 transition-transform"
+          >
+            <Camera className="w-6 h-6" />
+          </label>
+          <input
+            ref={inputRef}
+            id="camera-input"
+            type="file"
+            accept="image/*"
+            capture="environment"
+            className="hidden"
+            onChange={handleCameraCapture}
+          />
+        </>
+      )}
+
+      <IdentifySheet
+        open={showSheet}
+        identifying={identifying}
+        result={identifyResult}
+        encontrada={encontrada}
+        count={encontrada ? counts[encontrada.id] ?? 0 : 0}
+        onClose={() => setShowSheet(false)}
+        onConfirm={(s, next) => {
+          onSetCount?.(s.id, next);
+          setShowSheet(false);
+          toast.success(
+            next > 1 ? `Marcada como repetida (×${next})` : "Marcada como tenho!"
+          );
+        }}
+      />
     </div>
   );
 }
