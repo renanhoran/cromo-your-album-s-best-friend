@@ -15,14 +15,15 @@ if ("serviceWorker" in navigator) {
   const inIframe = (() => {
     try { return window.self !== window.top; } catch { return true; }
   })();
-  // Only the editor preview iframe blocks SW — published domains
-  // (*.lovable.app sem o prefixo id-preview--, custom domains) devem registrar.
   const isPreviewHost =
     location.hostname.includes("lovableproject.com") ||
     location.hostname.startsWith("id-preview--");
   if (!inIframe && !isPreviewHost) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((reg) => console.log("SW registrado:", reg.scope))
+        .catch((err) => console.error("SW falhou:", err));
     });
   } else {
     navigator.serviceWorker.getRegistrations().then((rs) => rs.forEach((r) => r.unregister()));
