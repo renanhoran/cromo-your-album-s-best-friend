@@ -5,7 +5,7 @@ import { StickerCounts } from "@/lib/storage";
 import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
-import { Search, X, Camera } from "lucide-react";
+import { Search, X, Camera, Share2 } from "lucide-react";
 import { getFlagUrl } from "@/data/flags";
 import { IdentifySheet, IdentifyResult } from "@/components/IdentifySheet";
 import { supabase } from "@/integrations/supabase/client";
