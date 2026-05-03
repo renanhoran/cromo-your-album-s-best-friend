@@ -11,6 +11,7 @@ import { StickerCounts } from "@/lib/storage";
 import { supabase } from "@/integrations/supabase/client";
 import type { Session, User } from "@supabase/supabase-js";
 import logoIcon from "@/assets/logo-icon.png";
+import { User as UserIcon } from "lucide-react";
 
 const ONBOARD_KEY = "cromo:onboarded:v1";
 
@@ -178,9 +179,9 @@ const Index = () => {
           <button
             onClick={() => setTab("perfil")}
             aria-label="Abrir perfil"
-            className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center text-base font-bold"
+            className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center"
           >
-            {profile.avatar || (profile.nome?.[0] ?? user.email?.[0] ?? "?").toUpperCase()}
+            <UserIcon className="h-4 w-4 text-foreground" />
           </button>
         </div>
         {diasRestantes > 0 && diasRestantes <= 3 && tab !== "perfil" && (
