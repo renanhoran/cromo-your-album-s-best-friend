@@ -29,6 +29,7 @@ export type Database = {
           id: string
           is_premium: boolean | null
           nome: string | null
+          onboarding_concluido: boolean | null
           phone: string | null
           plano: string | null
           postal_code: string | null
@@ -49,6 +50,7 @@ export type Database = {
           id: string
           is_premium?: boolean | null
           nome?: string | null
+          onboarding_concluido?: boolean | null
           phone?: string | null
           plano?: string | null
           postal_code?: string | null
@@ -69,6 +71,7 @@ export type Database = {
           id?: string
           is_premium?: boolean | null
           nome?: string | null
+          onboarding_concluido?: boolean | null
           phone?: string | null
           plano?: string | null
           postal_code?: string | null
