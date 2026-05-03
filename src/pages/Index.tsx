@@ -219,7 +219,7 @@ const Index = () => {
               onClick={() => setAcesso("bloqueado")}
               className="text-xs text-primary font-semibold underline"
             >
-              Liberar por R$ 19,90
+              Ver planos
             </button>
           </div>
         )}
