@@ -8,6 +8,7 @@ const corsHeaders = {
 const ASAAS_URL = "https://sandbox.asaas.com/api/v3";
 const ASAAS_KEY = Deno.env.get("ASAAS_API_KEY")!;
 const APP_URL = Deno.env.get("APP_URL") ?? "https://maniadealbum.com.br";
+const ASAAS_CHECKOUT_BASE_URL = "https://sandbox.asaas.com/checkoutSession/show?id=";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -163,7 +164,9 @@ Deno.serve(async (req) => {
       })
       .eq("id", user_id);
 
-    return new Response(JSON.stringify({ url: checkout.url ?? checkout.invoiceUrl }), {
+    const checkoutUrl = checkout.url ?? checkout.invoiceUrl ?? (checkout.id ? `${ASAAS_CHECKOUT_BASE_URL}${checkout.id}` : null);
+
+    return new Response(JSON.stringify({ url: checkoutUrl }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
