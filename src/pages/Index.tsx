@@ -18,14 +18,6 @@ export interface Profile {
   nome: string;
   cidade: string;
   avatar: string;
-  cpf_cnpj?: string;
-  phone?: string;
-  address?: string;
-  address_number?: string;
-  address_complement?: string;
-  postal_code?: string;
-  province?: string;
-  city?: string;
 }
 
 const Index = () => {
@@ -34,6 +26,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [acesso, setAcesso] = useState<"carregando" | "livre" | "bloqueado">("carregando");
   const [diasRestantes, setDiasRestantes] = useState<number>(3);
+  const [isPremium, setIsPremium] = useState(false);
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
@@ -41,14 +34,6 @@ const Index = () => {
     nome: "",
     cidade: "",
     avatar: "⚽",
-    cpf_cnpj: "",
-    phone: "",
-    address: "",
-    address_number: "",
-    address_complement: "",
-    postal_code: "",
-    province: "",
-    city: "",
   });
 
   // Auth listener (set up before getSession)
@@ -84,21 +69,13 @@ const Index = () => {
           nome: prof.nome ?? "",
           cidade: prof.cidade ?? "",
           avatar: prof.avatar ?? "⚽",
-          cpf_cnpj: prof.cpf_cnpj ?? "",
-          phone: prof.phone ?? "",
-          address: prof.address ?? "",
-          address_number: prof.address_number ?? "",
-          address_complement: prof.address_complement ?? "",
-          postal_code: prof.postal_code ?? "",
-          province: prof.province ?? "",
-          city: prof.city ?? "",
         });
-        const premiumAtivo =
-          !!prof.is_premium && !!prof.premium_ate && new Date(prof.premium_ate) > new Date();
-        if (premiumAtivo) {
+        if (prof.is_premium) {
+          setIsPremium(true);
           setAcesso("livre");
           setDiasRestantes(0);
         } else {
+          setIsPremium(false);
           const iniciou = new Date((prof as any).teste_iniciado_em ?? prof.created_at ?? Date.now());
           const diffMs = Date.now() - iniciou.getTime();
           const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -112,29 +89,14 @@ const Index = () => {
           nome: user.user_metadata?.full_name ?? user.email?.split("@")[0] ?? "",
           cidade: "",
           avatar: "⚽",
-          cpf_cnpj: "",
-          phone: "",
-          address: "",
-          address_number: "",
-          address_complement: "",
-          postal_code: "",
-          province: "",
-          city: "",
         };
         await supabase.from("profiles").insert(initial);
         setProfile({
           nome: initial.nome,
           cidade: initial.cidade,
           avatar: initial.avatar,
-          cpf_cnpj: initial.cpf_cnpj,
-          phone: initial.phone,
-          address: initial.address,
-          address_number: initial.address_number,
-          address_complement: initial.address_complement,
-          postal_code: initial.postal_code,
-          province: initial.province,
-          city: initial.city,
         });
+        setIsPremium(false);
         setAcesso("livre");
         setDiasRestantes(3);
       }
@@ -201,9 +163,6 @@ const Index = () => {
         userId={user.id}
         email={user.email ?? ""}
         nome={profile.nome}
-        profile={profile}
-        onProfileChange={updateProfile}
-        diasTestados={3}
       />
     );
   }
@@ -240,9 +199,9 @@ const Index = () => {
           </div>
         )}
       </header>
-      {tab === "album" && <AlbumView counts={counts} onTap={handleTap} />}
-      {tab === "trocas" && <TradesView counts={counts} />}
-      {tab === "locais" && <LocationsView userId={user.id} userCity={profile.cidade} />}
+      {tab === "album" && <AlbumView counts={counts} onTap={handleTap} isPremium={isPremium} />}
+      {tab === "trocas" && <TradesView counts={counts} isPremium={isPremium} />}
+      {tab === "locais" && <LocationsView userId={user.id} userCity={profile.cidade} isPremium={isPremium} />}
       {tab === "perfil" && (
         <ProfileView
           counts={counts}
