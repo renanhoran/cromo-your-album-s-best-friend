@@ -141,6 +141,9 @@ export function AlbumView({
       </header>
 
       <div className="px-4 pt-4 space-y-6">
+        <div className="rounded-xl bg-primary/10 border border-primary/30 px-3 py-2.5 text-center text-xs font-semibold text-primary">
+          1 toque: tenho · 2 toques: repetida · 3 toques: zerar
+        </div>
         {grouped.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-2">🎯</div>
@@ -198,9 +201,6 @@ export function AlbumView({
           </div>
         ))}
 
-        <p className="text-center text-xs text-muted-foreground pt-2">
-          1 toque: tenho · 2 toques: repetida · 3 toques: zerar
-        </p>
       </div>
     </div>
   );
