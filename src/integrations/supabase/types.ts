@@ -20,7 +20,7 @@ export type Database = {
           address_complement: string | null
           address_number: string | null
           asaas_customer_id: string | null
-          asaas_subscription_id: string | null
+          asaas_payment_id: string | null
           avatar: string | null
           cidade: string | null
           city: string | null
@@ -29,10 +29,8 @@ export type Database = {
           id: string
           is_premium: boolean | null
           nome: string | null
-          periodo_assinatura: string | null
           phone: string | null
           postal_code: string | null
-          premium_ate: string | null
           province: string | null
           teste_iniciado_em: string
         }
@@ -41,7 +39,7 @@ export type Database = {
           address_complement?: string | null
           address_number?: string | null
           asaas_customer_id?: string | null
-          asaas_subscription_id?: string | null
+          asaas_payment_id?: string | null
           avatar?: string | null
           cidade?: string | null
           city?: string | null
@@ -50,10 +48,8 @@ export type Database = {
           id: string
           is_premium?: boolean | null
           nome?: string | null
-          periodo_assinatura?: string | null
           phone?: string | null
           postal_code?: string | null
-          premium_ate?: string | null
           province?: string | null
           teste_iniciado_em?: string
         }
@@ -62,7 +58,7 @@ export type Database = {
           address_complement?: string | null
           address_number?: string | null
           asaas_customer_id?: string | null
-          asaas_subscription_id?: string | null
+          asaas_payment_id?: string | null
           avatar?: string | null
           cidade?: string | null
           city?: string | null
@@ -71,10 +67,8 @@ export type Database = {
           id?: string
           is_premium?: boolean | null
           nome?: string | null
-          periodo_assinatura?: string | null
           phone?: string | null
           postal_code?: string | null
-          premium_ate?: string | null
           province?: string | null
           teste_iniciado_em?: string
         }
