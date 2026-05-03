@@ -53,7 +53,7 @@ export function TradesView({ counts }: { counts: StickerCounts }) {
           <div className="text-2xl mb-1">📍</div>
           <p className="font-bold text-sm">Usuários reais próximos</p>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Em breve — convide amigos para o CROMO!
+            Em breve — convide amigos para o Mania de Álbum!
           </p>
         </div>
 

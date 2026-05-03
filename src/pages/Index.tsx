@@ -10,6 +10,7 @@ import { ProfileView } from "@/views/ProfileView";
 import { StickerCounts } from "@/lib/storage";
 import { supabase } from "@/integrations/supabase/client";
 import type { Session, User } from "@supabase/supabase-js";
+import logoIcon from "@/assets/logo-icon.png";
 
 const ONBOARD_KEY = "cromo:onboarded:v1";
 
@@ -211,8 +212,9 @@ const Index = () => {
     <div className="min-h-screen bg-background max-w-md mx-auto">
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur border-b border-border">
         <div className="flex items-center justify-between px-4 h-12">
-          <button onClick={() => setTab("album")} className="font-black tracking-tight text-sm">
-            CROMO <span className="text-primary">⚽</span>
+          <button onClick={() => setTab("album")} className="flex items-center gap-2 font-black tracking-tight text-sm">
+            <img src={logoIcon} alt="Mania de Álbum" className="h-7 w-7" />
+            <span>MANIA DE ÁLBUM</span>
           </button>
           <button
             onClick={() => setTab("perfil")}
