@@ -75,25 +75,40 @@ export function AlbumView({
     });
 
   const findSticker = (r: IdentifyResult): Sticker | null => {
-    const nome = r.nome?.toLowerCase().trim() ?? "";
-    const sigla = r.selecao?.toUpperCase().trim() ?? "";
+    const sigla = r.sigla_selecao?.toUpperCase().trim() ?? "";
     const num = r.numero?.toString().replace(/\D/g, "") ?? "";
+    const sobrenome = r.sobrenome?.toLowerCase().trim() ?? "";
+    const nomeCompleto = r.nome_completo?.toLowerCase().trim() ?? "";
 
-    if (sigla && num) {
-      const exact = STICKERS.find(
-        (s) => s.sigla_selecao === sigla && s.id.endsWith(num.padStart(3, "0"))
-      );
-      if (exact) return exact;
-    }
-    if (nome) {
-      const byName = STICKERS.find((s) => s.nome.toLowerCase() === nome);
-      if (byName) return byName;
-      const partial = STICKERS.find(
-        (s) => s.nome.toLowerCase().includes(nome) || nome.includes(s.nome.toLowerCase())
-      );
-      if (partial) return partial;
-    }
-    if (sigla && !num) {
+    const found = STICKERS.find((s) => {
+      if (num && sigla) {
+        const idEsperado = `${sigla}-${num.padStart(3, "0")}`;
+        if (s.id === idEsperado) return true;
+      }
+      if (sobrenome && sigla) {
+        const nomeLower = s.nome.toLowerCase();
+        const selecaoMatch = s.sigla_selecao === sigla;
+        const nomeMatch =
+          nomeLower.includes(sobrenome) ||
+          sobrenome.includes(nomeLower.split(" ")[0]);
+        if (selecaoMatch && nomeMatch) return true;
+      }
+      if (nomeCompleto && sigla) {
+        const first = nomeCompleto.split(" ")[0];
+        const sFirst = s.nome.toLowerCase().split(" ")[0];
+        if (
+          s.sigla_selecao === sigla &&
+          (s.nome.toLowerCase().includes(first) || nomeCompleto.includes(sFirst))
+        ) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    if (found) return found;
+
+    if (r.tipo === "escudo" && sigla) {
       const escudo = STICKERS.find(
         (s) => s.sigla_selecao === sigla && s.tipo === "escudo"
       );
@@ -135,7 +150,10 @@ export function AlbumView({
 
       const result: IdentifyResult = await res.json();
 
-      if (result.confianca === "baixa" || (!result.nome && !result.numero)) {
+      if (
+        result.confianca === "baixa" ||
+        (!result.nome_completo && !result.sobrenome && !result.sigla_selecao && !result.numero)
+      ) {
         toast.error("Não consegui identificar a figurinha. Tenta uma foto mais nítida.");
         setShowSheet(false);
         return;
