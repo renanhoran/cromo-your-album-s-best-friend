@@ -13,9 +13,37 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
-    const { user_id, email, nome, periodo } = await req.json();
+    const {
+      user_id,
+      email,
+      nome,
+      periodo,
+      cpf_cnpj,
+      phone,
+      address,
+      address_number,
+      address_complement,
+      postal_code,
+      province,
+    } = await req.json();
+
     if (!user_id || !email || !periodo) {
       return new Response(JSON.stringify({ error: "Parâmetros inválidos" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const cleanCpfCnpj = String(cpf_cnpj ?? "").replace(/\D/g, "");
+    const cleanPhone = String(phone ?? "").replace(/\D/g, "");
+    const cleanPostalCode = String(postal_code ?? "").replace(/\D/g, "");
+    const cleanAddress = String(address ?? "").trim();
+    const cleanAddressNumber = String(address_number ?? "").trim();
+    const cleanComplement = String(address_complement ?? "").trim();
+    const cleanProvince = String(province ?? "").trim();
+
+    if (!cleanCpfCnpj || !cleanPhone || !cleanAddress || !cleanAddressNumber || !cleanPostalCode || !cleanProvince) {
+      return new Response(JSON.stringify({ error: "Dados de cobrança incompletos" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -39,16 +67,26 @@ Deno.serve(async (req) => {
 
     let customerId = profile?.asaas_customer_id;
 
+    const customerPayload = {
+      name: nome || email,
+      email,
+      cpfCnpj: cleanCpfCnpj,
+      phone: cleanPhone,
+      mobilePhone: cleanPhone,
+      address: cleanAddress,
+      addressNumber: cleanAddressNumber,
+      complement: cleanComplement || undefined,
+      postalCode: cleanPostalCode,
+      province: cleanProvince,
+      externalReference: user_id,
+      notificationDisabled: false,
+    };
+
     if (!customerId) {
       const custRes = await fetch(`${ASAAS_URL}/customers`, {
         method: "POST",
         headers,
-        body: JSON.stringify({
-          name: nome || email,
-          email,
-          externalReference: user_id,
-          notificationDisabled: false,
-        }),
+        body: JSON.stringify(customerPayload),
       });
       const cust = await custRes.json();
       if (!custRes.ok) {
@@ -57,6 +95,17 @@ Deno.serve(async (req) => {
       }
       customerId = cust.id;
       await supabase.from("profiles").update({ asaas_customer_id: customerId }).eq("id", user_id);
+    } else {
+      const custRes = await fetch(`${ASAAS_URL}/customers/${customerId}`, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify(customerPayload),
+      });
+      const cust = await custRes.json();
+      if (!custRes.ok) {
+        console.error("Asaas customer update error", cust);
+        throw new Error("Falha ao atualizar cliente no Asaas");
+      }
     }
 
     const nextDueDate = new Date();
@@ -90,10 +139,7 @@ Deno.serve(async (req) => {
           cycle: ciclo,
           nextDueDate: nextDueDateStr,
         },
-        customerData: {
-          name: nome || email,
-          email,
-        },
+        customer: customerId,
       }),
     });
 
