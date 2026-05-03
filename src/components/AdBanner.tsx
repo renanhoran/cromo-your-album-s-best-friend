@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-const ADSENSE_CLIENT = "ca-pub-XXXXXXXXXXXXXXXX";
+const ADSENSE_CLIENT = "ca-pub-5841031464550658";
 
 export function AdBanner({ slot }: AdBannerProps) {
   const pushed = useRef(false);
