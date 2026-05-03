@@ -19,6 +19,7 @@ export interface Profile {
   nome: string;
   cidade: string;
   avatar: string;
+  phone: string;
 }
 
 const Index = () => {
@@ -37,6 +38,7 @@ const Index = () => {
     nome: "",
     cidade: "",
     avatar: "⚽",
+    phone: "",
   });
 
   // Detectar retorno do Stripe após pagamento
@@ -100,6 +102,7 @@ const Index = () => {
           nome: prof.nome ?? "",
           cidade: prof.cidade ?? "",
           avatar: prof.avatar ?? "⚽",
+          phone: (prof as any).phone ?? "",
         });
         if (prof.is_premium) {
           setIsPremium(true);
@@ -130,6 +133,7 @@ const Index = () => {
           nome: user.user_metadata?.full_name ?? user.email?.split("@")[0] ?? "",
           cidade: "",
           avatar: "⚽",
+          phone: "",
           onboarding_concluido: false,
           teste_iniciado_em: new Date().toISOString(),
         };
@@ -138,6 +142,7 @@ const Index = () => {
           nome: initial.nome,
           cidade: initial.cidade,
           avatar: initial.avatar,
+          phone: initial.phone,
         });
         setIsPremium(false);
         setPlano("teste");
