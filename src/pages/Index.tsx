@@ -12,8 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Session, User } from "@supabase/supabase-js";
 import logoIcon from "@/assets/logo-icon.png";
 import { User as UserIcon } from "lucide-react";
-
-const ONBOARD_KEY = "cromo:onboarded:v1";
+import { TesteBanner } from "@/components/TesteBanner";
 
 export interface Profile {
   nome: string;
@@ -27,6 +26,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [acesso, setAcesso] = useState<"carregando" | "livre" | "bloqueado">("carregando");
   const [diasRestantes, setDiasRestantes] = useState<number>(3);
+  const [horasRestantes, setHorasRestantes] = useState<number>(72);
   const [isPremium, setIsPremium] = useState(false);
   const [plano, setPlano] = useState<"teste" | "basico" | "completo">("teste");
   const [showOnboard, setShowOnboard] = useState(false);
@@ -49,7 +49,6 @@ const Index = () => {
       setUser(data.session?.user ?? null);
       setLoading(false);
     });
-    setShowOnboard(localStorage.getItem(ONBOARD_KEY) !== "1");
     return () => sub.subscription.unsubscribe();
   }, []);
 
@@ -77,16 +76,20 @@ const Index = () => {
           setPlano(((prof as any).plano as "basico" | "completo") ?? "completo");
           setAcesso("livre");
           setDiasRestantes(0);
+          setHorasRestantes(0);
         } else {
           setIsPremium(false);
           setPlano("teste");
           const iniciou = new Date((prof as any).teste_iniciado_em ?? prof.created_at ?? Date.now());
-          const diffMs = Date.now() - iniciou.getTime();
-          const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-          const restantes = Math.max(0, 3 - diffDias);
-          setDiasRestantes(restantes);
-          setAcesso(diffDias >= 3 ? "bloqueado" : "livre");
+          const fimTeste = new Date(iniciou.getTime() + 3 * 24 * 60 * 60 * 1000);
+          const msRestantes = fimTeste.getTime() - Date.now();
+          const dias = Math.max(0, Math.ceil(msRestantes / (1000 * 60 * 60 * 24)));
+          const horas = Math.max(0, Math.ceil(msRestantes / (1000 * 60 * 60)));
+          setDiasRestantes(dias);
+          setHorasRestantes(horas);
+          setAcesso(msRestantes <= 0 ? "bloqueado" : "livre");
         }
+        setShowOnboard(!(prof as any).onboarding_concluido);
       } else {
         const initial = {
           id: user.id,
@@ -104,6 +107,8 @@ const Index = () => {
         setPlano("teste");
         setAcesso("livre");
         setDiasRestantes(3);
+        setHorasRestantes(72);
+        setShowOnboard(true);
       }
 
       const { data: stickers } = await supabase
@@ -175,8 +180,13 @@ const Index = () => {
     return (
       <Onboarding
         onDone={() => {
-          localStorage.setItem(ONBOARD_KEY, "1");
           setShowOnboard(false);
+          if (user) {
+            supabase
+              .from("profiles")
+              .update({ onboarding_concluido: true })
+              .eq("id", user.id);
+          }
         }}
       />
     );
@@ -208,20 +218,12 @@ const Index = () => {
             <UserIcon className="h-4 w-4 text-foreground" />
           </button>
         </div>
-        {diasRestantes > 0 && diasRestantes <= 3 && tab !== "perfil" && (
-          <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 flex items-center justify-between">
-            <span className="text-xs font-medium text-primary">
-              {diasRestantes === 1
-                ? "Último dia de teste grátis"
-                : `${diasRestantes} dias de teste grátis restantes`}
-            </span>
-            <button
-              onClick={() => setAcesso("bloqueado")}
-              className="text-xs text-primary font-semibold underline"
-            >
-              Ver planos
-            </button>
-          </div>
+        {!isPremium && (
+          <TesteBanner
+            diasRestantes={diasRestantes}
+            horasRestantes={horasRestantes}
+            onVerPlanos={() => setAcesso("bloqueado")}
+          />
         )}
       </header>
       {tab === "album" && (
