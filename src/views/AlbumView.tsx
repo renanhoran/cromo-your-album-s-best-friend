@@ -266,7 +266,7 @@ export function AlbumView({
 
       <div className="px-4 pt-4 space-y-6">
         <div className="rounded-xl bg-primary/10 border border-primary/30 px-3 py-2.5 text-center text-xs font-semibold text-primary">
-          1 toque: tenho · 2 toques: repetida · 3 toques: zerar
+          1 toque: tenho ✓ · +toques: repetidas (×2 a ×9) · 10º toque ou × zera
         </div>
         {grouped.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
