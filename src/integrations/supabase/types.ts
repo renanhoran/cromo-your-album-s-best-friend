@@ -163,30 +163,18 @@ export type Database = {
       }
     }
     Views: {
-      profiles_public: {
-        Row: {
-          avatar: string | null
-          cidade: string | null
-          id: string | null
-          nome: string | null
-        }
-        Insert: {
-          avatar?: string | null
-          cidade?: string | null
-          id?: string | null
-          nome?: string | null
-        }
-        Update: {
-          avatar?: string | null
-          cidade?: string | null
-          id?: string | null
-          nome?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_public_profiles: {
+        Args: never
+        Returns: {
+          avatar: string
+          cidade: string
+          id: string
+          nome: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
