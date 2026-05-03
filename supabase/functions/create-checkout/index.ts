@@ -14,53 +14,24 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
-    const {
-      user_id,
-      email,
-      nome,
-      periodo,
-      cpf_cnpj,
-      phone,
-      address,
-      address_number,
-      address_complement,
-      postal_code,
-      province,
-      city,
-    } = await req.json();
+    const { user_id, email, nome } = await req.json();
 
-    if (!user_id || !email || !periodo) {
+    if (!user_id || !email) {
       return new Response(JSON.stringify({ error: "Parâmetros inválidos" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const cleanCpfCnpj = String(cpf_cnpj ?? "").replace(/\D/g, "");
-    const cleanPhone = String(phone ?? "").replace(/\D/g, "");
-    const cleanPostalCode = String(postal_code ?? "").replace(/\D/g, "");
-    const cleanAddress = String(address ?? "").trim();
-    const cleanAddressNumber = String(address_number ?? "").trim();
-    const cleanComplement = String(address_complement ?? "").trim();
-    const cleanProvince = String(province ?? "").trim();
-    const cleanCity = String(city ?? "").trim();
-
-    if (!cleanCpfCnpj || !cleanPhone || !cleanAddress || !cleanAddressNumber || !cleanPostalCode || !cleanProvince || !cleanCity) {
-      return new Response(JSON.stringify({ error: "Dados de cobrança incompletos" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
 
     const headers = {
       "Content-Type": "application/json",
       access_token: ASAAS_KEY,
     };
-
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
 
     const { data: profile } = await supabase
       .from("profiles")
@@ -70,101 +41,64 @@ Deno.serve(async (req) => {
 
     let customerId = profile?.asaas_customer_id;
 
-    const customerPayload = {
-      name: nome || email,
-      email,
-      cpfCnpj: cleanCpfCnpj,
-      ...(cleanPhone.length >= 10 ? { mobilePhone: cleanPhone } : {}),
-      address: cleanAddress,
-      addressNumber: cleanAddressNumber,
-      complement: cleanComplement || undefined,
-      postalCode: cleanPostalCode,
-      province: cleanProvince,
-      cityName: cleanCity || undefined,
-      externalReference: user_id,
-      notificationDisabled: false,
-    };
-
     if (!customerId) {
       const custRes = await fetch(`${ASAAS_URL}/customers`, {
         method: "POST",
         headers,
-        body: JSON.stringify(customerPayload),
+        body: JSON.stringify({
+          name: nome || email,
+          email,
+          externalReference: user_id,
+          notificationDisabled: false,
+        }),
       });
       const cust = await custRes.json();
-      if (!custRes.ok) {
+      if (!custRes.ok || !cust.id) {
         console.error("Asaas customer error", cust);
-        throw new Error("Falha ao criar cliente no Asaas");
+        return new Response(JSON.stringify({ error: "Falha ao criar cliente no Asaas" }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
       }
       customerId = cust.id;
       await supabase.from("profiles").update({ asaas_customer_id: customerId }).eq("id", user_id);
-    } else {
-      const custRes = await fetch(`${ASAAS_URL}/customers/${customerId}`, {
-        method: "PUT",
-        headers,
-        body: JSON.stringify(customerPayload),
-      });
-      const cust = await custRes.json();
-      if (!custRes.ok) {
-        console.error("Asaas customer update error", cust);
-        throw new Error("Falha ao atualizar cliente no Asaas");
-      }
     }
-
-    const nextDueDate = new Date();
-    nextDueDate.setDate(nextDueDate.getDate() + 3);
-    const nextDueDateStr = nextDueDate.toISOString().split("T")[0];
-
-    const valor = periodo === "anual" ? 79.9 : 9.9;
-    const ciclo = periodo === "anual" ? "YEARLY" : "MONTHLY";
 
     const checkoutRes = await fetch(`${ASAAS_URL}/checkouts`, {
       method: "POST",
       headers,
       body: JSON.stringify({
-        billingTypes: ["CREDIT_CARD"],
-        chargeTypes: ["RECURRENT"],
+        billingTypes: ["CREDIT_CARD", "PIX"],
+        chargeTypes: ["DETACHED"],
         minutesToExpire: 30,
         callback: {
           successUrl: `${APP_URL}/sucesso`,
           cancelUrl: `${APP_URL}/`,
           expiredUrl: `${APP_URL}/`,
         },
+        customer: customerId,
         items: [
           {
-            name: "Mania de Álbum",
-            description: `Assinatura ${periodo === "anual" ? "anual" : "mensal"} — acesso completo`,
+            name: "Mania de Álbum — Acesso Completo",
+            description: "Acesso completo permanente. Pague uma vez, use sempre.",
             quantity: 1,
-            value: valor,
+            value: 19.9,
           },
         ],
-        subscription: {
-          cycle: ciclo,
-          nextDueDate: nextDueDateStr,
-        },
-        customer: customerId,
       }),
     });
 
     const checkout = await checkoutRes.json();
     if (!checkoutRes.ok) {
       console.error("Asaas checkout error", checkout);
-      throw new Error("Falha ao criar checkout no Asaas");
+      return new Response(JSON.stringify({ error: "Falha ao criar checkout no Asaas" }), {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    const premiumAte = new Date();
-    premiumAte.setDate(premiumAte.getDate() + 3);
-
-    await supabase
-      .from("profiles")
-      .update({
-        is_premium: true,
-        premium_ate: premiumAte.toISOString(),
-        periodo_assinatura: periodo,
-      })
-      .eq("id", user_id);
-
-    const checkoutUrl = checkout.url ?? checkout.invoiceUrl ?? (checkout.id ? `${ASAAS_CHECKOUT_BASE_URL}${checkout.id}` : null);
+    const checkoutUrl =
+      checkout.url ?? checkout.invoiceUrl ?? (checkout.id ? `${ASAAS_CHECKOUT_BASE_URL}${checkout.id}` : null);
 
     return new Response(JSON.stringify({ url: checkoutUrl }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

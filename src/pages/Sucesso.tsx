@@ -11,10 +11,10 @@ const Sucesso = () => {
           <Check className="h-10 w-10 text-primary" strokeWidth={3} />
         </div>
         <h1 className="text-2xl font-black tracking-tight mb-3">
-          Bem-vindo ao Mania de Álbum!
+          Acesso liberado!
         </h1>
-        <p className="text-muted-foreground mb-1">Seu teste grátis de 3 dias começou agora.</p>
-        <p className="text-muted-foreground mb-8">Nenhuma cobrança hoje.</p>
+        <p className="text-muted-foreground mb-1">Bem-vindo ao Mania de Álbum.</p>
+        <p className="text-muted-foreground mb-8">Suas figurinhas estão salvas e você nunca mais verá anúncios.</p>
         <Button
           onClick={() => navigate("/")}
           className="w-full h-14 text-base font-bold rounded-xl"

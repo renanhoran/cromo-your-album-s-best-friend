@@ -4,7 +4,7 @@ import { MOCK_USERS, StickerCounts } from "@/lib/storage";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 
-export function TradesView({ counts }: { counts: StickerCounts }) {
+export function TradesView({ counts, isPremium = false }: { counts: StickerCounts; isPremium?: boolean }) {
   const matches = useMemo(() => {
     const stickerById = new Map(STICKERS.map((s) => [s.id, s]));
     const myMissing = STICKERS.filter((s) => (counts[s.id] ?? 0) === 0).map((s) => s.id);
@@ -47,7 +47,7 @@ export function TradesView({ counts }: { counts: StickerCounts }) {
       </header>
 
       <div className="px-4 pt-4 space-y-3">
-        <AdBanner label="Patrocinado" />
+        {!isPremium && <AdBanner slot="" />}
 
         <div className="rounded-2xl border border-dashed border-border p-4 text-center">
           <div className="text-2xl mb-1">📍</div>
