@@ -12,9 +12,10 @@ interface PaywallProps {
   nome?: string;
   profile: Profile;
   onProfileChange: (profile: Profile) => Promise<void>;
+  diasTestados?: number;
 }
 
-export function Paywall({ userId, email, nome, profile, onProfileChange }: PaywallProps) {
+export function Paywall({ userId, email, nome, profile, onProfileChange, diasTestados = 3 }: PaywallProps) {
   const [periodo, setPeriodo] = useState<"mensal" | "anual">("anual");
   const [loading, setLoading] = useState(false);
 
@@ -25,8 +26,8 @@ export function Paywall({ userId, email, nome, profile, onProfileChange }: Paywa
 
   const legal =
     periodo === "anual"
-      ? "Nenhuma cobrança nos primeiros 3 dias. Depois, R$ 79,90/ano. Cancele quando quiser."
-      : "Nenhuma cobrança nos primeiros 3 dias. Depois, R$ 9,90 por mês. Cancele quando quiser.";
+      ? "R$ 79,90 cobrado anualmente. Cancele quando quiser."
+      : "R$ 9,90 por mês. Cancele quando quiser.";
 
   const updateField = (field: keyof Profile, value: string) => {
     void onProfileChange({ ...profile, [field]: value });
@@ -84,18 +85,13 @@ export function Paywall({ userId, email, nome, profile, onProfileChange }: Paywa
   return (
     <div className="min-h-screen bg-background px-5 py-8 flex justify-center">
       <div className="w-full max-w-[420px] flex flex-col">
-        <div className="flex justify-center mb-5">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-bold">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            3 dias de teste grátis
-          </span>
-        </div>
-
+        <div className="flex justify-center mb-5 text-5xl">🔒</div>
         <h1 className="text-3xl font-black tracking-tight text-center leading-tight mb-2">
-          Complete seu álbum mais rápido.
+          Seu teste grátis acabou.
         </h1>
         <p className="text-center text-muted-foreground text-sm mb-6">
-          Acesso completo. Cancele quando quiser.
+          Você marcou suas figurinhas por {diasTestados} dias.<br />
+          Continue de onde parou — seus dados estão salvos.
         </p>
 
         <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-secondary mb-5">
@@ -130,6 +126,22 @@ export function Paywall({ userId, email, nome, profile, onProfileChange }: Paywa
           )}
         </div>
 
+        <ul className="mb-6 space-y-2 text-sm">
+          {[
+            "Suas figurinhas já marcadas continuam salvas",
+            "Match de trocas sem limite",
+            "Mapa de pontos de troca",
+            "Até 4 perfis — família toda usa",
+            "Sem propagandas",
+            "Backup automático",
+          ].map((b) => (
+            <li key={b} className="flex items-start gap-2">
+              <Check className="h-4 w-4 mt-0.5 text-primary shrink-0" />
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
         <div className="rounded-2xl border border-border bg-card p-5 mb-6 space-y-3">
           <h2 className="text-sm font-bold">Dados para cobrança</h2>
           <div className="grid grid-cols-1 gap-3">
@@ -157,7 +169,7 @@ export function Paywall({ userId, email, nome, profile, onProfileChange }: Paywa
           {loading ? (
             <Loader2 className="h-5 w-5 animate-spin" />
           ) : (
-            "Começar teste grátis de 3 dias"
+            "Continuar usando — assinar agora"
           )}
         </Button>
 

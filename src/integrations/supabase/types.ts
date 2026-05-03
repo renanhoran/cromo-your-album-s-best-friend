@@ -34,6 +34,7 @@ export type Database = {
           postal_code: string | null
           premium_ate: string | null
           province: string | null
+          teste_iniciado_em: string
         }
         Insert: {
           address?: string | null
@@ -54,6 +55,7 @@ export type Database = {
           postal_code?: string | null
           premium_ate?: string | null
           province?: string | null
+          teste_iniciado_em?: string
         }
         Update: {
           address?: string | null
@@ -74,6 +76,7 @@ export type Database = {
           postal_code?: string | null
           premium_ate?: string | null
           province?: string | null
+          teste_iniciado_em?: string
         }
         Relationships: []
       }
