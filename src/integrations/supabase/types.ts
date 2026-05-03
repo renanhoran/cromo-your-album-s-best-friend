@@ -34,6 +34,8 @@ export type Database = {
           plano: string | null
           postal_code: string | null
           province: string | null
+          stripe_customer_id: string | null
+          stripe_session_id: string | null
           teste_iniciado_em: string
         }
         Insert: {
@@ -55,6 +57,8 @@ export type Database = {
           plano?: string | null
           postal_code?: string | null
           province?: string | null
+          stripe_customer_id?: string | null
+          stripe_session_id?: string | null
           teste_iniciado_em?: string
         }
         Update: {
@@ -76,6 +80,8 @@ export type Database = {
           plano?: string | null
           postal_code?: string | null
           province?: string | null
+          stripe_customer_id?: string | null
+          stripe_session_id?: string | null
           teste_iniciado_em?: string
         }
         Relationships: []
