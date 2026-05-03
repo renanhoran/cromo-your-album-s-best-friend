@@ -89,7 +89,7 @@ const Index = () => {
           setHorasRestantes(horas);
           setAcesso(msRestantes <= 0 ? "bloqueado" : "livre");
         }
-        setShowOnboard(!(prof as any).onboarding_concluido);
+        setShowOnboard(!prof.is_premium && !(prof as any).onboarding_concluido);
       } else {
         const initial = {
           id: user.id,
