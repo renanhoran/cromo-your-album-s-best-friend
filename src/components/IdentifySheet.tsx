@@ -11,9 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Check, X, HelpCircle, Loader2 } from "lucide-react";
 
 export interface IdentifyResult {
-  numero: string | null;
+  sobrenome: string | null;
   nome: string | null;
-  selecao: string | null;
+  nome_completo: string | null;
+  sigla_selecao: string | null;
+  numero: string | null;
+  tipo: "jogador" | "escudo" | "foto_time" | "especial" | null;
   confianca: "alta" | "media" | "baixa";
 }
 
@@ -54,8 +57,8 @@ export function IdentifySheet({
               </div>
               <DialogTitle className="text-center">Não encontrada</DialogTitle>
               <DialogDescription className="text-center">
-                {result.nome ? (
-                  <>Identificamos: <strong>{result.nome}</strong></>
+                {result.nome_completo || result.sobrenome ? (
+                  <>Identificamos: <strong>{result.nome_completo ?? result.sobrenome}</strong></>
                 ) : (
                   "Não conseguimos identificar com clareza."
                 )}
