@@ -54,11 +54,13 @@ const Index = () => {
 
   // Load profile & stickers when user changes
   const loadedUserId = useRef<string | null>(null);
+  const onboardingSetRef = useRef(false);
   useEffect(() => {
     if (!user) {
       setCounts({});
       setAcesso("carregando");
       loadedUserId.current = null;
+      onboardingSetRef.current = false;
       return;
     }
     if (loadedUserId.current === user.id) return;
@@ -93,13 +95,19 @@ const Index = () => {
           setHorasRestantes(horas);
           setAcesso(msRestantes <= 0 ? "bloqueado" : "livre");
         }
-        setShowOnboard(!prof.is_premium && !(prof as any).onboarding_concluido);
+        if (!onboardingSetRef.current) {
+          const jaViu = (prof as any).onboarding_concluido === true;
+          setShowOnboard(!jaViu && !prof.is_premium);
+          onboardingSetRef.current = true;
+        }
       } else {
         const initial = {
           id: user.id,
           nome: user.user_metadata?.full_name ?? user.email?.split("@")[0] ?? "",
           cidade: "",
           avatar: "⚽",
+          onboarding_concluido: false,
+          teste_iniciado_em: new Date().toISOString(),
         };
         await supabase.from("profiles").insert(initial);
         setProfile({
@@ -113,6 +121,7 @@ const Index = () => {
         setDiasRestantes(3);
         setHorasRestantes(72);
         setShowOnboard(true);
+        onboardingSetRef.current = true;
       }
 
       const { data: stickers } = await supabase
@@ -183,13 +192,14 @@ const Index = () => {
   if (showOnboard) {
     return (
       <Onboarding
-        onDone={() => {
+        onDone={async () => {
           setShowOnboard(false);
           if (user) {
-            supabase
+            const { error } = await supabase
               .from("profiles")
               .update({ onboarding_concluido: true })
               .eq("id", user.id);
+            if (error) console.error("Erro ao salvar onboarding:", error);
           }
         }}
       />
