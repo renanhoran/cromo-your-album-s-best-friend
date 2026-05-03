@@ -1,11 +1,55 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { STICKERS } from "@/data/stickers";
-import { MOCK_USERS, StickerCounts } from "@/lib/storage";
+import { StickerCounts } from "@/lib/storage";
+import { supabase } from "@/integrations/supabase/client";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export function TradesView({ counts, isPremium = false }: { counts: StickerCounts; isPremium?: boolean }) {
+  const [realUsers, setRealUsers] = useState<
+    { id: string; nome: string; cidade: string; avatar: string; counts: StickerCounts }[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        const [{ data: profiles }, { data: stickers }] = await Promise.all([
+          supabase.rpc("get_public_profiles"),
+          supabase.from("user_stickers").select("user_id, sticker_id, count"),
+        ]);
+        if (cancelled) return;
+        const byUser = new Map<string, StickerCounts>();
+        (stickers ?? []).forEach((row: any) => {
+          if (user && row.user_id === user.id) return;
+          if (!byUser.has(row.user_id)) byUser.set(row.user_id, {});
+          byUser.get(row.user_id)![row.sticker_id] = row.count ?? 0;
+        });
+        const list = (profiles ?? [])
+          .filter((p: any) => byUser.has(p.id))
+          .map((p: any) => ({
+            id: p.id,
+            nome: p.nome || "Colecionador",
+            cidade: p.cidade || "",
+            avatar: p.avatar || "⚽",
+            counts: byUser.get(p.id) || {},
+          }));
+        setRealUsers(list);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const matches = useMemo(() => {
     const stickerById = new Map(STICKERS.map((s) => [s.id, s]));
     const myMissing = STICKERS.filter((s) => (counts[s.id] ?? 0) === 0).map((s) => s.id);
@@ -13,7 +57,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     const missingSet = new Set(myMissing);
     const dupeSet = new Set(myDupes);
 
-    return MOCK_USERS.map((u) => {
+    return realUsers.map((u) => {
       const theyHaveForMe: string[] = [];
       const iHaveForThem: string[] = [];
       missingSet.forEach((id) => {
@@ -27,7 +71,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     })
       .filter((m) => m.score > 0)
       .sort((a, b) => b.score - a.score);
-  }, [counts]);
+  }, [counts, realUsers]);
 
   const totalPossible = matches.reduce((acc, m) => acc + m.score, 0);
   const [open, setOpen] = useState<string | null>(null);
@@ -88,19 +132,17 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
 
         {!isPremium && <AdBanner slot="" />}
 
-        <div className="rounded-2xl border border-dashed border-border p-4 text-center">
-          <div className="text-2xl mb-1">📍</div>
-          <p className="font-bold text-sm">Usuários reais próximos</p>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Em breve — convide amigos para o Mania de Álbum!
-          </p>
-        </div>
+        {loading && (
+          <div className="text-center py-10 text-muted-foreground text-sm">
+            Buscando colecionadores…
+          </div>
+        )}
 
-        {matches.length === 0 && (
+        {!loading && matches.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-2">🤝</div>
             <p className="font-semibold text-foreground">Sem matches ainda</p>
-            <p className="text-sm">Marque suas figurinhas tenho/repetidas para encontrar trocas.</p>
+            <p className="text-sm">Marque suas figurinhas tenho/repetidas para encontrar trocas com outros colecionadores.</p>
           </div>
         )}
 

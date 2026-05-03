@@ -166,7 +166,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_public_profiles: {
+        Args: never
+        Returns: {
+          avatar: string
+          cidade: string
+          id: string
+          nome: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
