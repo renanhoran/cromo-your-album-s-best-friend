@@ -126,7 +126,7 @@ const Index = () => {
   const handleTap = async (id: string) => {
     if (!user) return;
     const c = counts[id] ?? 0;
-    const next = c === 0 ? 1 : c === 1 ? 2 : 0;
+    const next = c >= 9 ? 0 : c + 1;
     setCounts((prev) => {
       const u = { ...prev };
       if (next === 0) delete u[id];
