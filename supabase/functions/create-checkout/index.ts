@@ -41,6 +41,7 @@ Deno.serve(async (req) => {
     const cleanAddressNumber = String(address_number ?? "").trim();
     const cleanComplement = String(address_complement ?? "").trim();
     const cleanProvince = String(province ?? "").trim();
+    const cleanCity = String((await req.clone().json().catch(() => ({})))?.city ?? "").trim();
 
     if (!cleanCpfCnpj || !cleanPhone || !cleanAddress || !cleanAddressNumber || !cleanPostalCode || !cleanProvince) {
       return new Response(JSON.stringify({ error: "Dados de cobrança incompletos" }), {
@@ -71,13 +72,13 @@ Deno.serve(async (req) => {
       name: nome || email,
       email,
       cpfCnpj: cleanCpfCnpj,
-      phone: cleanPhone,
-      mobilePhone: cleanPhone,
+      ...(cleanPhone.length >= 10 ? { mobilePhone: cleanPhone } : {}),
       address: cleanAddress,
       addressNumber: cleanAddressNumber,
       complement: cleanComplement || undefined,
       postalCode: cleanPostalCode,
       province: cleanProvince,
+      cityName: cleanCity || undefined,
       externalReference: user_id,
       notificationDisabled: false,
     };
