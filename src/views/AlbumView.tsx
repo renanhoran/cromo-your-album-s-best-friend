@@ -312,8 +312,20 @@ export function AlbumView({
                 linhas.join("\n") +
                 `\n\nTroca comigo? 🤝` +
                 assinatura;
-              const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
-              window.open(url, "_blank");
+              const encoded = encodeURIComponent(texto);
+              // Tenta abrir o app nativo (mobile); se falhar, abre wa.me (web)
+              const isMobile =
+                /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+              const url = isMobile
+                ? `whatsapp://send?text=${encoded}`
+                : `https://wa.me/?text=${encoded}`;
+              window.location.href = url;
+              // Fallback: se o app não abrir em ~1.2s, abre o web
+              if (isMobile) {
+                setTimeout(() => {
+                  window.open(`https://wa.me/?text=${encoded}`, "_blank");
+                }, 1200);
+              }
             }}
             className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
           >
