@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { lovable } from "@/integrations/lovable";
 import { toast } from "sonner";
+import logoLight from "@/assets/logo-light.png";
+import logoDark from "@/assets/logo-dark.png";
 
 export function Login() {
   const handleGoogle = async () => {
@@ -15,13 +17,16 @@ export function Login() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 bg-background">
       <div className="max-w-md w-full text-center">
-        <div
-          className="mx-auto mb-6 h-24 w-24 rounded-[28px] flex items-center justify-center text-5xl shadow-[var(--shadow-pop)]"
-          style={{ background: "var(--gradient-primary)" }}
-        >
-          ⚽️
-        </div>
-        <h1 className="text-4xl font-black tracking-tight mb-2">CROMO</h1>
+        <img
+          src={logoLight}
+          alt="Mania de Álbum"
+          className="mx-auto mb-6 max-h-24 w-auto dark:hidden"
+        />
+        <img
+          src={logoDark}
+          alt="Mania de Álbum"
+          className="mx-auto mb-6 max-h-24 w-auto hidden dark:block"
+        />
         <p className="text-muted-foreground mb-10 max-w-xs mx-auto">
           Complete seu álbum da Copa 2026 mais rápido. Encontre trocas em segundos.
         </p>
