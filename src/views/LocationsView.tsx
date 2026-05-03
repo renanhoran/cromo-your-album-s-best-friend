@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Plus, MapPin, Calendar, Clock, Store } from "lucide-react";
+import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -23,7 +24,7 @@ interface Location {
   created_by: string | null;
 }
 
-export function LocationsView({ userId, userCity }: { userId: string; userCity: string }) {
+export function LocationsView({ userId, userCity, isPremium = false }: { userId: string; userCity: string; isPremium?: boolean }) {
   const [filter, setFilter] = useState<Filter>("ponto_fixo");
   const [locations, setLocations] = useState<Location[]>([]);
   const [open, setOpen] = useState(false);
@@ -114,8 +115,11 @@ export function LocationsView({ userId, userCity }: { userId: string; userCity: 
             <p className="text-sm">{filter === "evento" ? "Crie o primeiro evento!" : "Em breve mais pontos."}</p>
           </div>
         )}
-        {filtered.map((l) => (
-          <LocationCard key={l.id} loc={l} />
+        {filtered.map((l, index) => (
+          <div key={l.id}>
+            <LocationCard loc={l} />
+            {!isPremium && index === 2 && <div className="mt-3"><AdBanner slot="" /></div>}
+          </div>
         ))}
       </div>
 
