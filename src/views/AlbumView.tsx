@@ -313,6 +313,7 @@ export function AlbumView({
                   sticker={s}
                   count={counts[s.id] ?? 0}
                   onClick={() => onTap(s.id)}
+                  onClear={onSetCount ? () => onSetCount(s.id, 0) : undefined}
                 />
               ))}
             </div>

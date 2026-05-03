@@ -7,9 +7,10 @@ interface Props {
   sticker: StickerT;
   count: number;
   onClick: () => void;
+  onClear?: () => void;
 }
 
-export function StickerCard({ sticker, count, onClick }: Props) {
+export function StickerCard({ sticker, count, onClick, onClear }: Props) {
   const state = count === 0 ? "missing" : count === 1 ? "have" : "dupe";
   const initials = sticker.sigla_selecao;
   const isEspecial = sticker.tipo === "especial";
@@ -67,6 +68,18 @@ export function StickerCard({ sticker, count, onClick }: Props) {
           {isEscudo ? sticker.selecao : sticker.nome}
         </div>
       </div>
+      {count > 0 && onClear && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClear();
+          }}
+          aria-label="Zerar figurinha"
+          className="absolute top-1 left-1 z-10 w-5 h-5 rounded-full bg-black/50 text-white text-[11px] font-bold flex items-center justify-center"
+        >
+          ×
+        </button>
+      )}
       {count > 1 && (
         <span className="absolute top-1.5 right-1.5 bg-background/95 text-[hsl(var(--sticker-dupe))] text-[11px] font-black rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center shadow-sm">
           ×{count}
