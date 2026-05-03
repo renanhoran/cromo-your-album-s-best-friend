@@ -15,9 +15,11 @@ if ("serviceWorker" in navigator) {
   const inIframe = (() => {
     try { return window.self !== window.top; } catch { return true; }
   })();
+  // Only the editor preview iframe blocks SW — published domains
+  // (*.lovable.app sem o prefixo id-preview--, custom domains) devem registrar.
   const isPreviewHost =
     location.hostname.includes("lovableproject.com") ||
-    location.hostname.includes("lovable.app");
+    location.hostname.startsWith("id-preview--");
   if (!inIframe && !isPreviewHost) {
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("/sw.js").catch(() => {});
