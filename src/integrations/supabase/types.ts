@@ -16,40 +16,64 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          address: string | null
+          address_complement: string | null
+          address_number: string | null
           asaas_customer_id: string | null
           asaas_subscription_id: string | null
           avatar: string | null
           cidade: string | null
+          city: string | null
+          cpf_cnpj: string | null
           created_at: string | null
           id: string
           is_premium: boolean | null
           nome: string | null
           periodo_assinatura: string | null
+          phone: string | null
+          postal_code: string | null
           premium_ate: string | null
+          province: string | null
         }
         Insert: {
+          address?: string | null
+          address_complement?: string | null
+          address_number?: string | null
           asaas_customer_id?: string | null
           asaas_subscription_id?: string | null
           avatar?: string | null
           cidade?: string | null
+          city?: string | null
+          cpf_cnpj?: string | null
           created_at?: string | null
           id: string
           is_premium?: boolean | null
           nome?: string | null
           periodo_assinatura?: string | null
+          phone?: string | null
+          postal_code?: string | null
           premium_ate?: string | null
+          province?: string | null
         }
         Update: {
+          address?: string | null
+          address_complement?: string | null
+          address_number?: string | null
           asaas_customer_id?: string | null
           asaas_subscription_id?: string | null
           avatar?: string | null
           cidade?: string | null
+          city?: string | null
+          cpf_cnpj?: string | null
           created_at?: string | null
           id?: string
           is_premium?: boolean | null
           nome?: string | null
           periodo_assinatura?: string | null
+          phone?: string | null
+          postal_code?: string | null
           premium_ate?: string | null
+          province?: string | null
         }
         Relationships: []
       }

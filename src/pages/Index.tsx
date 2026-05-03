@@ -17,6 +17,14 @@ export interface Profile {
   nome: string;
   cidade: string;
   avatar: string;
+  cpf_cnpj?: string;
+  phone?: string;
+  address?: string;
+  address_number?: string;
+  address_complement?: string;
+  postal_code?: string;
+  province?: string;
+  city?: string;
 }
 
 const Index = () => {
@@ -28,7 +36,19 @@ const Index = () => {
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
-  const [profile, setProfile] = useState<Profile>({ nome: "", cidade: "", avatar: "⚽" });
+  const [profile, setProfile] = useState<Profile>({
+    nome: "",
+    cidade: "",
+    avatar: "⚽",
+    cpf_cnpj: "",
+    phone: "",
+    address: "",
+    address_number: "",
+    address_complement: "",
+    postal_code: "",
+    province: "",
+    city: "",
+  });
 
   // Auth listener (set up before getSession)
   useEffect(() => {
@@ -60,7 +80,19 @@ const Index = () => {
         .eq("id", user.id)
         .maybeSingle();
       if (prof) {
-        setProfile({ nome: prof.nome ?? "", cidade: prof.cidade ?? "", avatar: prof.avatar ?? "⚽" });
+        setProfile({
+          nome: prof.nome ?? "",
+          cidade: prof.cidade ?? "",
+          avatar: prof.avatar ?? "⚽",
+          cpf_cnpj: prof.cpf_cnpj ?? "",
+          phone: prof.phone ?? "",
+          address: prof.address ?? "",
+          address_number: prof.address_number ?? "",
+          address_complement: prof.address_complement ?? "",
+          postal_code: prof.postal_code ?? "",
+          province: prof.province ?? "",
+          city: prof.city ?? "",
+        });
         const ativo =
           !!prof.is_premium && !!prof.premium_ate && new Date(prof.premium_ate) > new Date();
         setIsPremium(ativo);
@@ -70,9 +102,29 @@ const Index = () => {
           nome: user.user_metadata?.full_name ?? user.email?.split("@")[0] ?? "",
           cidade: "",
           avatar: "⚽",
+          cpf_cnpj: "",
+          phone: "",
+          address: "",
+          address_number: "",
+          address_complement: "",
+          postal_code: "",
+          province: "",
+          city: "",
         };
         await supabase.from("profiles").insert(initial);
-        setProfile({ nome: initial.nome, cidade: initial.cidade, avatar: initial.avatar });
+        setProfile({
+          nome: initial.nome,
+          cidade: initial.cidade,
+          avatar: initial.avatar,
+          cpf_cnpj: initial.cpf_cnpj,
+          phone: initial.phone,
+          address: initial.address,
+          address_number: initial.address_number,
+          address_complement: initial.address_complement,
+          postal_code: initial.postal_code,
+          province: initial.province,
+          city: initial.city,
+        });
         setIsPremium(false);
       }
       setPremiumChecked(true);
@@ -139,6 +191,8 @@ const Index = () => {
         userId={user.id}
         email={user.email ?? ""}
         nome={profile.nome}
+        profile={profile}
+        onProfileChange={updateProfile}
       />
     );
   }
