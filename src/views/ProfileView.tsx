@@ -139,7 +139,7 @@ export function ProfileView({
           </div>
         )}
 
-        <AdBanner />
+        {plano === "teste" && <AdBanner />}
 
         <Button variant="outline" className="w-full h-12" onClick={onLogout}>
           Sair
