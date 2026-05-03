@@ -10,6 +10,7 @@ import { getFlagUrl } from "@/data/flags";
 import { IdentifySheet, IdentifyResult } from "@/components/IdentifySheet";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import type { Profile } from "@/pages/Index";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 
@@ -26,12 +27,14 @@ export function AlbumView({
   onSetCount,
   isPremium = false,
   temCamera = true,
+  profile,
 }: {
   counts: StickerCounts;
   onTap: (id: string) => void;
   onSetCount?: (id: string, next: number) => void;
   isPremium?: boolean;
   temCamera?: boolean;
+  profile?: Profile;
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
   const [query, setQuery] = useState("");
@@ -289,15 +292,26 @@ export function AlbumView({
         {filter === "repetidas" && filtered.length > 0 && (
           <button
             onClick={() => {
+              const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
+              if (!phoneRaw || phoneRaw.length < 10) {
+                toast.error(
+                  "Cadastre seu WhatsApp no Perfil para compartilhar suas repetidas."
+                );
+                return;
+              }
               const linhas = filtered.map((s) => {
                 const c = counts[s.id] ?? 0;
                 const extras = Math.max(0, c - 1);
                 return `• ${s.sigla_selecao} #${s.id} ${s.nome}${extras > 1 ? ` (×${extras})` : ""}`;
               });
+              const assinatura = profile?.nome
+                ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
+                : `\n\nWhatsApp: ${phoneRaw}`;
               const texto =
                 `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
                 linhas.join("\n") +
-                `\n\nTroca comigo? 🤝`;
+                `\n\nTroca comigo? 🤝` +
+                assinatura;
               const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
               window.open(url, "_blank");
             }}
