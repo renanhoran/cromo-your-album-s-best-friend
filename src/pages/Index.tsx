@@ -28,6 +28,7 @@ const Index = () => {
   const [acesso, setAcesso] = useState<"carregando" | "livre" | "bloqueado">("carregando");
   const [diasRestantes, setDiasRestantes] = useState<number>(3);
   const [isPremium, setIsPremium] = useState(false);
+  const [plano, setPlano] = useState<"teste" | "basico" | "completo">("teste");
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
@@ -73,10 +74,12 @@ const Index = () => {
         });
         if (prof.is_premium) {
           setIsPremium(true);
+          setPlano(((prof as any).plano as "basico" | "completo") ?? "completo");
           setAcesso("livre");
           setDiasRestantes(0);
         } else {
           setIsPremium(false);
+          setPlano("teste");
           const iniciou = new Date((prof as any).teste_iniciado_em ?? prof.created_at ?? Date.now());
           const diffMs = Date.now() - iniciou.getTime();
           const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -98,6 +101,7 @@ const Index = () => {
           avatar: initial.avatar,
         });
         setIsPremium(false);
+        setPlano("teste");
         setAcesso("livre");
         setDiasRestantes(3);
       }
@@ -215,7 +219,7 @@ const Index = () => {
               onClick={() => setAcesso("bloqueado")}
               className="text-xs text-primary font-semibold underline"
             >
-              Liberar por R$ 19,90
+              Ver planos
             </button>
           </div>
         )}
@@ -226,6 +230,7 @@ const Index = () => {
           onTap={handleTap}
           onSetCount={handleSetCount}
           isPremium={isPremium}
+          temCamera={plano === "teste" || plano === "completo"}
         />
       )}
       {tab === "trocas" && <TradesView counts={counts} isPremium={isPremium} />}
@@ -236,6 +241,8 @@ const Index = () => {
           profile={profile}
           setProfile={updateProfile}
           email={user.email ?? ""}
+          plano={plano}
+          userId={user.id}
           onLogout={async () => {
             await supabase.auth.signOut();
             setAcesso("carregando");

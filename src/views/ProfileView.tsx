@@ -5,20 +5,26 @@ import type { Profile } from "@/pages/Index";
 import { AdBanner } from "@/components/AdBanner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Camera, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export function ProfileView({
   counts,
   profile,
   setProfile,
   email,
+  plano = "teste",
+  userId,
   onLogout,
 }: {
   counts: StickerCounts;
   profile: Profile;
   setProfile: (p: Profile) => void;
   email: string;
+  plano?: "teste" | "basico" | "completo";
+  userId?: string;
   onLogout: () => void;
 }) {
   const stats = useMemo(() => {
@@ -40,6 +46,25 @@ export function ProfileView({
   const [isDark, setIsDark] = useState(
     typeof document !== "undefined" && document.documentElement.classList.contains("dark")
   );
+  const [upgrading, setUpgrading] = useState(false);
+
+  const handleUpgrade = async () => {
+    if (!userId) return;
+    setUpgrading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: { user_id: userId, email, nome: profile.nome, plano: "upgrade" },
+      });
+      if (error) throw error;
+      if (data?.url) window.location.href = data.url;
+      else throw new Error("URL de checkout não recebida");
+    } catch (e) {
+      console.error(e);
+      toast.error("Não foi possível iniciar o upgrade.");
+      setUpgrading(false);
+    }
+  };
+
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
     localStorage.setItem("cromo:theme", isDark ? "dark" : "light");
@@ -94,7 +119,27 @@ export function ProfileView({
           </div>
         </div>
 
-        <AdBanner />
+        {plano === "basico" && (
+          <div className="rounded-2xl border-2 p-4" style={{ borderColor: "#1DB954" }}>
+            <div className="flex items-center gap-2 mb-1">
+              <Camera className="h-4 w-4" style={{ color: "#1DB954" }} />
+              <h3 className="font-black text-sm">Quer a câmera IA?</h3>
+            </div>
+            <p className="text-xs text-muted-foreground mb-3">
+              Faça upgrade para o Plano Completo por apenas R$ 20,00 e identifique figurinhas pela câmera.
+            </p>
+            <Button
+              onClick={handleUpgrade}
+              disabled={upgrading}
+              className="w-full h-11 text-sm font-bold rounded-xl"
+              style={{ backgroundColor: "#1DB954", color: "#000" }}
+            >
+              {upgrading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Adicionar câmera por R$ 20,00"}
+            </Button>
+          </div>
+        )}
+
+        {plano === "teste" && <AdBanner />}
 
         <Button variant="outline" className="w-full h-12" onClick={onLogout}>
           Sair

@@ -70,6 +70,7 @@ Deno.serve(async (req) => {
       .from("profiles")
       .update({
         is_premium: true,
+        plano: payment.value > 30 || payment.value === 20 ? "completo" : "basico",
         asaas_payment_id: payment.id,
         asaas_customer_id: payment.customer,
       })

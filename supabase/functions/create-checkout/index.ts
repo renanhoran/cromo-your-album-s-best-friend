@@ -14,7 +14,7 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
-    const { user_id, email, nome } = await req.json();
+    const { user_id, email, nome, plano } = await req.json();
 
     if (!user_id || !email) {
       return new Response(JSON.stringify({ error: "Parâmetros inválidos" }), {
@@ -22,6 +22,27 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    const planos: Record<string, { valor: number; nome: string; descricao: string }> = {
+      basico: {
+        valor: 29.9,
+        nome: "Mania de Álbum — Plano Básico",
+        descricao: "Acesso completo permanente sem câmera IA.",
+      },
+      completo: {
+        valor: 49.9,
+        nome: "Mania de Álbum — Plano Completo",
+        descricao: "Acesso completo permanente com câmera IA ilimitada.",
+      },
+      upgrade: {
+        valor: 20.0,
+        nome: "Mania de Álbum — Upgrade Câmera IA",
+        descricao: "Upgrade do Básico para o Completo. Adiciona câmera IA.",
+      },
+    };
+
+    const planoKey = (plano as string) in planos ? (plano as string) : "completo";
+    const planoEscolhido = planos[planoKey];
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -72,17 +93,17 @@ Deno.serve(async (req) => {
         chargeTypes: ["DETACHED"],
         minutesToExpire: 30,
         callback: {
-          successUrl: `${APP_URL}/sucesso`,
+          successUrl: `${APP_URL}/sucesso?plano=${planoKey}`,
           cancelUrl: `${APP_URL}/`,
           expiredUrl: `${APP_URL}/`,
         },
         customer: customerId,
         items: [
           {
-            name: "Mania de Álbum — Acesso Completo",
-            description: "Acesso completo permanente. Pague uma vez, use sempre.",
+            name: planoEscolhido.nome,
+            description: planoEscolhido.descricao,
             quantity: 1,
-            value: 19.9,
+            value: planoEscolhido.valor,
           },
         ],
       }),

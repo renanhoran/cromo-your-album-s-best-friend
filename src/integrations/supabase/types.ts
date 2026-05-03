@@ -30,6 +30,7 @@ export type Database = {
           is_premium: boolean | null
           nome: string | null
           phone: string | null
+          plano: string | null
           postal_code: string | null
           province: string | null
           teste_iniciado_em: string
@@ -49,6 +50,7 @@ export type Database = {
           is_premium?: boolean | null
           nome?: string | null
           phone?: string | null
+          plano?: string | null
           postal_code?: string | null
           province?: string | null
           teste_iniciado_em?: string
@@ -68,6 +70,7 @@ export type Database = {
           is_premium?: boolean | null
           nome?: string | null
           phone?: string | null
+          plano?: string | null
           postal_code?: string | null
           province?: string | null
           teste_iniciado_em?: string

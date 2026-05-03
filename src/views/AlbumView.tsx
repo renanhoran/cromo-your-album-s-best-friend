@@ -25,11 +25,13 @@ export function AlbumView({
   onTap,
   onSetCount,
   isPremium = false,
+  temCamera = true,
 }: {
   counts: StickerCounts;
   onTap: (id: string) => void;
   onSetCount?: (id: string, next: number) => void;
   isPremium?: boolean;
+  temCamera?: boolean;
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
   const [query, setQuery] = useState("");
@@ -325,7 +327,7 @@ export function AlbumView({
 
       </div>
 
-      {isMobile && (
+      {isMobile && temCamera && (
         <>
           <label
             htmlFor="camera-input"
