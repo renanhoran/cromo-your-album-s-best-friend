@@ -5,7 +5,7 @@ import { StickerCounts } from "@/lib/storage";
 import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
-import { Search, X, Camera } from "lucide-react";
+import { Search, X, Camera, Share2 } from "lucide-react";
 import { getFlagUrl } from "@/data/flags";
 import { IdentifySheet, IdentifyResult } from "@/components/IdentifySheet";
 import { supabase } from "@/integrations/supabase/client";
@@ -286,6 +286,27 @@ export function AlbumView({
         <div className="rounded-xl bg-primary/10 border border-primary/30 px-3 py-2.5 text-center text-xs font-semibold text-primary">
           1 toque: tenho ✓ · +toques: repetidas (×2 a ×9) · 10º toque ou × zera
         </div>
+        {filter === "repetidas" && filtered.length > 0 && (
+          <button
+            onClick={() => {
+              const linhas = filtered.map((s) => {
+                const c = counts[s.id] ?? 0;
+                const extras = Math.max(0, c - 1);
+                return `• ${s.sigla_selecao} #${s.id} ${s.nome}${extras > 1 ? ` (×${extras})` : ""}`;
+              });
+              const texto =
+                `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
+                linhas.join("\n") +
+                `\n\nTroca comigo? 🤝`;
+              const url = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+              window.open(url, "_blank");
+            }}
+            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
+          >
+            <Share2 className="h-4 w-4" />
+            Compartilhar repetidas no WhatsApp
+          </button>
+        )}
         {grouped.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-2">🎯</div>
