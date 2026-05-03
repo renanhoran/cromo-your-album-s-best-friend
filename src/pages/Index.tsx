@@ -31,8 +31,8 @@ const Index = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isPremium, setIsPremium] = useState(false);
-  const [premiumChecked, setPremiumChecked] = useState(false);
+  const [acesso, setAcesso] = useState<"carregando" | "livre" | "bloqueado">("carregando");
+  const [diasRestantes, setDiasRestantes] = useState<number>(3);
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
@@ -69,8 +69,7 @@ const Index = () => {
   useEffect(() => {
     if (!user) {
       setCounts({});
-      setIsPremium(false);
-      setPremiumChecked(false);
+      setAcesso("carregando");
       return;
     }
     (async () => {
@@ -93,9 +92,19 @@ const Index = () => {
           province: prof.province ?? "",
           city: prof.city ?? "",
         });
-        const ativo =
+        const premiumAtivo =
           !!prof.is_premium && !!prof.premium_ate && new Date(prof.premium_ate) > new Date();
-        setIsPremium(ativo);
+        if (premiumAtivo) {
+          setAcesso("livre");
+          setDiasRestantes(0);
+        } else {
+          const iniciou = new Date((prof as any).teste_iniciado_em ?? prof.created_at ?? Date.now());
+          const diffMs = Date.now() - iniciou.getTime();
+          const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+          const restantes = Math.max(0, 3 - diffDias);
+          setDiasRestantes(restantes);
+          setAcesso(diffDias >= 3 ? "bloqueado" : "livre");
+        }
       } else {
         const initial = {
           id: user.id,
@@ -125,9 +134,9 @@ const Index = () => {
           province: initial.province,
           city: initial.city,
         });
-        setIsPremium(false);
+        setAcesso("livre");
+        setDiasRestantes(3);
       }
-      setPremiumChecked(true);
 
       const { data: stickers } = await supabase
         .from("user_stickers")
@@ -166,7 +175,7 @@ const Index = () => {
     await supabase.from("profiles").upsert({ id: user.id, ...p });
   };
 
-  if (loading || (user && !premiumChecked)) {
+  if (loading || (user && acesso === "carregando")) {
     return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
   }
 
@@ -185,7 +194,7 @@ const Index = () => {
     );
   }
 
-  if (!isPremium) {
+  if (acesso === "bloqueado") {
     return (
       <Paywall
         userId={user.id}
@@ -193,6 +202,7 @@ const Index = () => {
         nome={profile.nome}
         profile={profile}
         onProfileChange={updateProfile}
+        diasTestados={3}
       />
     );
   }
@@ -212,6 +222,21 @@ const Index = () => {
             {profile.avatar || (profile.nome?.[0] ?? user.email?.[0] ?? "?").toUpperCase()}
           </button>
         </div>
+        {diasRestantes > 0 && diasRestantes <= 3 && tab !== "perfil" && (
+          <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 flex items-center justify-between">
+            <span className="text-xs font-medium text-primary">
+              {diasRestantes === 1
+                ? "Último dia de teste grátis"
+                : `${diasRestantes} dias de teste grátis restantes`}
+            </span>
+            <button
+              onClick={() => setAcesso("bloqueado")}
+              className="text-xs text-primary font-semibold underline"
+            >
+              Assinar agora
+            </button>
+          </div>
+        )}
       </header>
       {tab === "album" && <AlbumView counts={counts} onTap={handleTap} />}
       {tab === "trocas" && <TradesView counts={counts} />}
@@ -224,7 +249,7 @@ const Index = () => {
           email={user.email ?? ""}
           onLogout={async () => {
             await supabase.auth.signOut();
-            setIsPremium(false);
+            setAcesso("carregando");
           }}
         />
       )}
