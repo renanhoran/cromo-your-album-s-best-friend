@@ -5,7 +5,7 @@ import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { Search, X } from "lucide-react";
-import { flagFromSigla } from "@/lib/flags";
+import { getFlagUrl } from "@/data/flags";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 
@@ -152,11 +152,14 @@ export function AlbumView({
         {grouped.map(([selecao, items]) => (
           <section key={selecao}>
             <div className="flex items-baseline justify-between mb-2 px-0.5">
-              <h2 className="text-sm font-black uppercase tracking-wider flex items-center gap-1.5">
-                {flagFromSigla(items[0]?.sigla_selecao ?? "") && (
-                  <span aria-hidden className="text-base leading-none">
-                    {flagFromSigla(items[0].sigla_selecao)}
-                  </span>
+              <h2 className="text-sm font-black uppercase tracking-wider flex items-center gap-2">
+                {getFlagUrl(items[0]?.sigla_selecao ?? "", 40) && (
+                  <img
+                    src={getFlagUrl(items[0].sigla_selecao, 40)!}
+                    alt={selecao}
+                    loading="lazy"
+                    className="w-6 h-4 object-cover rounded-sm shadow-sm"
+                  />
                 )}
                 {selecao}
               </h2>
