@@ -40,8 +40,8 @@ export function Login() {
           Continuar com Google
         </Button>
         <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
-          3 dias grátis, sem precisar colocar cartão.<br />
-          Só pedimos o pagamento se você quiser continuar.
+          3 dias grátis com tudo incluso — sem precisar colocar cartão.<br />
+          Depois, escolha o plano que faz mais sentido pra você.
         </p>
         <p className="mt-6 text-xs text-muted-foreground">Ao continuar você concorda com os termos do app.</p>
       </div>
