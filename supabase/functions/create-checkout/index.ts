@@ -5,10 +5,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const ASAAS_URL = "https://sandbox.asaas.com/api/v3";
 const ASAAS_KEY = Deno.env.get("ASAAS_API_KEY")!;
-const APP_URL = Deno.env.get("APP_URL") ?? "https://maniadealbum.com.br";
-const ASAAS_CHECKOUT_BASE_URL = "https://sandbox.asaas.com/checkoutSession/show?id=";
+const APP_URL = Deno.env.get("APP_URL") ?? "https://app.maniadealbum.com.br";
+
+const isSandbox = ASAAS_KEY.includes("$aact_") &&
+  (ASAAS_KEY.includes("YTU5YTE") || ASAAS_KEY.includes("sandbox") ||
+   Deno.env.get("ASAAS_SANDBOX") === "true");
+
+const ASAAS_URL = isSandbox
+  ? "https://sandbox.asaas.com/api/v3"
+  : "https://api.asaas.com/v3";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -25,19 +31,19 @@ Deno.serve(async (req) => {
 
     const planos: Record<string, { valor: number; nome: string; descricao: string }> = {
       basico: {
-        valor: 29.9,
+        valor: 29.90,
         nome: "Mania de Álbum — Plano Básico",
-        descricao: "Acesso completo permanente sem câmera IA.",
+        descricao: "Acesso completo permanente.",
       },
       completo: {
-        valor: 49.9,
+        valor: 49.90,
         nome: "Mania de Álbum — Plano Completo",
-        descricao: "Acesso completo permanente com câmera IA ilimitada.",
+        descricao: "Acesso completo com câmera IA.",
       },
       upgrade: {
-        valor: 20.0,
+        valor: 20.00,
         nome: "Mania de Álbum — Upgrade Câmera IA",
-        descricao: "Upgrade do Básico para o Completo. Adiciona câmera IA.",
+        descricao: "Upgrade para câmera IA ilimitada.",
       },
     };
 
@@ -51,7 +57,7 @@ Deno.serve(async (req) => {
 
     const headers = {
       "Content-Type": "application/json",
-      access_token: ASAAS_KEY,
+      "access_token": ASAAS_KEY,
     };
 
     const { data: profile } = await supabase
@@ -67,68 +73,87 @@ Deno.serve(async (req) => {
         method: "POST",
         headers,
         body: JSON.stringify({
-          name: nome || email,
+          name: nome || email.split("@")[0],
           email,
           externalReference: user_id,
-          notificationDisabled: false,
+          notificationDisabled: true,
         }),
       });
       const cust = await custRes.json();
+      console.log("Customer response:", JSON.stringify(cust));
+
       if (!custRes.ok || !cust.id) {
-        console.error("Asaas customer error", cust);
-        return new Response(JSON.stringify({ error: "Falha ao criar cliente no Asaas" }), {
+        return new Response(JSON.stringify({ error: "Falha ao criar cliente", detail: cust }), {
           status: 500,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
       customerId = cust.id;
-      await supabase.from("profiles").update({ asaas_customer_id: customerId }).eq("id", user_id);
+      await supabase.from("profiles")
+        .update({ asaas_customer_id: customerId })
+        .eq("id", user_id);
     }
 
-    const checkoutRes = await fetch(`${ASAAS_URL}/checkouts`, {
+    const paymentRes = await fetch(`${ASAAS_URL}/payments`, {
       method: "POST",
       headers,
       body: JSON.stringify({
-        billingTypes: ["CREDIT_CARD", "PIX"],
-        chargeTypes: ["DETACHED"],
-        minutesToExpire: 30,
-        callback: {
-          successUrl: `${APP_URL}/sucesso?plano=${planoKey}`,
-          cancelUrl: `${APP_URL}/`,
-          expiredUrl: `${APP_URL}/`,
-        },
         customer: customerId,
-        items: [
-          {
-            name: planoEscolhido.nome,
-            description: planoEscolhido.descricao,
-            quantity: 1,
-            value: planoEscolhido.valor,
-          },
-        ],
+        billingType: "UNDEFINED",
+        value: planoEscolhido.valor,
+        dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+          .toISOString().split("T")[0],
+        description: planoEscolhido.descricao,
+        externalReference: `${user_id}|${planoKey}`,
+        postalService: false,
       }),
     });
 
-    const checkout = await checkoutRes.json();
-    if (!checkoutRes.ok) {
-      console.error("Asaas checkout error", checkout);
-      return new Response(JSON.stringify({ error: "Falha ao criar checkout no Asaas" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    const payment = await paymentRes.json();
+    console.log("Payment response:", JSON.stringify(payment));
+
+    if (!paymentRes.ok || !payment.id) {
+      return new Response(
+        JSON.stringify({ error: "Falha ao criar cobrança", detail: payment }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
-    const checkoutUrl =
-      checkout.url ?? checkout.invoiceUrl ?? (checkout.id ? `${ASAAS_CHECKOUT_BASE_URL}${checkout.id}` : null);
+    const invoiceUrl = payment.invoiceUrl || payment.bankSlipUrl;
 
-    return new Response(JSON.stringify({ url: checkoutUrl }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    if (!invoiceUrl) {
+      const viewRes = await fetch(`${ASAAS_URL}/payments/${payment.id}/viewingInfo`, {
+        headers,
+      });
+      const viewData = await viewRes.json();
+      console.log("View response:", JSON.stringify(viewData));
+
+      const finalUrl = viewData.invoiceUrl || `https://sandbox.asaas.com/i/${payment.id}`;
+
+      await supabase.from("profiles")
+        .update({ asaas_payment_id: payment.id })
+        .eq("id", user_id);
+
+      return new Response(
+        JSON.stringify({ url: finalUrl }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    await supabase.from("profiles")
+      .update({ asaas_payment_id: payment.id })
+      .eq("id", user_id);
+
+    return new Response(
+      JSON.stringify({ url: invoiceUrl }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+
   } catch (err) {
-    console.error(err);
-    return new Response(JSON.stringify({ error: (err as Error).message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    console.error("Erro geral:", err);
+    return new Response(
+      JSON.stringify({ error: (err as Error).message }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
 });
