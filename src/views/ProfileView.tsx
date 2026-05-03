@@ -5,10 +5,11 @@ import type { Profile } from "@/pages/Index";
 import { AdBanner } from "@/components/AdBanner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Camera, Loader2 } from "lucide-react";
+import { Moon, Sun, Camera, Loader2, HelpCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { HowItWorksDialog } from "@/components/HowItWorksDialog";
 
 export function ProfileView({
   counts,
@@ -47,6 +48,7 @@ export function ProfileView({
     typeof document !== "undefined" && document.documentElement.classList.contains("dark")
   );
   const [upgrading, setUpgrading] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   const handleUpgrade = async () => {
     if (!userId) return;
@@ -117,6 +119,19 @@ export function ProfileView({
             <label className="text-xs font-semibold text-muted-foreground">Cidade</label>
             <Input value={profile.cidade} onChange={(e) => update({ cidade: e.target.value })} placeholder="Cidade, UF" />
           </div>
+          <div>
+            <label className="text-xs font-semibold text-muted-foreground">
+              WhatsApp <span className="text-muted-foreground font-normal">(para receber trocas)</span>
+            </label>
+            <Input
+              type="tel"
+              inputMode="tel"
+              value={profile.phone ?? ""}
+              onChange={(e) => update({ phone: e.target.value.replace(/[^\d+]/g, "").slice(0, 15) })}
+              placeholder="11999999999 (com DDD)"
+              maxLength={15}
+            />
+          </div>
         </div>
 
         {plano === "basico" && (
@@ -141,6 +156,15 @@ export function ProfileView({
 
         {plano === "teste" && <AdBanner />}
 
+        <Button
+          variant="outline"
+          className="w-full h-12 justify-start gap-3"
+          onClick={() => setShowHelp(true)}
+        >
+          <HelpCircle className="h-5 w-5" />
+          Como funciona o app
+        </Button>
+
         <Button variant="outline" className="w-full h-12" onClick={onLogout}>
           Sair
         </Button>
@@ -149,6 +173,8 @@ export function ProfileView({
           Mania de Álbum · Copa 2026 · feito para colecionadores
         </p>
       </div>
+
+      <HowItWorksDialog open={showHelp} onClose={() => setShowHelp(false)} />
     </div>
   );
 }
