@@ -276,6 +276,7 @@ const Index = () => {
           onSetCount={handleSetCount}
           isPremium={isPremium}
           temCamera={plano === "teste" || plano === "completo"}
+          profile={profile}
         />
       )}
       {tab === "trocas" && <TradesView counts={counts} isPremium={isPremium} />}
