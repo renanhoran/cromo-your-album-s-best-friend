@@ -163,7 +163,27 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      profiles_public: {
+        Row: {
+          avatar: string | null
+          cidade: string | null
+          id: string | null
+          nome: string | null
+        }
+        Insert: {
+          avatar?: string | null
+          cidade?: string | null
+          id?: string | null
+          nome?: string | null
+        }
+        Update: {
+          avatar?: string | null
+          cidade?: string | null
+          id?: string | null
+          nome?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
