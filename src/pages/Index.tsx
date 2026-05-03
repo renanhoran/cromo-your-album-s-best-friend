@@ -133,6 +133,26 @@ const Index = () => {
     }
   };
 
+  const handleSetCount = async (id: string, next: number) => {
+    if (!user) return;
+    setCounts((prev) => {
+      const u = { ...prev };
+      if (next <= 0) delete u[id];
+      else u[id] = next;
+      return u;
+    });
+    if (next <= 0) {
+      await supabase.from("user_stickers").delete().eq("user_id", user.id).eq("sticker_id", id);
+    } else {
+      await supabase
+        .from("user_stickers")
+        .upsert(
+          { user_id: user.id, sticker_id: id, count: next, updated_at: new Date().toISOString() },
+          { onConflict: "user_id,sticker_id" }
+        );
+    }
+  };
+
   const updateProfile = async (p: Profile) => {
     setProfile(p);
     if (!user) return;
@@ -200,7 +220,14 @@ const Index = () => {
           </div>
         )}
       </header>
-      {tab === "album" && <AlbumView counts={counts} onTap={handleTap} isPremium={isPremium} />}
+      {tab === "album" && (
+        <AlbumView
+          counts={counts}
+          onTap={handleTap}
+          onSetCount={handleSetCount}
+          isPremium={isPremium}
+        />
+      )}
       {tab === "trocas" && <TradesView counts={counts} isPremium={isPremium} />}
       {tab === "locais" && <LocationsView userId={user.id} userCity={profile.cidade} isPremium={isPremium} />}
       {tab === "perfil" && (
