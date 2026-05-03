@@ -1,4 +1,4 @@
 project_id = "frqagrjnwafnxhgvlnxi"
 
-[functions.asaas-webhook]
+[functions.stripe-webhook]
 verify_jwt = false
