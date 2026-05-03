@@ -13,6 +13,7 @@ import type { Session, User } from "@supabase/supabase-js";
 import logoIcon from "@/assets/logo-icon.png";
 import { User as UserIcon } from "lucide-react";
 import { TesteBanner } from "@/components/TesteBanner";
+import { PWAInstallBanner } from "@/components/PWAInstallBanner";
 import { toast } from "sonner";
 
 export interface Profile {
@@ -262,6 +263,7 @@ const Index = () => {
           </button>
         </div>
       </header>
+      <PWAInstallBanner />
       {!isPremium && (
         <TesteBanner
           diasRestantes={diasRestantes}
