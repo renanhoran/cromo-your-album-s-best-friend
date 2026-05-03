@@ -101,7 +101,7 @@ export function ProfileView({
         </Button>
 
         <p className="text-center text-[11px] text-muted-foreground pt-1">
-          CROMO · Copa 2026 · feito para colecionadores
+          Mania de Álbum · Copa 2026 · feito para colecionadores
         </p>
       </div>
     </div>
