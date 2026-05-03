@@ -1,6 +1,7 @@
 import { Sticker as StickerT } from "@/data/stickers";
 import { cn } from "@/lib/utils";
-import { FLAGS } from "@/data/flags";
+import { getFlagUrl } from "@/data/flags";
+import { useState } from "react";
 
 interface Props {
   sticker: StickerT;
@@ -13,7 +14,8 @@ export function StickerCard({ sticker, count, onClick }: Props) {
   const initials = sticker.sigla_selecao;
   const isEspecial = sticker.tipo === "especial";
   const isEscudo = sticker.tipo === "escudo";
-  const flag = FLAGS[sticker.sigla_selecao];
+  const flagUrl = getFlagUrl(sticker.sigla_selecao, 80);
+  const [flagFailed, setFlagFailed] = useState(false);
 
   return (
     <button
@@ -42,8 +44,14 @@ export function StickerCard({ sticker, count, onClick }: Props) {
             state === "missing" && "text-foreground/30"
           )}
         >
-          {flag ? (
-            <span className="text-4xl leading-none">{flag}</span>
+          {flagUrl && !flagFailed ? (
+            <img
+              src={flagUrl}
+              alt={sticker.selecao}
+              loading="lazy"
+              onError={() => setFlagFailed(true)}
+              className="w-10 h-7 object-cover rounded-sm shadow-sm"
+            />
           ) : isEspecial ? (
             "★"
           ) : (
