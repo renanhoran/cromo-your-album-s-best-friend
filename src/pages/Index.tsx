@@ -218,14 +218,14 @@ const Index = () => {
             <UserIcon className="h-4 w-4 text-foreground" />
           </button>
         </div>
-        {!isPremium && (
-          <TesteBanner
-            diasRestantes={diasRestantes}
-            horasRestantes={horasRestantes}
-            onVerPlanos={() => setAcesso("bloqueado")}
-          />
-        )}
       </header>
+      {!isPremium && (
+        <TesteBanner
+          diasRestantes={diasRestantes}
+          horasRestantes={horasRestantes}
+          onVerPlanos={() => setAcesso("bloqueado")}
+        />
+      )}
       {tab === "album" && (
         <AlbumView
           counts={counts}
