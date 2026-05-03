@@ -19,9 +19,11 @@ const FILTERS: { id: Filter; label: string }[] = [
 export function AlbumView({
   counts,
   onTap,
+  isPremium = false,
 }: {
   counts: StickerCounts;
   onTap: (id: string) => void;
+  isPremium?: boolean;
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
   const [query, setQuery] = useState("");
@@ -139,8 +141,6 @@ export function AlbumView({
       </header>
 
       <div className="px-4 pt-4 space-y-6">
-        <AdBanner />
-
         {grouped.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-2">🎯</div>
@@ -149,8 +149,9 @@ export function AlbumView({
           </div>
         )}
 
-        {grouped.map(([selecao, items]) => (
-          <section key={selecao}>
+        {grouped.map(([selecao, items], index) => (
+          <div key={selecao}>
+            <section>
             <div className="flex items-baseline justify-between mb-2 px-0.5">
               <h2 className="text-sm font-black uppercase tracking-wider flex items-center gap-2">
                 {getFlagUrl(items[0]?.sigla_selecao ?? "", 40) && (
@@ -188,7 +189,13 @@ export function AlbumView({
                 />
               ))}
             </div>
-          </section>
+            </section>
+            {!isPremium && index > 0 && index % 4 === 0 && (
+              <div className="mt-6">
+                <AdBanner slot="" />
+              </div>
+            )}
+          </div>
         ))}
 
         <p className="text-center text-xs text-muted-foreground pt-2">
