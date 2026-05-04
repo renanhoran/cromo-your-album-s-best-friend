@@ -38,6 +38,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     data_evento: "",
     descricao: "",
   });
+  const [formCoords, setFormCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [locating, setLocating] = useState(false);
   const [sortByDistance, setSortByDistance] = useState(false);
@@ -113,6 +114,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
             cidade: cidade ? (estado ? `${cidade}, ${estado}` : cidade) : f.cidade,
             endereco: endereco || f.endereco,
           }));
+          setFormCoords({ lat: latitude, lng: longitude });
           toast.success("Localização preenchida!");
         } catch {
           toast.error("Não foi possível identificar o endereço");
@@ -146,6 +148,8 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
       data_evento: new Date(form.data_evento).toISOString(),
       descricao: form.descricao || null,
       created_by: userId,
+      lat: formCoords?.lat ?? null,
+      lng: formCoords?.lng ?? null,
     });
     setSaving(false);
     if (error) {
@@ -155,6 +159,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     toast.success("Evento publicado! 🎉");
     setOpen(false);
     setForm({ nome: "", endereco: "", cidade: userCity || "", data_evento: "", descricao: "" });
+    setFormCoords(null);
     fetchLocations();
   };
 
@@ -179,6 +184,19 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
                 {f === "ponto_fixo" ? "Pontos fixos" : "Eventos"}
               </button>
             ))}
+            <button
+              onClick={handleNearMe}
+              disabled={geo.loading}
+              className={cn(
+                "shrink-0 px-3 h-9 rounded-full text-sm font-semibold border transition-all flex items-center gap-1.5",
+                sortByDistance
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-foreground border-border"
+              )}
+            >
+              {geo.loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Locate className="h-3.5 w-3.5" />}
+              Perto de mim
+            </button>
           </div>
         </div>
       </header>
