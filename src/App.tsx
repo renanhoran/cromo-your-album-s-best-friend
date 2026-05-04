@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import Privacidade from "./pages/Privacidade.tsx";
+import Termos from "./pages/Termos.tsx";
 
 const queryClient = new QueryClient();
 
