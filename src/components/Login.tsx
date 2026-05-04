@@ -153,7 +153,13 @@ export function Login() {
           3 dias grátis com tudo incluso — sem precisar colocar cartão.<br />
           Depois, escolha o plano que faz mais sentido pra você.
         </p>
-        <p className="mt-4 text-xs text-muted-foreground">Ao continuar você concorda com os termos do app.</p>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Ao continuar você concorda com os termos do app e com a{" "}
+          <a href="/privacidade" target="_blank" rel="noreferrer" className="underline text-primary">
+            Política de Privacidade
+          </a>
+          .
+        </p>
       </div>
     </div>
   );
