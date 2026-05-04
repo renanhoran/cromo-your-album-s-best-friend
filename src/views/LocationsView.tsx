@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { Plus, MapPin, Calendar, Clock, Store, Loader2, Locate } from "lucide-re
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useGeolocation, haversineKm, normalizeCidade } from "@/hooks/useGeolocation";
 
 type Filter = "ponto_fixo" | "evento";
 
@@ -22,6 +23,8 @@ interface Location {
   descricao: string | null;
   data_evento: string | null;
   created_by: string | null;
+  lat?: number | null;
+  lng?: number | null;
 }
 
 export function LocationsView({ userId, userCity, isPremium = false }: { userId: string; userCity: string; isPremium?: boolean }) {
@@ -37,6 +40,8 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
   });
   const [saving, setSaving] = useState(false);
   const [locating, setLocating] = useState(false);
+  const [sortByDistance, setSortByDistance] = useState(false);
+  const geo = useGeolocation();
 
   const fetchLocations = async () => {
     const { data } = await supabase
@@ -55,7 +60,32 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     if (userCity && !form.cidade) setForm((f) => ({ ...f, cidade: userCity }));
   }, [userCity]);
 
-  const filtered = locations.filter((l) => l.tipo === filter);
+  const filtered = useMemo(() => {
+    const base = locations.filter((l) => l.tipo === filter);
+    if (!sortByDistance || !geo.coords) return base;
+    const me = geo.coords;
+    const myCidade = normalizeCidade(me.cidade);
+    const withDist = base.map((l) => {
+      let dist = Number.POSITIVE_INFINITY;
+      if (l.lat != null && l.lng != null) {
+        dist = haversineKm(me, { lat: Number(l.lat), lng: Number(l.lng) });
+      } else if (myCidade && normalizeCidade(l.cidade) === myCidade) {
+        dist = 0.5;
+      }
+      return { l, dist };
+    });
+    withDist.sort((a, b) => a.dist - b.dist);
+    return withDist.map((x) => x.l);
+  }, [locations, filter, sortByDistance, geo.coords]);
+
+  const handleNearMe = async () => {
+    if (sortByDistance) {
+      setSortByDistance(false);
+      return;
+    }
+    const pos = geo.coords ?? (await geo.request());
+    if (pos) setSortByDistance(true);
+  };
 
   const handleUseLocation = () => {
     if (!("geolocation" in navigator)) {
