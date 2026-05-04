@@ -114,6 +114,11 @@ const Termos = () => {
 
         <hr className="my-10 border-neutral-800" />
         <p className="text-sm text-neutral-500 text-center">
+          <a href="/termos" className="underline text-neutral-400 hover:text-[#1DB954]">Termos de Uso</a>
+          {" · "}
+          <a href="/privacidade" className="underline text-neutral-400 hover:text-[#1DB954]">Política de Privacidade</a>
+        </p>
+        <p className="text-sm text-neutral-500 text-center mt-2">
           © 2026 Mania de Álbum. Todos os direitos reservados.
         </p>
       </div>
