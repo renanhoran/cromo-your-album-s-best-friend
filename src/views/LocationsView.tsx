@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { Plus, MapPin, Calendar, Clock, Store, Loader2, Locate } from "lucide-re
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useGeolocation, haversineKm, normalizeCidade } from "@/hooks/useGeolocation";
 
 type Filter = "ponto_fixo" | "evento";
 
@@ -22,6 +23,8 @@ interface Location {
   descricao: string | null;
   data_evento: string | null;
   created_by: string | null;
+  lat?: number | null;
+  lng?: number | null;
 }
 
 export function LocationsView({ userId, userCity, isPremium = false }: { userId: string; userCity: string; isPremium?: boolean }) {
@@ -35,8 +38,11 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     data_evento: "",
     descricao: "",
   });
+  const [formCoords, setFormCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [locating, setLocating] = useState(false);
+  const [sortByDistance, setSortByDistance] = useState(false);
+  const geo = useGeolocation();
 
   const fetchLocations = async () => {
     const { data } = await supabase
@@ -55,7 +61,32 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     if (userCity && !form.cidade) setForm((f) => ({ ...f, cidade: userCity }));
   }, [userCity]);
 
-  const filtered = locations.filter((l) => l.tipo === filter);
+  const filtered = useMemo(() => {
+    const base = locations.filter((l) => l.tipo === filter);
+    if (!sortByDistance || !geo.coords) return base;
+    const me = geo.coords;
+    const myCidade = normalizeCidade(me.cidade);
+    const withDist = base.map((l) => {
+      let dist = Number.POSITIVE_INFINITY;
+      if (l.lat != null && l.lng != null) {
+        dist = haversineKm(me, { lat: Number(l.lat), lng: Number(l.lng) });
+      } else if (myCidade && normalizeCidade(l.cidade) === myCidade) {
+        dist = 0.5;
+      }
+      return { l, dist };
+    });
+    withDist.sort((a, b) => a.dist - b.dist);
+    return withDist.map((x) => x.l);
+  }, [locations, filter, sortByDistance, geo.coords]);
+
+  const handleNearMe = async () => {
+    if (sortByDistance) {
+      setSortByDistance(false);
+      return;
+    }
+    const pos = geo.coords ?? (await geo.request());
+    if (pos) setSortByDistance(true);
+  };
 
   const handleUseLocation = () => {
     if (!("geolocation" in navigator)) {
@@ -83,6 +114,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
             cidade: cidade ? (estado ? `${cidade}, ${estado}` : cidade) : f.cidade,
             endereco: endereco || f.endereco,
           }));
+          setFormCoords({ lat: latitude, lng: longitude });
           toast.success("Localização preenchida!");
         } catch {
           toast.error("Não foi possível identificar o endereço");
@@ -116,6 +148,8 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
       data_evento: new Date(form.data_evento).toISOString(),
       descricao: form.descricao || null,
       created_by: userId,
+      lat: formCoords?.lat ?? null,
+      lng: formCoords?.lng ?? null,
     });
     setSaving(false);
     if (error) {
@@ -125,6 +159,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     toast.success("Evento publicado! 🎉");
     setOpen(false);
     setForm({ nome: "", endereco: "", cidade: userCity || "", data_evento: "", descricao: "" });
+    setFormCoords(null);
     fetchLocations();
   };
 
@@ -149,6 +184,19 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
                 {f === "ponto_fixo" ? "Pontos fixos" : "Eventos"}
               </button>
             ))}
+            <button
+              onClick={handleNearMe}
+              disabled={geo.loading}
+              className={cn(
+                "shrink-0 px-3 h-9 rounded-full text-sm font-semibold border transition-all flex items-center gap-1.5",
+                sortByDistance
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-foreground border-border"
+              )}
+            >
+              {geo.loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Locate className="h-3.5 w-3.5" />}
+              Perto de mim
+            </button>
           </div>
         </div>
       </header>
