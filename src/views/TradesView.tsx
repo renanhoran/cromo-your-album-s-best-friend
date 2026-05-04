@@ -5,12 +5,25 @@ import { supabase } from "@/integrations/supabase/client";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useGeolocation, normalizeCidade } from "@/hooks/useGeolocation";
+import { Locate, Loader2 } from "lucide-react";
 
 export function TradesView({ counts, isPremium = false }: { counts: StickerCounts; isPremium?: boolean }) {
   const [realUsers, setRealUsers] = useState<
     { id: string; nome: string; cidade: string; avatar: string; counts: StickerCounts }[]
   >([]);
   const [loading, setLoading] = useState(true);
+  const [nearMe, setNearMe] = useState(false);
+  const geo = useGeolocation();
+
+  const handleNearMe = async () => {
+    if (nearMe) {
+      setNearMe(false);
+      return;
+    }
+    const pos = geo.coords ?? (await geo.request());
+    if (pos) setNearMe(true);
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -57,7 +70,12 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     const missingSet = new Set(myMissing);
     const dupeSet = new Set(myDupes);
 
-    return realUsers.map((u) => {
+    const myCidade = nearMe && geo.coords ? normalizeCidade(geo.coords.cidade) : "";
+    const filteredUsers = nearMe && myCidade
+      ? realUsers.filter((u) => normalizeCidade(u.cidade) === myCidade)
+      : realUsers;
+
+    return filteredUsers.map((u) => {
       const theyHaveForMe: string[] = [];
       const iHaveForThem: string[] = [];
       missingSet.forEach((id) => {
@@ -71,7 +89,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     })
       .filter((m) => m.score > 0)
       .sort((a, b) => b.score - a.score);
-  }, [counts, realUsers]);
+  }, [counts, realUsers, nearMe, geo.coords]);
 
   const totalPossible = matches.reduce((acc, m) => acc + m.score, 0);
   const [open, setOpen] = useState<string | null>(null);
@@ -109,6 +127,21 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
         <div className="px-4 pt-4 pb-3">
           <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Match inteligente</p>
           <h1 className="text-2xl font-black tracking-tight">Trocas possíveis</h1>
+          <div className="mt-2">
+            <button
+              onClick={handleNearMe}
+              disabled={geo.loading}
+              className={cn(
+                "px-3 h-8 rounded-full text-xs font-semibold border transition-all inline-flex items-center gap-1.5",
+                nearMe
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-foreground border-border"
+              )}
+            >
+              {geo.loading ? <Loader2 className="h-3 w-3 animate-spin" /> : <Locate className="h-3 w-3" />}
+              {nearMe && geo.coords?.cidade ? `Perto de ${geo.coords.cidade}` : "Perto de mim"}
+            </button>
+          </div>
           <div className="mt-3 rounded-2xl p-4 text-primary-foreground shadow-[var(--shadow-pop)]" style={{ background: "var(--gradient-primary)" }}>
             <div className="text-3xl font-black leading-none">{totalPossible}</div>
             <div className="text-sm font-medium opacity-95 mt-1">
