@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Plus, MapPin, Calendar, Clock, Store } from "lucide-react";
+import { Plus, MapPin, Calendar, Clock, Store, Loader2, Locate } from "lucide-react";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -36,6 +36,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     descricao: "",
   });
   const [saving, setSaving] = useState(false);
+  const [locating, setLocating] = useState(false);
 
   const fetchLocations = async () => {
     const { data } = await supabase
@@ -55,6 +56,51 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
   }, [userCity]);
 
   const filtered = locations.filter((l) => l.tipo === filter);
+
+  const handleUseLocation = () => {
+    if (!("geolocation" in navigator)) {
+      toast.error("Seu navegador não suporta geolocalização");
+      return;
+    }
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords;
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=pt-BR`,
+            { headers: { "Accept": "application/json" } }
+          );
+          const data = await res.json();
+          const a = data?.address ?? {};
+          const cidade = a.city || a.town || a.village || a.municipality || a.county || "";
+          const estado = a.state || "";
+          const rua = [a.road, a.house_number].filter(Boolean).join(", ");
+          const bairro = a.suburb || a.neighbourhood || "";
+          const endereco = [rua, bairro].filter(Boolean).join(" - ");
+          setForm((f) => ({
+            ...f,
+            cidade: cidade ? (estado ? `${cidade}, ${estado}` : cidade) : f.cidade,
+            endereco: endereco || f.endereco,
+          }));
+          toast.success("Localização preenchida!");
+        } catch {
+          toast.error("Não foi possível identificar o endereço");
+        } finally {
+          setLocating(false);
+        }
+      },
+      (err) => {
+        setLocating(false);
+        if (err.code === err.PERMISSION_DENIED) {
+          toast.error("Permissão de localização negada");
+        } else {
+          toast.error("Não foi possível obter sua localização");
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    );
+  };
 
   const handleCreate = async () => {
     if (!form.nome.trim() || !form.cidade.trim() || !form.data_evento) {
@@ -138,6 +184,16 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
             <SheetTitle>Criar evento de troca</SheetTitle>
           </SheetHeader>
           <div className="space-y-3 mt-4">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleUseLocation}
+              disabled={locating}
+              className="w-full h-11 gap-2"
+            >
+              {locating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Locate className="h-4 w-4" />}
+              {locating ? "Obtendo localização..." : "Usar minha localização"}
+            </Button>
             <Field label="Nome do evento">
               <Input
                 value={form.nome}
