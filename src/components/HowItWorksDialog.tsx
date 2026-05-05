@@ -39,7 +39,7 @@ const SECTIONS = [
   {
     emoji: "💎",
     title: "Planos",
-    desc: "Você começa com 15 dias grátis com tudo incluso. Depois, escolha o plano Básico ou Completo (com câmera IA).",,
+    desc: "Você começa com 15 dias grátis com tudo incluso. Depois, escolha o plano Básico ou Completo (com câmera IA).",
   },
 ];
 
