@@ -4,14 +4,19 @@ import { Loader2, Check, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { AdBanner } from "@/components/AdBanner";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 
 interface PaywallProps {
   userId: string;
   email: string;
   nome?: string;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  dismissible?: boolean;
 }
 
-export function Paywall({ userId, email, nome }: PaywallProps) {
+export function Paywall({ userId, email, nome, open, onOpenChange, dismissible = true }: PaywallProps) {
   const [loading, setLoading] = useState<null | "basico" | "completo">(null);
 
   const handleStart = async (plano: "basico" | "completo") => {
@@ -34,15 +39,36 @@ export function Paywall({ userId, email, nome }: PaywallProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background px-5 py-8 flex justify-center">
-      <div className="w-full max-w-[420px] flex flex-col">
+    <Dialog
+      open={open}
+      onOpenChange={(o) => {
+        if (!o && !dismissible) return;
+        onOpenChange(o);
+      }}
+    >
+      <DialogContent
+        className="max-w-[440px] p-0 bg-background border-border [&>button]:hidden max-h-[90vh] overflow-y-auto"
+        onPointerDownOutside={(e) => { if (!dismissible) e.preventDefault(); }}
+        onEscapeKeyDown={(e) => { if (!dismissible) e.preventDefault(); }}
+      >
+      <div className="px-5 py-7 flex justify-center">
+      <div className="w-full flex flex-col relative">
+        {dismissible && (
+          <button
+            onClick={() => onOpenChange(false)}
+            aria-label="Fechar"
+            className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-secondary flex items-center justify-center hover:bg-muted z-10"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
         <div className="flex justify-center mb-5">
           <div className="h-16 w-16 rounded-full bg-secondary flex items-center justify-center">
             <Lock className="h-8 w-8 text-foreground" />
           </div>
         </div>
         <h1 className="text-3xl font-black tracking-tight text-center leading-tight mb-2">
-          Seu teste grátis acabou.
+          {dismissible ? "Escolha seu plano." : "Seu teste grátis acabou."}
         </h1>
         <p className="text-center text-muted-foreground text-sm mb-5">
           Suas figurinhas estão salvas.<br />
@@ -113,11 +139,9 @@ export function Paywall({ userId, email, nome }: PaywallProps) {
         <p className="text-xs text-muted-foreground text-center leading-relaxed">
           Pagamento único. Sem mensalidade. Sem surpresa.
         </p>
-
-        <div className="mt-8">
-          <AdBanner slot="" />
-        </div>
       </div>
-    </div>
+      </div>
+      </DialogContent>
+    </Dialog>
   );
 }
