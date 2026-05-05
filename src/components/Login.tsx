@@ -150,7 +150,7 @@ export function Login() {
         </Tabs>
 
         <p className="mt-6 text-xs text-muted-foreground leading-relaxed">
-          3 dias grátis com tudo incluso — sem precisar colocar cartão.<br />
+          15 dias grátis com tudo incluso — sem precisar colocar cartão.<br />
           Depois, escolha o plano que faz mais sentido pra você.
         </p>
         <p className="mt-4 text-xs text-muted-foreground">

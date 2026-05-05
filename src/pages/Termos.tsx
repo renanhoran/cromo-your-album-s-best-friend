@@ -37,7 +37,7 @@ const Termos = () => {
         <Section title="4. Planos e pagamento">
           <p className="mb-3">💳 O pagamento é único, sem mensalidade ou cobrança recorrente.</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>O app oferece um período de teste gratuito de 3 dias com acesso às funcionalidades principais.</li>
+            <li>O app oferece um período de teste gratuito de 15 dias com acesso às funcionalidades principais.</li>
             <li>Após o período de teste, é necessário adquirir o plano Básico (R$ 29,90) ou Completo (R$ 49,90) para continuar usando.</li>
             <li>Os pagamentos são processados pela Stripe e estão sujeitos aos termos dela.</li>
             <li>Não oferecemos reembolso após a confirmação do pagamento, exceto nos casos previstos pelo Código de Defesa do Consumidor (Lei nº 8.078/1990), como o direito de arrependimento em até 7 dias corridos após a compra, conforme o art. 49.</li>
