@@ -1,0 +1,1 @@
+UPDATE public.profiles SET teste_iniciado_em = now() WHERE is_premium = false AND (teste_iniciado_em IS NULL OR teste_iniciado_em < now() - interval '15 days');
