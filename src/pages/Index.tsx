@@ -35,6 +35,7 @@ const Index = () => {
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
+  const [paywallOpen, setPaywallOpen] = useState(false);
   const [profile, setProfile] = useState<Profile>({
     nome: "",
     cidade: "",
@@ -288,6 +289,14 @@ const Index = () => {
         />
       )}
       <BottomNav tab={tab} onChange={setTab} />
+      <Paywall
+        userId={user.id}
+        email={user.email ?? ""}
+        nome={profile.nome}
+        open={paywallOpen || acesso === "bloqueado"}
+        onOpenChange={(o) => setPaywallOpen(o)}
+        dismissible={acesso !== "bloqueado"}
+      />
     </div>
   );
 };
