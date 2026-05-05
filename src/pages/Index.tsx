@@ -28,8 +28,8 @@ const Index = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [acesso, setAcesso] = useState<"carregando" | "livre" | "bloqueado">("carregando");
-  const [diasRestantes, setDiasRestantes] = useState<number>(3);
-  const [horasRestantes, setHorasRestantes] = useState<number>(72);
+  const [diasRestantes, setDiasRestantes] = useState<number>(15);
+  const [horasRestantes, setHorasRestantes] = useState<number>(360);
   const [isPremium, setIsPremium] = useState(false);
   const [plano, setPlano] = useState<"teste" | "basico" | "completo">("teste");
   const [showOnboard, setShowOnboard] = useState(false);
@@ -115,7 +115,7 @@ const Index = () => {
           setIsPremium(false);
           setPlano("teste");
           const iniciou = new Date((prof as any).teste_iniciado_em ?? prof.created_at ?? Date.now());
-          const fimTeste = new Date(iniciou.getTime() + 3 * 24 * 60 * 60 * 1000);
+          const fimTeste = new Date(iniciou.getTime() + 15 * 24 * 60 * 60 * 1000);
           const msRestantes = fimTeste.getTime() - Date.now();
           const dias = Math.max(0, Math.ceil(msRestantes / (1000 * 60 * 60 * 24)));
           const horas = Math.max(0, Math.ceil(msRestantes / (1000 * 60 * 60)));
@@ -148,8 +148,8 @@ const Index = () => {
         setIsPremium(false);
         setPlano("teste");
         setAcesso("livre");
-        setDiasRestantes(3);
-        setHorasRestantes(72);
+        setDiasRestantes(15);
+        setHorasRestantes(360);
         setShowOnboard(true);
         onboardingSetRef.current = true;
       }

@@ -6,7 +6,7 @@ const SLIDES = [
   {
     emoji: "📒",
     title: "Bem-vindo ao Mania de Álbum!",
-    desc: "Seu álbum digital da Copa 2026: marque figurinhas, encontre trocas e complete a coleção. 3 dias grátis, sem cartão.",
+    desc: "Seu álbum digital da Copa 2026: marque figurinhas, encontre trocas e complete a coleção. 15 dias grátis, sem cartão.",
     destaque: null as string | null,
     cta: "Próximo",
   },
@@ -49,7 +49,7 @@ const SLIDES = [
     emoji: "🚀",
     title: "Tudo pronto!",
     desc: "Comece a marcar suas figurinhas. Seus dados ficam salvos na nuvem e sincronizam entre dispositivos.",
-    destaque: "🎁 3 dias grátis com tudo incluso",
+    destaque: "🎁 15 dias grátis com tudo incluso",
     cta: "Começar a usar →",
   },
 ];
