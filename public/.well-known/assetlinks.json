@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "br.com.maniadealbum.app.twa",
+      "sha256_cert_fingerprints": [
+        "13:44:DD:51:E9:F3:4F:AB:4D:E8:51:F0:A6:D1:79:AD:53:F3:D5:0D:53:68:79:97:92:7A:39:BB:44:0A:5C:CF"
+      ]
+    }
+  }
+]
