@@ -236,16 +236,6 @@ const Index = () => {
     );
   }
 
-  if (acesso === "bloqueado") {
-    return (
-      <Paywall
-        userId={user.id}
-        email={user.email ?? ""}
-        nome={profile.nome}
-      />
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto">
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur border-b border-border">
@@ -268,7 +258,7 @@ const Index = () => {
         <TesteBanner
           diasRestantes={diasRestantes}
           horasRestantes={horasRestantes}
-          onVerPlanos={() => setAcesso("bloqueado")}
+          onVerPlanos={() => setPaywallOpen(true)}
         />
       )}
       {tab === "album" && (
