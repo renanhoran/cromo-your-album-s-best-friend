@@ -35,6 +35,7 @@ const Index = () => {
   const [showOnboard, setShowOnboard] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
+  const [paywallOpen, setPaywallOpen] = useState(false);
   const [profile, setProfile] = useState<Profile>({
     nome: "",
     cidade: "",
@@ -236,16 +237,6 @@ const Index = () => {
     );
   }
 
-  if (acesso === "bloqueado") {
-    return (
-      <Paywall
-        userId={user.id}
-        email={user.email ?? ""}
-        nome={profile.nome}
-      />
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto">
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur border-b border-border">
@@ -268,7 +259,7 @@ const Index = () => {
         <TesteBanner
           diasRestantes={diasRestantes}
           horasRestantes={horasRestantes}
-          onVerPlanos={() => setAcesso("bloqueado")}
+          onVerPlanos={() => setPaywallOpen(true)}
         />
       )}
       {tab === "album" && (
@@ -298,6 +289,14 @@ const Index = () => {
         />
       )}
       <BottomNav tab={tab} onChange={setTab} />
+      <Paywall
+        userId={user.id}
+        email={user.email ?? ""}
+        nome={profile.nome}
+        open={paywallOpen || acesso === "bloqueado"}
+        onOpenChange={(o) => setPaywallOpen(o)}
+        dismissible={acesso !== "bloqueado"}
+      />
     </div>
   );
 };
