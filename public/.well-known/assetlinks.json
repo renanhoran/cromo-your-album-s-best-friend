@@ -4,9 +4,8 @@
     "target": {
       "namespace": "android_app",
       "package_name": "br.com.maniadealbum.app.twa",
-      "sha256_cert_fingerprints": [
-        "13:44:DD:51:E9:F3:4F:AB:4D:E8:51:F0:A6:D1:79:AD:53:F3:D5:0D:53:68:79:97:92:7A:39:BB:44:0A:5C:CF"
-      ]
+      "sha256_cert_fingerprints":
+        ["9E:63:9D:47:BB:46:7F:C8:28:6A:7E:39:9C:F5:EB:F1:FB:E6:D7:42:89:29:7B:6E:46:CB:F5:FF:73:25:BF:BC"]
     }
   }
 ]
