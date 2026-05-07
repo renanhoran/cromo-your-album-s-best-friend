@@ -11,6 +11,7 @@ import { IdentifySheet, IdentifyResult } from "@/components/IdentifySheet";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Profile } from "@/pages/Index";
+import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 
@@ -44,6 +45,7 @@ export function AlbumView({
   const [identifyResult, setIdentifyResult] = useState<IdentifyResult | null>(null);
   const [encontrada, setEncontrada] = useState<Sticker | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { share: shareWhats, dialog: whatsDialog } = useWhatsAppShare("album_repetidas");
 
   useEffect(() => {
     const check = () =>
@@ -290,40 +292,36 @@ export function AlbumView({
           1 toque: tenho ✓ · +toques: repetidas (×2 a ×9) · 10º toque ou × zera
         </div>
         {filter === "repetidas" && filtered.length > 0 && (
-          <a
-            href={(() => {
+          <button
+            type="button"
+            onClick={() => {
               const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
+              if (!phoneRaw || phoneRaw.length < 10) {
+                toast.error(
+                  "Cadastre seu WhatsApp no Perfil para compartilhar suas repetidas."
+                );
+                return;
+              }
               const linhas = filtered.map((s) => {
                 const c = counts[s.id] ?? 0;
                 const extras = Math.max(0, c - 1);
                 return `• ${s.sigla_selecao} #${s.id} ${s.nome}${extras > 1 ? ` (×${extras})` : ""}`;
               });
               const assinatura = profile?.nome
-                ? `\n\n— ${profile.nome}${phoneRaw ? `\nWhatsApp: ${phoneRaw}` : ""}`
-                : phoneRaw ? `\n\nWhatsApp: ${phoneRaw}` : "";
+                ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
+                : `\n\nWhatsApp: ${phoneRaw}`;
               const texto =
                 `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
                 linhas.join("\n") +
                 `\n\nTroca comigo? 🤝` +
                 assinatura;
-              return `https://wa.me/?text=${encodeURIComponent(texto)}`;
-            })()}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
-              if (!phoneRaw || phoneRaw.length < 10) {
-                e.preventDefault();
-                toast.error(
-                  "Cadastre seu WhatsApp no Perfil para compartilhar suas repetidas."
-                );
-              }
+              shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
             }}
-            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform no-underline"
+            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
           >
             <Share2 className="h-4 w-4" />
             Compartilhar repetidas no WhatsApp
-          </a>
+          </button>
         )}
         {grouped.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
