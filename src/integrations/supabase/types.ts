@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      lgpd_consents: {
+        Row: {
+          aceito: boolean
+          created_at: string
+          id: string
+          origem: string | null
+          tipo: string
+          user_agent: string | null
+          user_id: string
+          versao: string
+        }
+        Insert: {
+          aceito?: boolean
+          created_at?: string
+          id?: string
+          origem?: string | null
+          tipo: string
+          user_agent?: string | null
+          user_id: string
+          versao: string
+        }
+        Update: {
+          aceito?: boolean
+          created_at?: string
+          id?: string
+          origem?: string | null
+          tipo?: string
+          user_agent?: string | null
+          user_id?: string
+          versao?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           address: string | null

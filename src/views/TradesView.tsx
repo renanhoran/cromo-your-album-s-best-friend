@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useGeolocation, normalizeCidade } from "@/hooks/useGeolocation";
 import { Locate, Loader2 } from "lucide-react";
+import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 
 export function TradesView({ counts, isPremium = false }: { counts: StickerCounts; isPremium?: boolean }) {
   const [realUsers, setRealUsers] = useState<
@@ -15,6 +16,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
   const [loading, setLoading] = useState(true);
   const [nearMe, setNearMe] = useState(false);
   const geo = useGeolocation();
+  const { share: shareWhats, dialog: whatsDialog } = useWhatsAppShare("trocas");
 
   const handleNearMe = async () => {
     if (nearMe) {
@@ -117,12 +119,12 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
       `_Total: ${repetidas.length} figurinha(s) repetida(s)_`,
       "_Baixe o Mania de Álbum: app.maniadealbum.com.br_",
     ].join("\n");
-    const url = `https://wa.me/?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, "_blank");
+    shareWhats(`https://wa.me/?text=${encodeURIComponent(mensagem)}`);
   };
 
   return (
     <div className="pb-24">
+      {whatsDialog}
       <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
           <p className="text-xs text-muted-foreground font-semibold tracking-wide uppercase">Match inteligente</p>
@@ -240,7 +242,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
                         `Topa trocar? 🔥`,
                         `_via app.maniadealbum.com.br_`,
                       ].join("\n");
-                      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+                      shareWhats(`https://wa.me/?text=${encodeURIComponent(msg)}`);
                     }}
                     className="w-full h-11 rounded-xl font-bold text-white flex items-center justify-center gap-2"
                     style={{ backgroundColor: "#25D366" }}
