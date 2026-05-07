@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { HowItWorksDialog } from "@/components/HowItWorksDialog";
+import { WHATSAPP_CONSENT_TIPO, WHATSAPP_CONSENT_VERSION } from "@/components/WhatsAppConsentDialog";
 
 export function ProfileView({
   counts,
@@ -49,6 +50,45 @@ export function ProfileView({
   );
   const [upgrading, setUpgrading] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const [hasWhatsConsent, setHasWhatsConsent] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+    (async () => {
+      const { data } = await supabase
+        .from("lgpd_consents")
+        .select("versao, aceito")
+        .eq("user_id", userId)
+        .eq("tipo", WHATSAPP_CONSENT_TIPO)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      setHasWhatsConsent(
+        !!data && data.aceito === true && data.versao === WHATSAPP_CONSENT_VERSION
+      );
+    })();
+  }, [userId]);
+
+  const revogarConsentimentoWhats = async () => {
+    if (!userId) return;
+    const { error } = await supabase.from("lgpd_consents").insert({
+      user_id: userId,
+      tipo: WHATSAPP_CONSENT_TIPO,
+      versao: WHATSAPP_CONSENT_VERSION,
+      aceito: false,
+      user_agent: navigator.userAgent,
+      origem: "perfil_revogacao",
+    });
+    if (error) {
+      toast.error("Não foi possível revogar agora.");
+      return;
+    }
+    try {
+      localStorage.removeItem(`lgpd:${WHATSAPP_CONSENT_TIPO}:${userId}`);
+    } catch {}
+    setHasWhatsConsent(false);
+    toast.success("Consentimento revogado. Pediremos novamente antes do próximo compartilhamento.");
+  };
 
   const handleUpgrade = async () => {
     if (!userId) return;
@@ -164,6 +204,29 @@ export function ProfileView({
           <HelpCircle className="h-5 w-5" />
           Como funciona o app
         </Button>
+
+        <div className="rounded-2xl bg-card border border-border p-4 space-y-2">
+          <h3 className="font-bold text-sm">Privacidade e LGPD</h3>
+          <p className="text-xs text-muted-foreground">
+            Consentimento para compartilhar pelo WhatsApp:{" "}
+            <span className={hasWhatsConsent ? "text-primary font-semibold" : "text-muted-foreground font-semibold"}>
+              {hasWhatsConsent ? "ativo" : "não concedido"}
+            </span>
+          </p>
+          {hasWhatsConsent && (
+            <Button variant="outline" size="sm" className="w-full" onClick={revogarConsentimentoWhats}>
+              Revogar consentimento do WhatsApp
+            </Button>
+          )}
+          <div className="flex flex-wrap gap-3 text-xs pt-1">
+            <a href="/privacidade" target="_blank" rel="noreferrer" className="underline text-primary">
+              Política de Privacidade
+            </a>
+            <a href="/termos" target="_blank" rel="noreferrer" className="underline text-primary">
+              Termos de Uso
+            </a>
+          </div>
+        </div>
 
         <Button variant="outline" className="w-full h-12" onClick={onLogout}>
           Sair
