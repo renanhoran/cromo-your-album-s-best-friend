@@ -220,6 +220,7 @@ export function AlbumView({
 
   return (
     <div className="pb-24">
+      {whatsDialog}
       {/* Header / progress */}
       <header className="sticky top-12 z-20 bg-background/95 backdrop-blur border-b border-border">
         <div className="px-4 pt-4 pb-3">
