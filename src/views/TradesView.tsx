@@ -242,7 +242,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
                         `Topa trocar? 🔥`,
                         `_via app.maniadealbum.com.br_`,
                       ].join("\n");
-                      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+                      shareWhats(`https://wa.me/?text=${encodeURIComponent(msg)}`);
                     }}
                     className="w-full h-11 rounded-xl font-bold text-white flex items-center justify-center gap-2"
                     style={{ backgroundColor: "#25D366" }}
