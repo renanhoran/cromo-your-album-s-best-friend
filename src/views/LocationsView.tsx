@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Plus, MapPin, Calendar, Clock, Store, Loader2, Locate } from "lucide-react";
+import { Plus, MapPin, Calendar, Clock, Store, Loader2, Locate, Search, X } from "lucide-react";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -42,6 +42,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
   const [saving, setSaving] = useState(false);
   const [locating, setLocating] = useState(false);
   const [sortByDistance, setSortByDistance] = useState(false);
+  const [query, setQuery] = useState("");
   const geo = useGeolocation();
 
   const fetchLocations = async () => {
@@ -62,7 +63,16 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
   }, [userCity]);
 
   const filtered = useMemo(() => {
-    const base = locations.filter((l) => l.tipo === filter);
+    const q = query.trim().toLowerCase();
+    const base = locations.filter((l) => {
+      if (l.tipo !== filter) return false;
+      if (!q) return true;
+      const haystack = [l.nome, l.cidade, l.estado, l.endereco, l.descricao]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(q);
+    });
     if (!sortByDistance || !geo.coords) return base;
     const me = geo.coords;
     const myCidade = normalizeCidade(me.cidade);
@@ -77,7 +87,7 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
     });
     withDist.sort((a, b) => a.dist - b.dist);
     return withDist.map((x) => x.l);
-  }, [locations, filter, sortByDistance, geo.coords]);
+  }, [locations, filter, sortByDistance, geo.coords, query]);
 
   const handleNearMe = async () => {
     if (sortByDistance) {
@@ -198,6 +208,25 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
               Perto de mim
             </button>
           </div>
+          <div className="relative mt-3">
+            <Search className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={filter === "evento" ? "Buscar evento, cidade..." : "Buscar ponto, cidade..."}
+              className="pl-9 pr-9 h-10"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full hover:bg-secondary flex items-center justify-center"
+                aria-label="Limpar busca"
+              >
+                <X className="h-3.5 w-3.5 text-muted-foreground" />
+              </button>
+            )}
+          </div>
         </div>
       </header>
 
@@ -205,8 +234,16 @@ export function LocationsView({ userId, userCity, isPremium = false }: { userId:
         {filtered.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
             <div className="text-4xl mb-2">📍</div>
-            <p className="font-semibold text-foreground">Nada por aqui ainda</p>
-            <p className="text-sm">{filter === "evento" ? "Crie o primeiro evento!" : "Em breve mais pontos."}</p>
+            <p className="font-semibold text-foreground">
+              {query ? "Nenhum resultado" : "Nada por aqui ainda"}
+            </p>
+            <p className="text-sm">
+              {query
+                ? "Tente outro nome ou cidade."
+                : filter === "evento"
+                ? "Crie o primeiro evento!"
+                : "Em breve mais pontos."}
+            </p>
           </div>
         )}
         {filtered.map((l, index) => (
