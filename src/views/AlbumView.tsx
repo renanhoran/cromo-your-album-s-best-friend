@@ -441,7 +441,7 @@ export function AlbumView({
             </AlertDialogContent>
           </AlertDialog>
           <div className="fixed bottom-20 right-4 z-40 flex flex-col items-center gap-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-destructive drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-50 bg-red-900 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] px-2 py-0.5 rounded-full">
               Localize com IA
             </span>
             <button
