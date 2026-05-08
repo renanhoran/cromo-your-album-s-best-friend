@@ -106,7 +106,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     repetidas.forEach((s) => {
       if (!porSelecao[s.selecao]) porSelecao[s.selecao] = [];
       const qtd = (counts[s.id] ?? 0) - 1;
-      porSelecao[s.selecao].push(`${s.nome}${qtd > 1 ? ` (×${qtd})` : ""}`);
+      porSelecao[s.selecao].push(`${s.id}${qtd > 1 ? ` (×${qtd})` : ""}`);
     });
     const linhas = Object.entries(porSelecao).map(
       ([selecao, jogadores]) => `*${selecao}:* ${jogadores.join(", ")}`
@@ -223,11 +223,11 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
                       const linhasTem = theyHaveForMe
                         .map((id) => stickerById.get(id))
                         .filter(Boolean)
-                        .map((s) => `• ${s!.id} — ${s!.nome} (${s!.selecao})`);
+                        .map((s) => `• ${s!.id} (${s!.selecao})`);
                       const linhasOfereco = iHaveForThem
                         .map((id) => stickerById.get(id))
                         .filter(Boolean)
-                        .map((s) => `• ${s!.id} — ${s!.nome} (${s!.selecao})`);
+                        .map((s) => `• ${s!.id} (${s!.selecao})`);
                       const msg = [
                         `🤝 *Proposta de troca — Copa 2026*`,
                         ``,

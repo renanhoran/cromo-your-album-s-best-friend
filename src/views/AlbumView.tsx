@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
-type SearchMode = "pais" | "jogador" | "codigo";
+type SearchMode = "pais" | "codigo";
 
 const FILTERS: { id: Filter; label: string }[] = [
   { id: "todas", label: "Todas" },
@@ -173,9 +173,6 @@ export function AlbumView({
         return s.sigla_selecao === paisFilter;
       }
       if (!q) return true;
-      if (searchMode === "jogador") {
-        return s.nome.toLowerCase().includes(q);
-      }
       // codigo
       return s.id.toLowerCase().includes(q);
     });
@@ -263,7 +260,6 @@ export function AlbumView({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="pais">País</SelectItem>
-                <SelectItem value="jogador">Jogador</SelectItem>
                 <SelectItem value="codigo">Código</SelectItem>
               </SelectContent>
             </Select>
@@ -290,11 +286,7 @@ export function AlbumView({
                   inputMode="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder={
-                    searchMode === "jogador"
-                      ? "Nome do jogador"
-                      : "Código (ex: BRA-14)"
-                  }
+                  placeholder="Código (ex: BRA-14)"
                   className="w-full h-10 pl-9 pr-9 rounded-full bg-secondary text-sm font-medium placeholder:text-muted-foreground border border-transparent focus:bg-card focus:border-border focus:outline-none transition-colors"
                 />
                 {query && (
@@ -330,7 +322,7 @@ export function AlbumView({
               const linhas = filtered.map((s) => {
                 const c = counts[s.id] ?? 0;
                 const extras = Math.max(0, c - 1);
-                return `• ${s.sigla_selecao} #${s.id} ${s.nome}${extras > 1 ? ` (×${extras})` : ""}`;
+                return `• ${s.sigla_selecao} #${s.id}${extras > 1 ? ` (×${extras})` : ""}`;
               });
               const assinatura = profile?.nome
                 ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
