@@ -306,7 +306,7 @@ export function AlbumView({
 
       <div className="px-4 pt-4 space-y-6">
         <div className="rounded-xl bg-primary/10 border border-primary/30 px-3 py-2.5 text-center text-xs font-semibold text-primary">
-          1 toque: tenho ✓ · +toques: repetidas - × zera
+          1 toque: tenho ✓ · +toques: repetidas · × zera
         </div>
         {filter === "repetidas" && filtered.length > 0 && (
           <button
