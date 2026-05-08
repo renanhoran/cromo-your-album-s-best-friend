@@ -410,7 +410,7 @@ export function AlbumView({
 
       </div>
 
-      {isMobile && temCamera && (
+      {temCamera && (
         <>
           <AlertDialog open={showCameraTip} onOpenChange={setShowCameraTip}>
             <AlertDialogContent>
