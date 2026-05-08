@@ -18,6 +18,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 type SearchMode = "pais" | "codigo";
@@ -50,6 +59,7 @@ export function AlbumView({
   const [paisFilter, setPaisFilter] = useState<string>("__all__");
   const [isMobile, setIsMobile] = useState(false);
   const [identifying, setIdentifying] = useState(false);
+  const [showCameraTip, setShowCameraTip] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { share: shareWhats, dialog: whatsDialog } = useWhatsAppShare("album_repetidas");
 
@@ -402,14 +412,44 @@ export function AlbumView({
 
       {isMobile && temCamera && (
         <>
+          <AlertDialog open={showCameraTip} onOpenChange={setShowCameraTip}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <div className="mx-auto mb-2 w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Camera className="w-7 h-7 text-primary" />
+                </div>
+                <AlertDialogTitle className="text-center">
+                  Aponte para a parte de trás da figurinha
+                </AlertDialogTitle>
+                <AlertDialogDescription className="text-center">
+                  A câmera lê o código impresso atrás da figurinha (ex: <strong>BRA-14</strong>),
+                  não o rosto do jogador. Aproxime bem para capturar o código.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction
+                  onClick={() => {
+                    localStorage.setItem("camera_tip_seen", "1");
+                    setShowCameraTip(false);
+                    setTimeout(() => inputRef.current?.click(), 100);
+                  }}
+                  className="w-full"
+                >
+                  Entendi, abrir câmera
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <button
             type="button"
             aria-label="Identificar figurinha pela câmera"
             onClick={() => {
-              toast.info("Aponte para o código da parte de trás da figurinha (ex: BRA-14)", {
-                duration: 3500,
-              });
-              setTimeout(() => inputRef.current?.click(), 250);
+              const seen = localStorage.getItem("camera_tip_seen") === "1";
+              if (seen) {
+                inputRef.current?.click();
+              } else {
+                setShowCameraTip(true);
+              }
             }}
             className="fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg cursor-pointer active:scale-95 transition-transform"
           >
