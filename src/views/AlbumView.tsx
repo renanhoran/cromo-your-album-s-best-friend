@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
-type SearchMode = "pais" | "jogador" | "codigo";
+type SearchMode = "pais" | "codigo";
 
 const FILTERS: { id: Filter; label: string }[] = [
   { id: "todas", label: "Todas" },
