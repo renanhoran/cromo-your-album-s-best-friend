@@ -133,15 +133,10 @@ const Index = () => {
           const importacaoFeita = (prof as any).onboarding_importacao_concluido === true;
           const avisoOcrVisto = (prof as any).aviso_camera_ocr_visto === true;
           setShowOnboard(!jaViu && !prof.is_premium);
-          // Importação só pra quem já passou pelo onboarding inicial
-          if (jaViu && !importacaoFeita) {
-            setShowImport(true);
-          }
-          // Banner de aviso só pra quem já tinha conta antes (importação_concluido pode ser null/false e onboarding já feito)
-          if (jaViu && importacaoFeita === false && !avisoOcrVisto) {
-            // Já trataremos com import; não mostrar o banner pra quem ainda não importou.
-            setShowOcrNotice(false);
-          } else if (jaViu && importacaoFeita && !avisoOcrVisto) {
+          // Para usuários existentes (já fizeram onboarding antes desta atualização),
+          // mostramos o banner OCR em vez de forçar a tela de importação.
+          // Usuários novos verão a tela de importação logo após o onboarding (no callback onDone).
+          if (jaViu && !avisoOcrVisto) {
             setShowOcrNotice(true);
           }
           onboardingSetRef.current = true;
