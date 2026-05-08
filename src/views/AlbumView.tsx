@@ -11,8 +11,16 @@ import { toast } from "sonner";
 import type { Profile } from "@/pages/Index";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
+type SearchMode = "pais" | "jogador" | "codigo";
 
 const FILTERS: { id: Filter; label: string }[] = [
   { id: "todas", label: "Todas" },
@@ -38,6 +46,8 @@ export function AlbumView({
 }) {
   const [filter, setFilter] = useState<Filter>("todas");
   const [query, setQuery] = useState("");
+  const [searchMode, setSearchMode] = useState<SearchMode>("pais");
+  const [paisFilter, setPaisFilter] = useState<string>("__all__");
   const [isMobile, setIsMobile] = useState(false);
   const [identifying, setIdentifying] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -158,14 +168,28 @@ export function AlbumView({
       if (filter === "repetidas") return c >= 2;
       return true;
     }).filter((s) => {
+      if (searchMode === "pais") {
+        if (paisFilter === "__all__") return true;
+        return s.sigla_selecao === paisFilter;
+      }
       if (!q) return true;
-      return (
-        s.selecao.toLowerCase().includes(q) ||
-        s.sigla_selecao.toLowerCase().includes(q) ||
-        s.nome.toLowerCase().includes(q)
-      );
+      if (searchMode === "jogador") {
+        return s.nome.toLowerCase().includes(q);
+      }
+      // codigo
+      return s.id.toLowerCase().includes(q);
     });
-  }, [counts, filter, query]);
+  }, [counts, filter, query, searchMode, paisFilter]);
+
+  const paises = useMemo(() => {
+    const map = new Map<string, string>();
+    STICKERS.forEach((s) => {
+      if (!map.has(s.sigla_selecao)) map.set(s.sigla_selecao, s.selecao);
+    });
+    return Array.from(map.entries())
+      .map(([sigla, nome]) => ({ sigla, nome }))
+      .sort((a, b) => a.nome.localeCompare(b.nome));
+  }, []);
 
   // Group by selecao for visual organization
   const grouped = useMemo(() => {
@@ -225,24 +249,64 @@ export function AlbumView({
             ))}
           </div>
 
-          <div className="relative mt-3">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              inputMode="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar seleção ou jogador"
-              className="w-full h-10 pl-9 pr-9 rounded-full bg-secondary text-sm font-medium placeholder:text-muted-foreground border border-transparent focus:bg-card focus:border-border focus:outline-none transition-colors"
-            />
-            {query && (
-              <button
-                onClick={() => setQuery("")}
-                aria-label="Limpar busca"
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-4 w-4" />
-              </button>
+          <div className="mt-3 flex gap-2">
+            <Select
+              value={searchMode}
+              onValueChange={(v) => {
+                setSearchMode(v as SearchMode);
+                setQuery("");
+                setPaisFilter("__all__");
+              }}
+            >
+              <SelectTrigger className="w-32 h-10 rounded-full bg-secondary border-transparent text-sm font-semibold">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="pais">País</SelectItem>
+                <SelectItem value="jogador">Jogador</SelectItem>
+                <SelectItem value="codigo">Código</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {searchMode === "pais" ? (
+              <Select value={paisFilter} onValueChange={setPaisFilter}>
+                <SelectTrigger className="flex-1 h-10 rounded-full bg-secondary border-transparent text-sm font-medium">
+                  <SelectValue placeholder="Selecione um país" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="__all__">Todos os países</SelectItem>
+                  {paises.map((p) => (
+                    <SelectItem key={p.sigla} value={p.sigla}>
+                      {p.nome}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            ) : (
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  inputMode="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={
+                    searchMode === "jogador"
+                      ? "Nome do jogador"
+                      : "Código (ex: BRA-14)"
+                  }
+                  className="w-full h-10 pl-9 pr-9 rounded-full bg-secondary text-sm font-medium placeholder:text-muted-foreground border border-transparent focus:bg-card focus:border-border focus:outline-none transition-colors"
+                />
+                {query && (
+                  <button
+                    onClick={() => setQuery("")}
+                    aria-label="Limpar busca"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>
