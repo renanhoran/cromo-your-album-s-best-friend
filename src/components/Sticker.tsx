@@ -59,14 +59,16 @@ export function StickerCard({ sticker, count, onClick, onClear }: Props) {
             initials
           )}
         </div>
-        <div
-          className={cn(
-            "mt-2 text-[10px] font-semibold text-center leading-tight line-clamp-2 px-1",
-            state === "missing" && "text-muted-foreground"
-          )}
-        >
-          {isEscudo ? sticker.selecao : sticker.nome}
-        </div>
+        {isEscudo && (
+          <div
+            className={cn(
+              "mt-2 text-[10px] font-semibold text-center leading-tight line-clamp-2 px-1",
+              state === "missing" && "text-muted-foreground"
+            )}
+          >
+            {sticker.selecao}
+          </div>
+        )}
       </div>
       {count > 0 && onClear && (
         <button
