@@ -1,17 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { STICKERS } from "@/data/stickers";
-import type { Sticker } from "@/data/stickers";
 import { StickerCounts } from "@/lib/storage";
 import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 import { Search, X, Camera, Share2 } from "lucide-react";
 import { getFlagUrl } from "@/data/flags";
-import { IdentifySheet, IdentifyResult } from "@/components/IdentifySheet";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import type { Profile } from "@/pages/Index";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
+import { findStickerByCode } from "@/lib/stickerCode";
 
 type Filter = "todas" | "tenho" | "preciso" | "repetidas";
 
@@ -41,9 +40,6 @@ export function AlbumView({
   const [query, setQuery] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [identifying, setIdentifying] = useState(false);
-  const [showSheet, setShowSheet] = useState(false);
-  const [identifyResult, setIdentifyResult] = useState<IdentifyResult | null>(null);
-  const [encontrada, setEncontrada] = useState<Sticker | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { share: shareWhats, dialog: whatsDialog } = useWhatsAppShare("album_repetidas");
 
@@ -79,57 +75,12 @@ export function AlbumView({
       reader.readAsDataURL(file);
     });
 
-  const findSticker = (r: IdentifyResult): Sticker | null => {
-    const sigla = r.sigla_selecao?.toUpperCase().trim() ?? "";
-    const num = r.numero?.toString().replace(/\D/g, "") ?? "";
-    const sobrenome = r.sobrenome?.toLowerCase().trim() ?? "";
-    const nomeCompleto = r.nome_completo?.toLowerCase().trim() ?? "";
-
-    const found = STICKERS.find((s) => {
-      if (num && sigla) {
-        const idEsperado = `${sigla}-${num.padStart(3, "0")}`;
-        if (s.id === idEsperado) return true;
-      }
-      if (sobrenome && sigla) {
-        const nomeLower = s.nome.toLowerCase();
-        const selecaoMatch = s.sigla_selecao === sigla;
-        const nomeMatch =
-          nomeLower.includes(sobrenome) ||
-          sobrenome.includes(nomeLower.split(" ")[0]);
-        if (selecaoMatch && nomeMatch) return true;
-      }
-      if (nomeCompleto && sigla) {
-        const first = nomeCompleto.split(" ")[0];
-        const sFirst = s.nome.toLowerCase().split(" ")[0];
-        if (
-          s.sigla_selecao === sigla &&
-          (s.nome.toLowerCase().includes(first) || nomeCompleto.includes(sFirst))
-        ) {
-          return true;
-        }
-      }
-      return false;
-    });
-
-    if (found) return found;
-
-    if (r.tipo === "escudo" && sigla) {
-      const escudo = STICKERS.find(
-        (s) => s.sigla_selecao === sigla && s.tipo === "escudo"
-      );
-      if (escudo) return escudo;
-    }
-    return null;
-  };
-
   const handleCameraCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setShowSheet(true);
     setIdentifying(true);
-    setIdentifyResult(null);
-    setEncontrada(null);
+    const loadingToast = toast.loading("Lendo código...");
 
     try {
       const { base64, mediaType } = await compressImage(file);
@@ -147,28 +98,37 @@ export function AlbumView({
         }
       );
 
+      toast.dismiss(loadingToast);
+
       if (!res.ok) {
-        toast.error("Erro ao identificar. Tente novamente.");
-        setShowSheet(false);
+        toast.error("Não foi possível ler o código. Tente novamente.");
         return;
       }
 
-      const result: IdentifyResult = await res.json();
+      const result: { codigo: string | null; erro?: boolean } = await res.json();
 
-      if (
-        result.confianca === "baixa" ||
-        (!result.nome_completo && !result.sobrenome && !result.sigla_selecao && !result.numero)
-      ) {
-        toast.error("Não consegui identificar a figurinha. Tenta uma foto mais nítida.");
-        setShowSheet(false);
+      if (!result.codigo || result.erro) {
+        toast.error("Não foi possível ler o código. Tente novamente.");
         return;
       }
 
-      setIdentifyResult(result);
-      setEncontrada(findSticker(result));
+      const sticker = findStickerByCode(result.codigo);
+      if (!sticker) {
+        toast.error(`Código ${result.codigo} não encontrado. Tente aproximar mais a câmera.`);
+        return;
+      }
+
+      const current = counts[sticker.id] ?? 0;
+      const next = current >= 9 ? 9 : current + 1;
+      onSetCount?.(sticker.id, next);
+      toast.success(
+        next > 1
+          ? `Figurinha ${result.codigo} já tinha — repetida (×${next}) ✓`
+          : `Figurinha ${result.codigo} marcada! ✓`
+      );
     } catch {
-      toast.error("Erro ao identificar. Tente novamente.");
-      setShowSheet(false);
+      toast.dismiss(loadingToast);
+      toast.error("Não foi possível ler o código. Tente novamente.");
     } finally {
       setIdentifying(false);
       if (inputRef.current) inputRef.current.value = "";
@@ -401,25 +361,10 @@ export function AlbumView({
             capture="environment"
             className="hidden"
             onChange={handleCameraCapture}
+            disabled={identifying}
           />
         </>
       )}
-
-      <IdentifySheet
-        open={showSheet}
-        identifying={identifying}
-        result={identifyResult}
-        encontrada={encontrada}
-        count={encontrada ? counts[encontrada.id] ?? 0 : 0}
-        onClose={() => setShowSheet(false)}
-        onConfirm={(s, next) => {
-          onSetCount?.(s.id, next);
-          setShowSheet(false);
-          toast.success(
-            next > 1 ? `Marcada como repetida (×${next})` : "Marcada como tenho!"
-          );
-        }}
-      />
     </div>
   );
 }

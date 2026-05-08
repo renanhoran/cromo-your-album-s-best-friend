@@ -14,6 +14,8 @@ import logoIcon from "@/assets/logo-icon.png";
 import { User as UserIcon } from "lucide-react";
 import { TesteBanner } from "@/components/TesteBanner";
 import { PWAInstallBanner } from "@/components/PWAInstallBanner";
+import { ImportStickersOnboarding } from "@/components/ImportStickersOnboarding";
+import { CameraOcrNoticeBanner } from "@/components/CameraOcrNoticeBanner";
 import { toast } from "sonner";
 
 export interface Profile {
@@ -33,6 +35,8 @@ const Index = () => {
   const [isPremium, setIsPremium] = useState(false);
   const [plano, setPlano] = useState<"teste" | "basico" | "completo">("teste");
   const [showOnboard, setShowOnboard] = useState(false);
+  const [showImport, setShowImport] = useState(false);
+  const [showOcrNotice, setShowOcrNotice] = useState(false);
   const [tab, setTab] = useState<Tab>("album");
   const [counts, setCounts] = useState<StickerCounts>({});
   const [paywallOpen, setPaywallOpen] = useState(false);
@@ -126,7 +130,15 @@ const Index = () => {
         }
         if (!onboardingSetRef.current) {
           const jaViu = (prof as any).onboarding_concluido === true;
+          const importacaoFeita = (prof as any).onboarding_importacao_concluido === true;
+          const avisoOcrVisto = (prof as any).aviso_camera_ocr_visto === true;
           setShowOnboard(!jaViu && !prof.is_premium);
+          // Para usuários existentes (já fizeram onboarding antes desta atualização),
+          // mostramos o banner OCR em vez de forçar a tela de importação.
+          // Usuários novos verão a tela de importação logo após o onboarding (no callback onDone).
+          if (jaViu && !avisoOcrVisto) {
+            setShowOcrNotice(true);
+          }
           onboardingSetRef.current = true;
         }
       } else {
@@ -137,6 +149,8 @@ const Index = () => {
           avatar: "⚽",
           phone: "",
           onboarding_concluido: false,
+          onboarding_importacao_concluido: false,
+          aviso_camera_ocr_visto: true,
           teste_iniciado_em: new Date().toISOString(),
         };
         await supabase.from("profiles").insert(initial);
@@ -152,6 +166,7 @@ const Index = () => {
         setDiasRestantes(15);
         setHorasRestantes(360);
         setShowOnboard(true);
+        setShowImport(false);
         onboardingSetRef.current = true;
       }
 
@@ -231,8 +246,21 @@ const Index = () => {
               .update({ onboarding_concluido: true })
               .eq("id", user.id);
             if (error) console.error("Erro ao salvar onboarding:", error);
+            // Após concluir onboarding inicial, mostrar tela de importação (uma vez)
+            setShowImport(true);
           }
         }}
+      />
+    );
+  }
+
+  if (showImport && user) {
+    return (
+      <ImportStickersOnboarding
+        userId={user.id}
+        counts={counts}
+        onCountsChange={setCounts}
+        onDone={() => setShowImport(false)}
       />
     );
   }
@@ -255,6 +283,16 @@ const Index = () => {
         </div>
       </header>
       <PWAInstallBanner />
+      {showOcrNotice && user && (
+        <CameraOcrNoticeBanner
+          userId={user.id}
+          onDismiss={() => setShowOcrNotice(false)}
+          onImport={() => {
+            setShowOcrNotice(false);
+            setShowImport(true);
+          }}
+        />
+      )}
       {!isPremium && (
         <TesteBanner
           diasRestantes={diasRestantes}
