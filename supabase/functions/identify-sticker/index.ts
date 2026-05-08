@@ -17,7 +17,7 @@ Deno.serve(async (req) => {
 
     const response = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 300,
+      max_tokens: 30,
       messages: [{
         role: "user",
         content: [
@@ -31,50 +31,36 @@ Deno.serve(async (req) => {
           },
           {
             type: "text",
-            text: `Esta é uma figurinha do álbum Panini FIFA World Cup 2026.
-
-Analise a imagem com atenção e identifique:
-1. O SOBRENOME do jogador — geralmente escrito em letras maiúsculas na parte inferior ou superior da figurinha
-2. O NOME do jogador — geralmente escrito em letras menores abaixo do sobrenome
-3. A SIGLA da seleção — ex: BRA, ARG, FRA, MEX
-4. O NÚMERO da figurinha — número pequeno no canto da figurinha
-
-IMPORTANTE: 
-- Se a figurinha mostra um JOGADOR com foto, retorne o nome/sobrenome do jogador
-- Se a figurinha mostra apenas um ESCUDO/EMBLEMA sem foto de jogador, retorne tipo "escudo"
-- Leia com cuidado o texto na figurinha — não adivinhe
-
-Responda APENAS com JSON válido, sem explicações:
-{
-  "sobrenome": "sobrenome em maiúsculas ou null",
-  "nome": "nome em letras menores ou null",
-  "nome_completo": "Nome Sobrenome combinado ou null",
-  "sigla_selecao": "sigla de 3 letras ou null",
-  "numero": "número da figurinha ou null",
-  "tipo": "jogador ou escudo ou foto_time ou especial",
-  "confianca": "alta ou media ou baixa"
-}`
+            text: `Leia o código alfanumérico impresso nesta figurinha Panini da Copa do Mundo 2026.
+O código está no formato SIGLA-NÚMERO (exemplos: BRA-14, MEX-07, FWC-03, USA-20).
+Retorne SOMENTE o código, sem nenhum texto adicional, sem pontuação, sem explicação.
+Se não conseguir ler o código, retorne apenas: ERRO`
           }
         ]
       }]
     });
 
     const text = response.content[0].type === "text" ? response.content[0].text : "{}";
-    const clean = text.replace(/```json|```/g, "").trim();
+    const clean = text.replace(/[`"'.\s]/g, "").toUpperCase().trim();
+    console.log("OCR result:", clean);
 
-    try {
-      const result = JSON.parse(clean);
-      console.log("Identificação:", JSON.stringify(result));
-      return new Response(JSON.stringify(result), {
+    if (!clean || clean === "ERRO" || clean.includes("ERRO")) {
+      return new Response(JSON.stringify({ codigo: null, erro: true }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
-    } catch {
-      console.error("JSON parse error:", clean);
-      return new Response(
-        JSON.stringify({ sobrenome: null, nome: null, nome_completo: null, sigla_selecao: null, numero: null, tipo: null, confianca: "baixa" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
     }
+
+    const match = clean.match(/([A-Z]{2,4})-?(\d{1,3})/);
+    if (!match) {
+      return new Response(JSON.stringify({ codigo: null, erro: true }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const codigo = `${match[1]}-${match[2].padStart(2, "0")}`;
+    return new Response(JSON.stringify({ codigo, erro: false }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   } catch (err) {
     console.error("Erro:", err);
     return new Response(
