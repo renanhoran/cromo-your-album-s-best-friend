@@ -229,13 +229,13 @@ export function AlbumView({
             <Stat value={stats.dupes} label="repetidas" tone="dupe" />
           </div>
 
-          <div className="flex gap-2 overflow-x-auto -mx-1 px-1 pb-1 no-scrollbar">
+          <div className="grid grid-cols-4 gap-1.5">
             {FILTERS.map((f) => (
               <button
                 key={f.id}
                 onClick={() => setFilter(f.id)}
                 className={cn(
-                  "shrink-0 px-4 h-9 rounded-full text-sm font-semibold border transition-all",
+                  "h-9 rounded-full text-xs font-semibold border transition-all px-2",
                   filter === f.id
                     ? "bg-foreground text-background border-foreground"
                     : "bg-card text-foreground border-border"
