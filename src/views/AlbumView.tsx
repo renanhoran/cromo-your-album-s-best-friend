@@ -440,21 +440,26 @@ export function AlbumView({
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-          <button
-            type="button"
-            aria-label="Identificar figurinha pela câmera"
-            onClick={() => {
-              const seen = localStorage.getItem("camera_tip_seen") === "1";
-              if (seen) {
-                inputRef.current?.click();
-              } else {
-                setShowCameraTip(true);
-              }
-            }}
-            className="fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg cursor-pointer active:scale-95 transition-transform"
-          >
-            <Camera className="w-6 h-6" />
-          </button>
+          <div className="fixed bottom-20 right-4 z-40 flex flex-col items-center gap-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-destructive bg-background/90 px-2 py-0.5 rounded-full shadow-sm border border-destructive/30">
+              Localize com IA
+            </span>
+            <button
+              type="button"
+              aria-label="Identificar figurinha pela câmera"
+              onClick={() => {
+                const seen = localStorage.getItem("camera_tip_seen") === "1";
+                if (seen) {
+                  inputRef.current?.click();
+                } else {
+                  setShowCameraTip(true);
+                }
+              }}
+              className="w-14 h-14 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-lg cursor-pointer active:scale-95 transition-transform"
+            >
+              <Camera className="w-6 h-6" />
+            </button>
+          </div>
           <input
             ref={inputRef}
             id="camera-input"
