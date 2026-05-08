@@ -346,6 +346,12 @@ export function AlbumView({
 
       {isMobile && temCamera && (
         <>
+          <div className="fixed bottom-[5.5rem] right-4 z-40 max-w-[14rem]">
+            <div className="bg-primary/10 border border-primary/30 rounded-xl px-3 py-2 text-xs font-semibold text-primary text-right shadow-sm">
+              <Camera className="h-3.5 w-3.5 inline mr-1" />
+              Aponte para o código da parte de trás da figurinha
+            </div>
+          </div>
           <label
             htmlFor="camera-input"
             aria-label="Identificar figurinha pela câmera"

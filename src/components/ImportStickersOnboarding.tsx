@@ -216,7 +216,7 @@ export function ImportStickersOnboarding({ userId, counts, onCountsChange, onDon
             </button>
             <h2 className="text-xl font-black mb-1">Escanear figurinhas</h2>
             <p className="text-muted-foreground text-sm mb-4">
-              Aponte para o número da figurinha (ex: BRA-14)
+              Aponte a câmera para o código na parte de trás da figurinha (ex: BRA-14)
             </p>
             <div className="rounded-2xl bg-primary/10 border border-primary/30 px-4 py-3 mb-4 text-center">
               <div className="text-3xl font-black text-primary leading-none">{scanned.size}</div>
