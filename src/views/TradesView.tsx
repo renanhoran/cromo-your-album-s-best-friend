@@ -47,8 +47,9 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
         const list = (profiles ?? [])
           .filter((p: any) => byUser.has(p.id))
           .filter((p: any) => {
-            const n = (p.nome ?? "").toLowerCase().trim();
-            return n !== "operador" && n !== "app tester";
+            const n = (p.nome ?? "").toLowerCase().replace(/\s+/g, "");
+            if (!n) return true;
+            return !/(operador|apptester|tester|teste\d|^teste$)/.test(n);
           })
           .map((p: any) => ({
             id: p.id,
