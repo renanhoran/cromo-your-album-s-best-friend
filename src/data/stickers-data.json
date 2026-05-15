@@ -9678,5 +9678,255 @@
     "posicao_relativa": 20,
     "tipo": "jogador",
     "nome": "Carrasquilla Adalberto"
+  },
+  {
+    "id": "FWC-009",
+    "numero_absoluto": 124,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 9,
+    "tipo": "especial",
+    "nome": "História da Copa — 1930 Uruguai"
+  },
+  {
+    "id": "FWC-010",
+    "numero_absoluto": 125,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 10,
+    "tipo": "especial",
+    "nome": "História da Copa — 1950 Brasil"
+  },
+  {
+    "id": "FWC-011",
+    "numero_absoluto": 126,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 11,
+    "tipo": "especial",
+    "nome": "História da Copa — 1958 Suécia"
+  },
+  {
+    "id": "FWC-012",
+    "numero_absoluto": 127,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 12,
+    "tipo": "especial",
+    "nome": "História da Copa — 1962 Chile"
+  },
+  {
+    "id": "FWC-013",
+    "numero_absoluto": 128,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 13,
+    "tipo": "especial",
+    "nome": "História da Copa — 1970 México"
+  },
+  {
+    "id": "FWC-014",
+    "numero_absoluto": 129,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 14,
+    "tipo": "especial",
+    "nome": "História da Copa — 1974 Alemanha"
+  },
+  {
+    "id": "FWC-015",
+    "numero_absoluto": 130,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 15,
+    "tipo": "especial",
+    "nome": "História da Copa — 1986 México"
+  },
+  {
+    "id": "FWC-016",
+    "numero_absoluto": 131,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 16,
+    "tipo": "especial",
+    "nome": "História da Copa — 1994 EUA"
+  },
+  {
+    "id": "FWC-017",
+    "numero_absoluto": 132,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 17,
+    "tipo": "especial",
+    "nome": "História da Copa — 2002 Coreia/Japão"
+  },
+  {
+    "id": "FWC-018",
+    "numero_absoluto": 133,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 18,
+    "tipo": "especial",
+    "nome": "História da Copa — 2014 Brasil"
+  },
+  {
+    "id": "FWC-019",
+    "numero_absoluto": 134,
+    "grupo": "FWC",
+    "sigla_selecao": "FWC",
+    "selecao": "FIFA World Cup History",
+    "posicao_relativa": 19,
+    "tipo": "especial",
+    "nome": "História da Copa — 2022 Catar"
+  },
+  {
+    "id": "CC-001",
+    "numero_absoluto": 135,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 1,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC1"
+  },
+  {
+    "id": "CC-002",
+    "numero_absoluto": 136,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 2,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC2"
+  },
+  {
+    "id": "CC-003",
+    "numero_absoluto": 137,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 3,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC3"
+  },
+  {
+    "id": "CC-004",
+    "numero_absoluto": 138,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 4,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC4"
+  },
+  {
+    "id": "CC-005",
+    "numero_absoluto": 139,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 5,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC5"
+  },
+  {
+    "id": "CC-006",
+    "numero_absoluto": 140,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 6,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC6"
+  },
+  {
+    "id": "CC-007",
+    "numero_absoluto": 141,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 7,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC7"
+  },
+  {
+    "id": "CC-008",
+    "numero_absoluto": 142,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 8,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC8"
+  },
+  {
+    "id": "CC-009",
+    "numero_absoluto": 143,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 9,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC9"
+  },
+  {
+    "id": "CC-010",
+    "numero_absoluto": 144,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 10,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC10"
+  },
+  {
+    "id": "CC-011",
+    "numero_absoluto": 145,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 11,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC11"
+  },
+  {
+    "id": "CC-012",
+    "numero_absoluto": 146,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 12,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC12"
+  },
+  {
+    "id": "CC-013",
+    "numero_absoluto": 147,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 13,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC13"
+  },
+  {
+    "id": "CC-014",
+    "numero_absoluto": 148,
+    "grupo": "CC",
+    "sigla_selecao": "CC",
+    "selecao": "Figurinhas Coca-Cola",
+    "posicao_relativa": 14,
+    "tipo": "especial_parceiro",
+    "nome": "Figurinha Coca-Cola CC14"
   }
 ]
