@@ -5,7 +5,7 @@ import type { Profile } from "@/pages/Index";
 import { AdBanner } from "@/components/AdBanner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Camera, Loader2, HelpCircle } from "lucide-react";
+import { Moon, Sun, Camera, Loader2, HelpCircle, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -204,6 +204,17 @@ export function ProfileView({
           <HelpCircle className="h-5 w-5" />
           Como funciona o app
         </Button>
+
+        <a
+          href="/downloads/tabela-figurinhas-copa-2026.pdf"
+          download
+          className="block"
+        >
+          <Button variant="outline" className="w-full h-12 justify-start gap-3">
+            <Download className="h-5 w-5" />
+            Baixar tabela de figurinhas (PDF)
+          </Button>
+        </a>
 
         <div className="rounded-2xl bg-card border border-border p-4 space-y-2">
           <h3 className="font-bold text-sm">Privacidade e LGPD</h3>
