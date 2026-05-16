@@ -80,7 +80,7 @@
     "nome": "Mascotes Históricos Copa do Mundo"
   },
   {
-    "id": "MEX-000",
+    "id": "MEX-001",
     "numero_absoluto": 8,
     "grupo": "A",
     "sigla_selecao": "MEX",
@@ -110,7 +110,7 @@
     "nome": "Sánchez Jorge"
   },
   {
-    "id": "RSA-000",
+    "id": "RSA-001",
     "numero_absoluto": 10,
     "grupo": "A",
     "sigla_selecao": "RSA",
@@ -160,7 +160,7 @@
     "nome": "Chaine Sipho"
   },
   {
-    "id": "KOR-000",
+    "id": "KOR-001",
     "numero_absoluto": 12,
     "grupo": "A",
     "sigla_selecao": "KOR",
@@ -230,7 +230,7 @@
     "nome": "Lee Han-beom"
   },
   {
-    "id": "CZE-000",
+    "id": "CZE-001",
     "numero_absoluto": 14,
     "grupo": "A",
     "sigla_selecao": "CZE",
@@ -320,7 +320,7 @@
     "nome": "Staněk Jindřich"
   },
   {
-    "id": "CAN-000",
+    "id": "CAN-001",
     "numero_absoluto": 16,
     "grupo": "B",
     "sigla_selecao": "CAN",
@@ -430,7 +430,7 @@
     "nome": "Davies Alphonso"
   },
   {
-    "id": "BIH-000",
+    "id": "BIH-001",
     "numero_absoluto": 18,
     "grupo": "B",
     "sigla_selecao": "BIH",
@@ -560,7 +560,7 @@
     "nome": "Dedić Amar"
   },
   {
-    "id": "QAT-000",
+    "id": "QAT-001",
     "numero_absoluto": 20,
     "grupo": "B",
     "sigla_selecao": "QAT",
@@ -710,7 +710,7 @@
     "nome": "Albrake Sultan"
   },
   {
-    "id": "SUI-000",
+    "id": "SUI-001",
     "numero_absoluto": 22,
     "grupo": "B",
     "sigla_selecao": "SUI",
@@ -880,7 +880,7 @@
     "nome": "Mvogo Yvon"
   },
   {
-    "id": "BRA-000",
+    "id": "BRA-001",
     "numero_absoluto": 24,
     "grupo": "C",
     "sigla_selecao": "BRA",
@@ -1070,7 +1070,7 @@
     "nome": "Bento"
   },
   {
-    "id": "MAR-000",
+    "id": "MAR-001",
     "numero_absoluto": 26,
     "grupo": "C",
     "sigla_selecao": "MAR",
@@ -1270,7 +1270,7 @@
     "nome": "El Kajoui Munir"
   },
   {
-    "id": "HAI-000",
+    "id": "HAI-001",
     "numero_absoluto": 28,
     "grupo": "C",
     "sigla_selecao": "HAI",
@@ -1470,7 +1470,7 @@
     "nome": "Arcus Carlens"
   },
   {
-    "id": "SCO-000",
+    "id": "SCO-001",
     "numero_absoluto": 30,
     "grupo": "C",
     "sigla_selecao": "SCO",
@@ -1670,7 +1670,7 @@
     "nome": "McKenna Scott"
   },
   {
-    "id": "USA-000",
+    "id": "USA-001",
     "numero_absoluto": 32,
     "grupo": "D",
     "sigla_selecao": "USA",
@@ -1870,7 +1870,7 @@
     "nome": "Robinson Antonee"
   },
   {
-    "id": "PAR-000",
+    "id": "PAR-001",
     "numero_absoluto": 34,
     "grupo": "D",
     "sigla_selecao": "PAR",
@@ -2070,7 +2070,7 @@
     "nome": "Gill Orlando"
   },
   {
-    "id": "AUS-000",
+    "id": "AUS-001",
     "numero_absoluto": 36,
     "grupo": "D",
     "sigla_selecao": "AUS",
@@ -2270,7 +2270,7 @@
     "nome": "Gauci Joe"
   },
   {
-    "id": "TUR-000",
+    "id": "TUR-001",
     "numero_absoluto": 38,
     "grupo": "D",
     "sigla_selecao": "TUR",
@@ -2470,7 +2470,7 @@
     "nome": "Demiral Merih"
   },
   {
-    "id": "GER-000",
+    "id": "GER-001",
     "numero_absoluto": 40,
     "grupo": "E",
     "sigla_selecao": "GER",
@@ -2670,7 +2670,7 @@
     "nome": "Tah Jonathan"
   },
   {
-    "id": "CUW-000",
+    "id": "CUW-001",
     "numero_absoluto": 42,
     "grupo": "E",
     "sigla_selecao": "CUW",
@@ -2870,7 +2870,7 @@
     "nome": "Van Eijma Roshon"
   },
   {
-    "id": "CIV-000",
+    "id": "CIV-001",
     "numero_absoluto": 44,
     "grupo": "E",
     "sigla_selecao": "CIV",
@@ -3070,7 +3070,7 @@
     "nome": "Konan Ghislain"
   },
   {
-    "id": "ECU-000",
+    "id": "ECU-001",
     "numero_absoluto": 46,
     "grupo": "E",
     "sigla_selecao": "ECU",
@@ -3270,7 +3270,7 @@
     "nome": "Valle Gonzalo"
   },
   {
-    "id": "NED-000",
+    "id": "NED-001",
     "numero_absoluto": 48,
     "grupo": "F",
     "sigla_selecao": "NED",
@@ -3470,7 +3470,7 @@
     "nome": "Van Dijk Virgil"
   },
   {
-    "id": "JPN-000",
+    "id": "JPN-001",
     "numero_absoluto": 50,
     "grupo": "F",
     "sigla_selecao": "JPN",
@@ -3670,7 +3670,7 @@
     "nome": "Watanabe Tsuyoshi"
   },
   {
-    "id": "SWE-000",
+    "id": "SWE-001",
     "numero_absoluto": 52,
     "grupo": "F",
     "sigla_selecao": "SWE",
@@ -3870,7 +3870,7 @@
     "nome": "Hien Isak"
   },
   {
-    "id": "TUN-000",
+    "id": "TUN-001",
     "numero_absoluto": 54,
     "grupo": "F",
     "sigla_selecao": "TUN",
@@ -4240,7 +4240,7 @@
     "nome": "Talbi Montassar"
   },
   {
-    "id": "BEL-000",
+    "id": "BEL-001",
     "numero_absoluto": 58,
     "grupo": "G",
     "sigla_selecao": "BEL",
@@ -4420,7 +4420,7 @@
     "nome": "Theate Arthur"
   },
   {
-    "id": "EGY-000",
+    "id": "EGY-001",
     "numero_absoluto": 60,
     "grupo": "G",
     "sigla_selecao": "EGY",
@@ -4600,7 +4600,7 @@
     "nome": "Hany Mohamed"
   },
   {
-    "id": "IRN-000",
+    "id": "IRN-001",
     "numero_absoluto": 62,
     "grupo": "G",
     "sigla_selecao": "IRN",
@@ -4780,7 +4780,7 @@
     "nome": "Pouraliganji Morteza"
   },
   {
-    "id": "NZL-000",
+    "id": "NZL-001",
     "numero_absoluto": 64,
     "grupo": "G",
     "sigla_selecao": "NZL",
@@ -4960,7 +4960,7 @@
     "nome": "Paulsen Alex"
   },
   {
-    "id": "ESP-000",
+    "id": "ESP-001",
     "numero_absoluto": 66,
     "grupo": "H",
     "sigla_selecao": "ESP",
@@ -5140,7 +5140,7 @@
     "nome": "Le Normand Robin"
   },
   {
-    "id": "CPV-000",
+    "id": "CPV-001",
     "numero_absoluto": 68,
     "grupo": "H",
     "sigla_selecao": "CPV",
@@ -5320,7 +5320,7 @@
     "nome": "Costa Logan"
   },
   {
-    "id": "KSA-000",
+    "id": "KSA-001",
     "numero_absoluto": 70,
     "grupo": "H",
     "sigla_selecao": "KSA",
@@ -5500,7 +5500,7 @@
     "nome": "Al-Sanbi Abdulrahman"
   },
   {
-    "id": "URU-000",
+    "id": "URU-001",
     "numero_absoluto": 72,
     "grupo": "H",
     "sigla_selecao": "URU",
@@ -5680,7 +5680,7 @@
     "nome": "Mele Santiago"
   },
   {
-    "id": "FRA-000",
+    "id": "FRA-001",
     "numero_absoluto": 74,
     "grupo": "I",
     "sigla_selecao": "FRA",
@@ -5870,7 +5870,7 @@
     "nome": "Upamecano Dayot"
   },
   {
-    "id": "SEN-000",
+    "id": "SEN-001",
     "numero_absoluto": 76,
     "grupo": "I",
     "sigla_selecao": "SEN",
@@ -6070,7 +6070,7 @@
     "nome": "Diouf Yehvann"
   },
   {
-    "id": "IRQ-000",
+    "id": "IRQ-001",
     "numero_absoluto": 78,
     "grupo": "I",
     "sigla_selecao": "IRQ",
@@ -6270,7 +6270,7 @@
     "nome": "Sulaka Rebin"
   },
   {
-    "id": "NOR-000",
+    "id": "NOR-001",
     "numero_absoluto": 80,
     "grupo": "I",
     "sigla_selecao": "NOR",
@@ -6470,7 +6470,7 @@
     "nome": "Müller Wolfe David"
   },
   {
-    "id": "ARG-000",
+    "id": "ARG-001",
     "numero_absoluto": 82,
     "grupo": "J",
     "sigla_selecao": "ARG",
@@ -6670,7 +6670,7 @@
     "nome": "Molina Nahuel"
   },
   {
-    "id": "ALG-000",
+    "id": "ALG-001",
     "numero_absoluto": 84,
     "grupo": "J",
     "sigla_selecao": "ALG",
@@ -6870,7 +6870,7 @@
     "nome": "Bensebaini Ramy"
   },
   {
-    "id": "AUT-000",
+    "id": "AUT-001",
     "numero_absoluto": 86,
     "grupo": "J",
     "sigla_selecao": "AUT",
@@ -7070,7 +7070,7 @@
     "nome": "Pentz Patrick"
   },
   {
-    "id": "JOR-000",
+    "id": "JOR-001",
     "numero_absoluto": 88,
     "grupo": "J",
     "sigla_selecao": "JOR",
@@ -7270,7 +7270,7 @@
     "nome": "Haddad Ihsan"
   },
   {
-    "id": "POR-000",
+    "id": "POR-001",
     "numero_absoluto": 90,
     "grupo": "K",
     "sigla_selecao": "POR",
@@ -7470,7 +7470,7 @@
     "nome": "Sá José"
   },
   {
-    "id": "COD-000",
+    "id": "COD-001",
     "numero_absoluto": 92,
     "grupo": "K",
     "sigla_selecao": "COD",
@@ -7670,7 +7670,7 @@
     "nome": "Wan-Bissaka Aaron"
   },
   {
-    "id": "UZB-000",
+    "id": "UZB-001",
     "numero_absoluto": 94,
     "grupo": "K",
     "sigla_selecao": "UZB",
@@ -7870,7 +7870,7 @@
     "nome": "Savfiev Farrukh"
   },
   {
-    "id": "COL-000",
+    "id": "COL-001",
     "numero_absoluto": 96,
     "grupo": "K",
     "sigla_selecao": "COL",
@@ -8070,7 +8070,7 @@
     "nome": "Ospina David"
   },
   {
-    "id": "ENG-000",
+    "id": "ENG-001",
     "numero_absoluto": 98,
     "grupo": "L",
     "sigla_selecao": "ENG",
@@ -8270,7 +8270,7 @@
     "nome": "James Reece"
   },
   {
-    "id": "CRO-000",
+    "id": "CRO-001",
     "numero_absoluto": 100,
     "grupo": "L",
     "sigla_selecao": "CRO",
@@ -8470,7 +8470,7 @@
     "nome": "Šutalo Josip"
   },
   {
-    "id": "GHA-000",
+    "id": "GHA-001",
     "numero_absoluto": 102,
     "grupo": "L",
     "sigla_selecao": "GHA",
@@ -8670,7 +8670,7 @@
     "nome": "Salisu Mohammed"
   },
   {
-    "id": "PAN-000",
+    "id": "PAN-001",
     "numero_absoluto": 104,
     "grupo": "L",
     "sigla_selecao": "PAN",
