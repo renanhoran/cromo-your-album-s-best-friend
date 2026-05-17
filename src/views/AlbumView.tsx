@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import type { Profile } from "@/pages/Index";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
+import { flagFromSigla } from "@/lib/flags";
+import type { Sticker } from "@/data/stickers";
 import {
   Select,
   SelectContent,
@@ -329,17 +331,16 @@ export function AlbumView({
                 );
                 return;
               }
-              const linhas = filtered.map((s) => {
-                const c = counts[s.id] ?? 0;
-                const extras = Math.max(0, c - 1);
-                return `• ${s.sigla_selecao} #${s.id}${extras > 1 ? ` (×${extras})` : ""}`;
+              const corpo = buildGroupedShareText(filtered, (s) => {
+                const extras = Math.max(0, (counts[s.id] ?? 0) - 1);
+                return Array(extras).fill(s.id);
               });
               const assinatura = profile?.nome
                 ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
                 : `\n\nWhatsApp: ${phoneRaw}`;
               const texto =
                 `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
-                linhas.join("\n") +
+                corpo +
                 `\n\nTroca comigo? 🤝` +
                 assinatura;
               shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
@@ -348,6 +349,34 @@ export function AlbumView({
           >
             <Share2 className="h-4 w-4" />
             Compartilhar repetidas no WhatsApp
+          </button>
+        )}
+        {filter === "preciso" && filtered.length > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
+              if (!phoneRaw || phoneRaw.length < 10) {
+                toast.error(
+                  "Cadastre seu WhatsApp no Perfil para compartilhar suas faltantes."
+                );
+                return;
+              }
+              const corpo = buildGroupedShareText(filtered, (s) => [s.id]);
+              const assinatura = profile?.nome
+                ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
+                : `\n\nWhatsApp: ${phoneRaw}`;
+              const texto =
+                `🎯 Figurinhas que preciso — Copa 2026 (${stats.missing})\n\n` +
+                corpo +
+                `\n\nTem alguma dessas? 🤝` +
+                assinatura;
+              shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
+            }}
+            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
+          >
+            <Share2 className="h-4 w-4" />
+            Compartilhar faltantes no WhatsApp
           </button>
         )}
         {grouped.length === 0 && (
@@ -489,4 +518,52 @@ function Stat({ value, label, tone }: { value: number; label: string; tone: "hav
       <div className="text-[11px] text-muted-foreground font-medium mt-0.5">{label}</div>
     </div>
   );
+}
+
+const GROUP_ORDER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "FWC", "CC"];
+
+function groupEmoji(grupo: string, sigla: string): string {
+  if (grupo === "FWC") return "🏆";
+  if (grupo === "CC") return "🥤";
+  return flagFromSigla(sigla) || "•";
+}
+
+function groupLabel(grupo: string): string {
+  if (grupo === "FWC") return "FWC — Especiais";
+  if (grupo === "CC") return "Coca-Cola";
+  return `GRUPO ${grupo}`;
+}
+
+export function buildGroupedShareText(
+  stickers: Sticker[],
+  codesFor: (s: Sticker) => string[]
+): string {
+  // group by grupo -> sigla
+  const byGroup = new Map<string, Map<string, { selecao: string; sigla: string; codigos: string[] }>>();
+  for (const s of stickers) {
+    const codes = codesFor(s);
+    if (!codes.length) continue;
+    if (!byGroup.has(s.grupo)) byGroup.set(s.grupo, new Map());
+    const inner = byGroup.get(s.grupo)!;
+    if (!inner.has(s.sigla_selecao)) {
+      inner.set(s.sigla_selecao, { selecao: s.selecao, sigla: s.sigla_selecao, codigos: [] });
+    }
+    inner.get(s.sigla_selecao)!.codigos.push(...codes);
+  }
+
+  const ordered = [...byGroup.keys()].sort(
+    (a, b) => GROUP_ORDER.indexOf(a) - GROUP_ORDER.indexOf(b)
+  );
+
+  const blocos: string[] = [];
+  for (const g of ordered) {
+    const inner = byGroup.get(g)!;
+    const linhas: string[] = [`*${groupLabel(g)}*`];
+    for (const { selecao, sigla, codigos } of inner.values()) {
+      const emoji = groupEmoji(g, sigla);
+      linhas.push(`${emoji} ${selecao}: ${codigos.join(", ")}`);
+    }
+    blocos.push(linhas.join("\n"));
+  }
+  return blocos.join("\n\n");
 }
