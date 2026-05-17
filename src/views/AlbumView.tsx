@@ -519,3 +519,51 @@ function Stat({ value, label, tone }: { value: number; label: string; tone: "hav
     </div>
   );
 }
+
+const GROUP_ORDER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "FWC", "CC"];
+
+function groupEmoji(grupo: string, sigla: string): string {
+  if (grupo === "FWC") return "🏆";
+  if (grupo === "CC") return "🥤";
+  return flagFromSigla(sigla) || "•";
+}
+
+function groupLabel(grupo: string): string {
+  if (grupo === "FWC") return "FWC — Especiais";
+  if (grupo === "CC") return "Coca-Cola";
+  return `GRUPO ${grupo}`;
+}
+
+export function buildGroupedShareText(
+  stickers: Sticker[],
+  codesFor: (s: Sticker) => string[]
+): string {
+  // group by grupo -> sigla
+  const byGroup = new Map<string, Map<string, { selecao: string; sigla: string; codigos: string[] }>>();
+  for (const s of stickers) {
+    const codes = codesFor(s);
+    if (!codes.length) continue;
+    if (!byGroup.has(s.grupo)) byGroup.set(s.grupo, new Map());
+    const inner = byGroup.get(s.grupo)!;
+    if (!inner.has(s.sigla_selecao)) {
+      inner.set(s.sigla_selecao, { selecao: s.selecao, sigla: s.sigla_selecao, codigos: [] });
+    }
+    inner.get(s.sigla_selecao)!.codigos.push(...codes);
+  }
+
+  const ordered = [...byGroup.keys()].sort(
+    (a, b) => GROUP_ORDER.indexOf(a) - GROUP_ORDER.indexOf(b)
+  );
+
+  const blocos: string[] = [];
+  for (const g of ordered) {
+    const inner = byGroup.get(g)!;
+    const linhas: string[] = [`*${groupLabel(g)}*`];
+    for (const { selecao, sigla, codigos } of inner.values()) {
+      const emoji = groupEmoji(g, sigla);
+      linhas.push(`${emoji} ${selecao}: ${codigos.join(", ")}`);
+    }
+    blocos.push(linhas.join("\n"));
+  }
+  return blocos.join("\n\n");
+}
