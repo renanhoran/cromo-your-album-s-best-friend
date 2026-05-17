@@ -12,6 +12,7 @@ import type { Profile } from "@/pages/Index";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
 import { flagFromSigla } from "@/lib/flags";
+import type { Sticker } from "@/data/stickers";
 import {
   Select,
   SelectContent,
