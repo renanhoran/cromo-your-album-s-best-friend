@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import type { Profile } from "@/pages/Index";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
+import { flagFromSigla } from "@/lib/flags";
 import {
   Select,
   SelectContent,
