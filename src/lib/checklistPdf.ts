@@ -156,7 +156,7 @@ export async function generateChecklistPdf(
 
   // stats bar
   doc.setFillColor(...SOFT_BG);
-  doc.roundRect(MARGIN, y, W - 2 * MARGIN, 14, 2, 2, "F");
+  doc.roundedRect(MARGIN, y, W - 2 * MARGIN, 14, 2, 2, "F");
   doc.setTextColor(...HEADER);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
@@ -185,9 +185,9 @@ export async function generateChecklistPdf(
   const pbx = MARGIN + 82;
   const pbw = W - 2 * MARGIN - 86;
   doc.setFillColor(...TRACK);
-  doc.roundRect(pbx, y + 5, pbw, 4, 1, 1, "F");
+  doc.roundedRect(pbx, y + 5, pbw, 4, 1, 1, "F");
   doc.setFillColor(...PRIMARY);
-  doc.roundRect(pbx, y + 5, (pbw * have) / total, 4, 1, 1, "F");
+  doc.roundedRect(pbx, y + 5, (pbw * have) / total, 4, 1, 1, "F");
   doc.setTextColor(...HEADER);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
@@ -320,7 +320,7 @@ export async function generateChecklistPdf(
   doc.setFillColor(248, 250, 252);
   doc.setDrawColor(...BORDER);
   doc.setLineWidth(0.3);
-  doc.roundRect(MARGIN, y, W - 2 * MARGIN, 60, 3, 3, "FD");
+  doc.roundedRect(MARGIN, y, W - 2 * MARGIN, 60, 3, 3, "FD");
 
   const qrSize = 45;
   const qrX = MARGIN + 6;
