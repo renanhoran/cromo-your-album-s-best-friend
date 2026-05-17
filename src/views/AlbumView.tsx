@@ -524,31 +524,65 @@ function Stat({ value, label, tone }: { value: number; label: string; tone: "hav
   );
 }
 
-const GROUP_ORDER = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "FWC", "CC"];
+const GROUP_ORDER = [
+  "FWC1",
+  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+  "FWC2",
+  "CC",
+];
 
-function groupEmoji(grupo: string, sigla: string): string {
-  if (grupo === "FWC") return "🏆";
-  if (grupo === "CC") return "🥤";
+// Ordem oficial dos países dentro de cada grupo (sorteio Copa 2026)
+const COUNTRY_ORDER: Record<string, string[]> = {
+  A: ["MEX", "RSA", "KOR", "CZE"],
+  B: ["CAN", "BIH", "QAT", "SUI"],
+  C: ["BRA", "MAR", "HAI", "SCO"],
+  D: ["USA", "PAR", "AUS", "TUR"],
+  E: ["GER", "CUW", "CIV", "ECU"],
+  F: ["NED", "JPN", "SWE", "TUN"],
+  G: ["BEL", "EGY", "IRN", "NZL"],
+  H: ["ESP", "CPV", "KSA", "URU"],
+  I: ["FRA", "SEN", "IRQ", "NOR"],
+  J: ["ARG", "ALG", "AUT", "JOR"],
+  K: ["POR", "COD", "UZB", "COL"],
+  L: ["ENG", "CRO", "GHA", "PAN"],
+};
+
+function fwcSplitKey(id: string): "FWC1" | "FWC2" {
+  // FWC-001..FWC-008 = Especiais (início) | FWC-009..FWC-019 = History (final)
+  const n = parseInt(id.split("-")[1] ?? "0", 10);
+  return n <= 8 ? "FWC1" : "FWC2";
+}
+
+function bucketFor(s: Sticker): string {
+  if (s.grupo === "FWC") return fwcSplitKey(s.id);
+  return s.grupo;
+}
+
+function groupEmoji(bucket: string, sigla: string): string {
+  if (bucket === "FWC1" || bucket === "FWC2") return "🏆";
+  if (bucket === "CC") return "🥤";
   return flagFromSigla(sigla) || "•";
 }
 
-function groupLabel(grupo: string): string {
-  if (grupo === "FWC") return "FWC — Especiais";
-  if (grupo === "CC") return "Coca-Cola";
-  return `GRUPO ${grupo}`;
+function groupLabel(bucket: string): string {
+  if (bucket === "FWC1") return "FWC — Especiais";
+  if (bucket === "FWC2") return "FWC — História da Copa";
+  if (bucket === "CC") return "Coca-Cola";
+  return `GRUPO ${bucket}`;
 }
 
 export function buildGroupedShareText(
   stickers: Sticker[],
   codesFor: (s: Sticker) => string[]
 ): string {
-  // group by grupo -> sigla
+  // group by bucket -> sigla
   const byGroup = new Map<string, Map<string, { selecao: string; sigla: string; codigos: string[] }>>();
   for (const s of stickers) {
     const codes = codesFor(s);
     if (!codes.length) continue;
-    if (!byGroup.has(s.grupo)) byGroup.set(s.grupo, new Map());
-    const inner = byGroup.get(s.grupo)!;
+    const bucket = bucketFor(s);
+    if (!byGroup.has(bucket)) byGroup.set(bucket, new Map());
+    const inner = byGroup.get(bucket)!;
     if (!inner.has(s.sigla_selecao)) {
       inner.set(s.sigla_selecao, { selecao: s.selecao, sigla: s.sigla_selecao, codigos: [] });
     }
@@ -563,9 +597,27 @@ export function buildGroupedShareText(
   for (const g of ordered) {
     const inner = byGroup.get(g)!;
     const linhas: string[] = [`*${groupLabel(g)}*`];
-    for (const { selecao, sigla, codigos } of inner.values()) {
+
+    // Ordena países conforme ordem oficial do grupo; demais (FWC/CC) mantêm ordem por código
+    const officialOrder = COUNTRY_ORDER[g];
+    const entries = [...inner.values()];
+    if (officialOrder) {
+      entries.sort(
+        (a, b) =>
+          officialOrder.indexOf(a.sigla) - officialOrder.indexOf(b.sigla)
+      );
+    } else {
+      entries.sort((a, b) => {
+        const ca = [...a.codigos].sort()[0] ?? "";
+        const cb = [...b.codigos].sort()[0] ?? "";
+        return ca.localeCompare(cb);
+      });
+    }
+
+    for (const { selecao, sigla, codigos } of entries) {
+      const codigosOrdenados = [...codigos].sort();
       const emoji = groupEmoji(g, sigla);
-      linhas.push(`${emoji} ${selecao}: ${codigos.join(", ")}`);
+      linhas.push(`${emoji} ${selecao}: ${codigosOrdenados.join(", ")}`);
     }
     blocos.push(linhas.join("\n"));
   }
