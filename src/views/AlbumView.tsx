@@ -4,7 +4,7 @@ import { StickerCounts } from "@/lib/storage";
 import { StickerCard } from "@/components/Sticker";
 import { AdBanner } from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
-import { Search, X, Camera, Share2 } from "lucide-react";
+import { Search, X, Camera, Share2, Download } from "lucide-react";
 import { getFlagUrl } from "@/data/flags";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -12,6 +12,7 @@ import type { Profile } from "@/pages/Index";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
 import { flagFromSigla } from "@/lib/flags";
+import { downloadChecklistPdf } from "@/lib/checklistPdf";
 import type { Sticker } from "@/data/stickers";
 import {
   Select,
@@ -62,6 +63,7 @@ export function AlbumView({
   const [isMobile, setIsMobile] = useState(false);
   const [identifying, setIdentifying] = useState(false);
   const [showCameraTip, setShowCameraTip] = useState(false);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { share: shareWhats, dialog: whatsDialog } = useWhatsAppShare("album_repetidas");
 
@@ -240,6 +242,26 @@ export function AlbumView({
             <Stat value={stats.missing} label="preciso" tone="missing" />
             <Stat value={stats.dupes} label="repetidas" tone="dupe" />
           </div>
+
+          <button
+            type="button"
+            disabled={downloadingPdf}
+            onClick={async () => {
+              setDownloadingPdf(true);
+              try {
+                await downloadChecklistPdf(counts, { nome: profile?.nome });
+                toast.success("Checklist do álbum baixado!");
+              } catch {
+                toast.error("Não foi possível gerar o PDF. Tente novamente.");
+              } finally {
+                setDownloadingPdf(false);
+              }
+            }}
+            className="w-full flex items-center justify-center gap-2 h-10 rounded-full bg-primary text-primary-foreground font-bold text-sm shadow-sm active:scale-[0.98] transition-transform mb-3 disabled:opacity-60"
+          >
+            <Download className="h-4 w-4" />
+            {downloadingPdf ? "Gerando PDF…" : "Baixar checklist do álbum"}
+          </button>
 
           <div className="grid grid-cols-4 gap-1.5">
             {FILTERS.map((f) => (
