@@ -330,17 +330,16 @@ export function AlbumView({
                 );
                 return;
               }
-              const linhas = filtered.map((s) => {
-                const c = counts[s.id] ?? 0;
-                const extras = Math.max(0, c - 1);
-                return `• ${s.sigla_selecao} #${s.id}${extras > 1 ? ` (×${extras})` : ""}`;
+              const corpo = buildGroupedShareText(filtered, (s) => {
+                const extras = Math.max(0, (counts[s.id] ?? 0) - 1);
+                return Array(extras).fill(s.id);
               });
               const assinatura = profile?.nome
                 ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
                 : `\n\nWhatsApp: ${phoneRaw}`;
               const texto =
                 `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
-                linhas.join("\n") +
+                corpo +
                 `\n\nTroca comigo? 🤝` +
                 assinatura;
               shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
@@ -349,6 +348,34 @@ export function AlbumView({
           >
             <Share2 className="h-4 w-4" />
             Compartilhar repetidas no WhatsApp
+          </button>
+        )}
+        {filter === "preciso" && filtered.length > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
+              if (!phoneRaw || phoneRaw.length < 10) {
+                toast.error(
+                  "Cadastre seu WhatsApp no Perfil para compartilhar suas faltantes."
+                );
+                return;
+              }
+              const corpo = buildGroupedShareText(filtered, (s) => [s.id]);
+              const assinatura = profile?.nome
+                ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
+                : `\n\nWhatsApp: ${phoneRaw}`;
+              const texto =
+                `🎯 Figurinhas que preciso — Copa 2026 (${stats.missing})\n\n` +
+                corpo +
+                `\n\nTem alguma dessas? 🤝` +
+                assinatura;
+              shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
+            }}
+            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
+          >
+            <Share2 className="h-4 w-4" />
+            Compartilhar faltantes no WhatsApp
           </button>
         )}
         {grouped.length === 0 && (
