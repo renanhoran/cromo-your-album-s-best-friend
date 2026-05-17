@@ -338,11 +338,13 @@ export function AlbumView({
               const assinatura = profile?.nome
                 ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
                 : `\n\nWhatsApp: ${phoneRaw}`;
+              const rodapeApp = "\n\nBaixe agora o único app com leitor de figurinhas por IA via foto 📸⚽\n\nControle as figurinhas que você já tem, as repetidas e as que ainda faltam.\nAlém disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!\n\napp.maniadealbum.com.br";
               const texto =
                 `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
                 corpo +
                 `\n\nTroca comigo? 🤝` +
-                assinatura;
+                assinatura +
+                rodapeApp;
               shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
             }}
             className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
@@ -366,11 +368,13 @@ export function AlbumView({
               const assinatura = profile?.nome
                 ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
                 : `\n\nWhatsApp: ${phoneRaw}`;
+              const rodapeApp = "\n\nBaixe agora o único app com leitor de figurinhas por IA via foto 📸⚽\n\nControle as figurinhas que você já tem, as repetidas e as que ainda faltam.\nAlém disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!\n\napp.maniadealbum.com.br";
               const texto =
                 `🎯 Figurinhas que preciso — Copa 2026 (${stats.missing})\n\n` +
                 corpo +
                 `\n\nTem alguma dessas? 🤝` +
-                assinatura;
+                assinatura +
+                rodapeApp;
               shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
             }}
             className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"

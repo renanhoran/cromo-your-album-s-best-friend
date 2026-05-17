@@ -122,7 +122,13 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
       ...linhas,
       "",
       `_Total: ${repetidas.length} figurinha(s) repetida(s)_`,
-      "_Baixe o Mania de Álbum: app.maniadealbum.com.br_",
+      "",
+      "Baixe agora o único app com leitor de figurinhas por IA via foto 📸⚽",
+      "",
+      "Controle as figurinhas que você já tem, as repetidas e as que ainda faltam.",
+      "Além disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!",
+      "",
+      "app.maniadealbum.com.br",
     ].join("\n");
     shareWhats(`https://wa.me/?text=${encodeURIComponent(mensagem)}`);
   };
@@ -245,7 +251,13 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
                         ...linhasOfereco,
                         ``,
                         `Topa trocar? 🔥`,
-                        `_via app.maniadealbum.com.br_`,
+                        ``,
+                        `Baixe agora o único app com leitor de figurinhas por IA via foto 📸⚽`,
+                        ``,
+                        `Controle as figurinhas que você já tem, as repetidas e as que ainda faltam.`,
+                        `Além disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!`,
+                        ``,
+                        `app.maniadealbum.com.br`,
                       ].join("\n");
                       shareWhats(`https://wa.me/?text=${encodeURIComponent(msg)}`);
                     }}
