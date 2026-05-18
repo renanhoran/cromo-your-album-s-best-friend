@@ -102,12 +102,9 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
   const totalPossible = matches.reduce((acc, m) => acc + m.score, 0);
   const [open, setOpen] = useState<string | null>(null);
 
-  const compartilharRepetidas = () => {
+  const mensagemRepetidas = useMemo(() => {
     const repetidas = STICKERS.filter((s) => (counts[s.id] ?? 0) > 1);
-    if (repetidas.length === 0) {
-      toast.info("Você não tem figurinhas repetidas ainda.");
-      return null;
-    }
+    if (repetidas.length === 0) return "";
     const porSelecao: Record<string, string[]> = {};
     repetidas.forEach((s) => {
       if (!porSelecao[s.selecao]) porSelecao[s.selecao] = [];
@@ -117,7 +114,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     const linhas = Object.entries(porSelecao).map(
       ([selecao, jogadores]) => `*${selecao}:* ${jogadores.join(", ")}`
     );
-    const mensagem = [
+    return [
       "📒 *Minhas figurinhas repetidas — Copa 2026*",
       "",
       ...linhas,
@@ -131,8 +128,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
       "",
       "app.maniadealbum.com.br",
     ].join("\n");
-    return mensagem;
-  };
+  }, [counts]);
 
   return (
     <div className="pb-24">
@@ -167,11 +163,13 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
 
       <div className="px-4 pt-4 space-y-3">
         <WhatsAppShareButtons
-          text={compartilharRepetidas() ?? ""}
+          text={mensagemRepetidas}
           shareLabel="Compartilhar repetidas"
           onShare={(url) => {
-            const msg = compartilharRepetidas();
-            if (!msg) return;
+            if (!mensagemRepetidas) {
+              toast.info("Você não tem figurinhas repetidas ainda.");
+              return;
+            }
             shareWhats(url);
           }}
         />
