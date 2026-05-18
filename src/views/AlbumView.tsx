@@ -13,6 +13,7 @@ import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
 import { flagFromSigla } from "@/lib/flags";
 import { downloadChecklistPdf } from "@/lib/checklistPdf";
+import { WhatsAppShareButtons } from "@/components/WhatsAppShareButtons";
 import type { Sticker } from "@/data/stickers";
 import {
   Select,
@@ -343,67 +344,65 @@ export function AlbumView({
           1 toque: tenho ✓ · +toques: repetidas · × zera
         </div>
         {filter === "repetidas" && filtered.length > 0 && (
-          <button
-            type="button"
-            onClick={() => {
-              const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
-              if (!phoneRaw || phoneRaw.length < 10) {
-                toast.error(
-                  "Cadastre seu WhatsApp no Perfil para compartilhar suas repetidas."
-                );
-                return;
-              }
-              const corpo = buildGroupedShareText(filtered, (s) => {
-                const extras = Math.max(0, (counts[s.id] ?? 0) - 1);
-                return Array(extras).fill(s.id);
-              });
-              const assinatura = profile?.nome
-                ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
-                : `\n\nWhatsApp: ${phoneRaw}`;
-              const rodapeApp = "\n\nBaixe agora o único app com leitor de figurinhas por IA via foto 📸⚽\n\nControle as figurinhas que você já tem, as repetidas e as que ainda faltam.\nAlém disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!\n\napp.maniadealbum.com.br";
-              const texto =
-                `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
-                corpo +
-                `\n\nTroca comigo? 🤝` +
-                assinatura +
-                rodapeApp;
-              shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
-            }}
-            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
-          >
-            <Share2 className="h-4 w-4" />
-            Compartilhar repetidas no WhatsApp
-          </button>
+          (() => {
+            const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
+            const corpo = buildGroupedShareText(filtered, (s) => {
+              const extras = Math.max(0, (counts[s.id] ?? 0) - 1);
+              return Array(extras).fill(s.id);
+            });
+            const assinatura = profile?.nome
+              ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
+              : `\n\nWhatsApp: ${phoneRaw}`;
+            const rodapeApp = "\n\nBaixe agora o único app com leitor de figurinhas por IA via foto 📸⚽\n\nControle as figurinhas que você já tem, as repetidas e as que ainda faltam.\nAlém disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!\n\napp.maniadealbum.com.br";
+            const texto =
+              `🔁 Minhas figurinhas repetidas — Copa 2026 (${stats.dupes})\n\n` +
+              corpo +
+              `\n\nTroca comigo? 🤝` +
+              assinatura +
+              rodapeApp;
+            return (
+              <WhatsAppShareButtons
+                text={texto}
+                shareLabel="Compartilhar repetidas"
+                onShare={(url) => {
+                  if (!phoneRaw || phoneRaw.length < 10) {
+                    toast.error("Cadastre seu WhatsApp no Perfil para compartilhar suas repetidas.");
+                    return;
+                  }
+                  shareWhats(url);
+                }}
+              />
+            );
+          })()
         )}
         {filter === "preciso" && filtered.length > 0 && (
-          <button
-            type="button"
-            onClick={() => {
-              const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
-              if (!phoneRaw || phoneRaw.length < 10) {
-                toast.error(
-                  "Cadastre seu WhatsApp no Perfil para compartilhar suas faltantes."
-                );
-                return;
-              }
-              const corpo = buildGroupedShareText(filtered, (s) => [s.id]);
-              const assinatura = profile?.nome
-                ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
-                : `\n\nWhatsApp: ${phoneRaw}`;
-              const rodapeApp = "\n\nBaixe agora o único app com leitor de figurinhas por IA via foto 📸⚽\n\nControle as figurinhas que você já tem, as repetidas e as que ainda faltam.\nAlém disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!\n\napp.maniadealbum.com.br";
-              const texto =
-                `🎯 Figurinhas que preciso — Copa 2026 (${stats.missing})\n\n` +
-                corpo +
-                `\n\nTem alguma dessas? 🤝` +
-                assinatura +
-                rodapeApp;
-              shareWhats(`https://wa.me/?text=${encodeURIComponent(texto)}`);
-            }}
-            className="w-full flex items-center justify-center gap-2 h-11 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm active:scale-[0.98] transition-transform"
-          >
-            <Share2 className="h-4 w-4" />
-            Compartilhar faltantes no WhatsApp
-          </button>
+          (() => {
+            const phoneRaw = (profile?.phone ?? "").replace(/\D/g, "");
+            const corpo = buildGroupedShareText(filtered, (s) => [s.id]);
+            const assinatura = profile?.nome
+              ? `\n\n— ${profile.nome}\nWhatsApp: ${phoneRaw}`
+              : `\n\nWhatsApp: ${phoneRaw}`;
+            const rodapeApp = "\n\nBaixe agora o único app com leitor de figurinhas por IA via foto 📸⚽\n\nControle as figurinhas que você já tem, as repetidas e as que ainda faltam.\nAlém disso, encontre pessoas próximas de você que tenham as figurinhas que você precisa — e que precisem das suas!\n\napp.maniadealbum.com.br";
+            const texto =
+              `🎯 Figurinhas que preciso — Copa 2026 (${stats.missing})\n\n` +
+              corpo +
+              `\n\nTem alguma dessas? 🤝` +
+              assinatura +
+              rodapeApp;
+            return (
+              <WhatsAppShareButtons
+                text={texto}
+                shareLabel="Compartilhar faltantes"
+                onShare={(url) => {
+                  if (!phoneRaw || phoneRaw.length < 10) {
+                    toast.error("Cadastre seu WhatsApp no Perfil para compartilhar suas faltantes.");
+                    return;
+                  }
+                  shareWhats(url);
+                }}
+              />
+            );
+          })()
         )}
         {grouped.length === 0 && (
           <div className="text-center py-16 text-muted-foreground">
