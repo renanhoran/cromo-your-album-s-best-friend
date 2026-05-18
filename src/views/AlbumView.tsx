@@ -13,6 +13,7 @@ import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
 import { findStickerByCode } from "@/lib/stickerCode";
 import { flagFromSigla } from "@/lib/flags";
 import { downloadChecklistPdf } from "@/lib/checklistPdf";
+import { WhatsAppShareButtons } from "@/components/WhatsAppShareButtons";
 import type { Sticker } from "@/data/stickers";
 import {
   Select,
