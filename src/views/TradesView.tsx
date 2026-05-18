@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useGeolocation, normalizeCidade } from "@/hooks/useGeolocation";
 import { Locate, Loader2 } from "lucide-react";
 import { useWhatsAppShare } from "@/hooks/useWhatsAppShare";
+import { WhatsAppShareButtons } from "@/components/WhatsAppShareButtons";
 
 export function TradesView({ counts, isPremium = false }: { counts: StickerCounts; isPremium?: boolean }) {
   const [realUsers, setRealUsers] = useState<
@@ -105,7 +106,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
     const repetidas = STICKERS.filter((s) => (counts[s.id] ?? 0) > 1);
     if (repetidas.length === 0) {
       toast.info("Você não tem figurinhas repetidas ainda.");
-      return;
+      return null;
     }
     const porSelecao: Record<string, string[]> = {};
     repetidas.forEach((s) => {
@@ -130,7 +131,7 @@ export function TradesView({ counts, isPremium = false }: { counts: StickerCount
       "",
       "app.maniadealbum.com.br",
     ].join("\n");
-    shareWhats(`https://wa.me/?text=${encodeURIComponent(mensagem)}`);
+    return mensagem;
   };
 
   return (
